@@ -1,0 +1,6 @@
+name: Devathlon3
+version: ${project.version}
+main: io.github.teamdevintia.devathlon3.Devathlon3
+authors: [TeamDevintia]
+description: 'TeamDevintia''s entry for Devathlon3'
+website: 'https://github.com/TeamDevintia/DevAthlon3'
