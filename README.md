@@ -5,13 +5,13 @@ https://www.gommehd.net/forum/threads/devathlon-nummer-3-sei-dabei.501442/
 
 ### Developer [@TeamDevintia/devs](https://github.com/orgs/TeamDevintia/teams/devs)
 
-* @MiniDigger https://beam.pro/MiniDigger
-* @Shad0wCore
+* [@MiniDigger](https://github.com/MiniDigger) https://beam.pro/MiniDigger
+* [@Shad0wCore](https://github.com/Shad0wCore)
 
 ### Designer [@TeamDevintia/designer](https://github.com/orgs/TeamDevintia/teams/designer)
 
-* @HerrPixel
-* @batthomas
+* [@HerrPixel](https://github.com/HerrPixel)
+* [@batthomas](https://github.com/batthomas)
 
 
 ## Building
