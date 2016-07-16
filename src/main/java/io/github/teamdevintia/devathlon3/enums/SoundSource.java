@@ -2,6 +2,14 @@ package io.github.teamdevintia.devathlon3.enums;
 
 /**
  * @author Shad0wCore
+ *         <p>
+ *         A collection of sound catorgories.
+ *         <p>
+ *         <b>Description from Minecraft Wiki:</b>
+ *         The category this sound event belongs to. Valid category names are
+ *         "ambient", "weather", "player", "neutral", "hostile", "block", "record", "music", "master" and "voice".
+ *         This String lets the sound system know what sound events belong to what category, so the volume can
+ *         be adjusted based on what the sound options are set to for each category.
  */
 public enum SoundSource {
 
