@@ -14,7 +14,7 @@ import java.util.Map;
 /**
  * @author Shad0wCore
  */
-public class ItemFactory {
+public final class ItemFactory {
 
     private ItemStack factoryItemStack;
     private ItemMeta factoryItemMeta;

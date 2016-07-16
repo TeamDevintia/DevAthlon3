@@ -10,7 +10,7 @@ import java.util.List;
  *
  * @author MiniDigger
  */
-public class DirectionUtil {
+public final class DirectionUtil {
 
     private static final List<BlockFace> faces = new ArrayList<>(4);
 

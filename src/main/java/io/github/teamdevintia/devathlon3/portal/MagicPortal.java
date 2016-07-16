@@ -1,10 +1,11 @@
 package io.github.teamdevintia.devathlon3.portal;
 
 import io.github.teamdevintia.devathlon3.Devathlon3;
+import io.github.teamdevintia.devathlon3.managers.VFXManager;
 import io.github.teamdevintia.devathlon3.util.DirectionUtil;
+import io.github.teamdevintia.devathlon3.visuals.BloodTrailVFXPacket;
 import net.minecraft.server.v1_10_R1.PacketPlayOutGameStateChange;
 import org.bukkit.Bukkit;
-import org.bukkit.Effect;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -17,7 +18,6 @@ import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
-import org.bukkit.util.Vector;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -142,27 +142,7 @@ public class MagicPortal implements Listener {
         particleTask = new BukkitRunnable() {
             @Override
             public void run() {
-                for (LocationTuple tuple : connections) {
-                    //TODO move this into ParticleUtil @Shad0wCore
-                    //calc direction
-                    Vector diff = tuple.loc2.toVector().subtract(tuple.loc1.toVector());
-                    double distance = diff.length();
-
-                    // calc step size
-                    double stepSize = 0.5;
-                    double dx = (diff.getX() / distance) * stepSize;
-                    double dy = (diff.getY() / distance) * stepSize;
-                    double dz = (diff.getZ() / distance) * stepSize;
-
-                    // 0.5 offset to center the particle
-                    Location temp = tuple.loc1.clone().add(0.5, 0.5, 0.5);
-                    // play the line
-                    for (double d = 0; d <= distance; d += stepSize) {
-                        temp.add(dx, dy, dz);
-
-                        temp.getWorld().playEffect(temp, Effect.TILE_BREAK, Material.REDSTONE_BLOCK.getId());
-                    }
-                }
+                VFXManager.triggerVFXPacket(new BloodTrailVFXPacket(), null, null, connections);
             }
         }.runTaskTimer(plugin, 0, 1);
 

@@ -11,6 +11,9 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 /**
  * Main class
+ *
+ * @author Shad0wCore
+ * @author MiniDigger
  */
 public final class Devathlon3 extends JavaPlugin {
 
