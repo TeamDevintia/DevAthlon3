@@ -34,6 +34,7 @@ public class Essence implements Listener {
         ESSENCE.setItemMeta( meta );
     }
 */
+
     public Essence( Devathlon3 plugin ) {
         Bukkit.getPluginManager().registerEvents( this, plugin );
     }
