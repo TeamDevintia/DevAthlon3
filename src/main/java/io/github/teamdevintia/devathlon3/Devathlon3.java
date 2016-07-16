@@ -11,11 +11,15 @@ import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.java.JavaPlugin;
 
+/**
+ * Main class
+ */
 public final class Devathlon3 extends JavaPlugin {
 
     public static final ItemStack ritualsLeuchter = new ItemStack( Material.REDSTONE_TORCH_ON );
 
     static {
+        // create ritualsleuchter item
         ItemMeta ritualsLeuchterMeta = ritualsLeuchter.getItemMeta();
         ritualsLeuchterMeta.setDisplayName( "Ritualsleuchter" );
         ritualsLeuchterMeta.addEnchant( Enchantment.DIG_SPEED, 1, true );
@@ -30,7 +34,7 @@ public final class Devathlon3 extends JavaPlugin {
         // blood drop
         new Blood( this );
 
-        addCraftingRecipies();
+        addCraftingRecipes();
     }
 
     @Override
@@ -38,7 +42,10 @@ public final class Devathlon3 extends JavaPlugin {
 
     }
 
-    private void addCraftingRecipies() {
+    /**
+     * Adds the crafting recipes
+     */
+    private void addCraftingRecipes() {
         // ritualsleuchter
         ShapedRecipe ritualsLeuchterRecipe = new ShapedRecipe( ritualsLeuchter );
         ritualsLeuchterRecipe.shape( "BBB", "BSB", "BBB" );

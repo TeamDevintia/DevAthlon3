@@ -22,7 +22,9 @@ import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
- * Created by Martin on 16.07.2016.
+ * Handles the mechanics attached to the blood item.
+ *
+ * @author MiniDigger
  */
 public class Blood implements Listener {
 
@@ -31,6 +33,7 @@ public class Blood implements Listener {
     public static final ItemStack BLOOD;
 
     static {
+        // add blood dropping entities
         agressiveMobs.add( EntityType.ZOMBIE );
         agressiveMobs.add( EntityType.SKELETON );
         agressiveMobs.add( EntityType.SPIDER );
@@ -51,9 +54,12 @@ public class Blood implements Listener {
 
     @EventHandler
     public void onDeath( EntityDeathEvent event ) {
+        // spawn blood on death of some entities
+        // only before wizard spawns
         if ( !MagicPortal.wizardActive ) {
             if ( agressiveMobs.contains( event.getEntity().getType() ) ) {
                 int r = ThreadLocalRandom.current().nextInt( 100 );
+                // 33% chance
                 if ( r <= 33 ) {
                     Location loc = event.getEntity().getLocation();
                     loc.getWorld().dropItemNaturally( loc, BLOOD );
@@ -64,20 +70,17 @@ public class Blood implements Listener {
 
     @EventHandler
     public void onPlace( BlockPlaceEvent event ) {
-        if ( event.getItemInHand().getType() == Material.REDSTONE ) {
-            if ( event.getItemInHand().hasItemMeta() ) {
-                if ( event.getItemInHand().getItemMeta().hasDisplayName() ) {
-                    if ( event.getItemInHand().getItemMeta().getDisplayName().equals( ChatColor.RED + "Blut" ) ) {
-                        event.setBuild( false );
-                        event.setCancelled( true );
-                    }
-                }
-            }
+        // don't place blood
+        if ( event.getItemInHand().equals( BLOOD ) ) {
+            event.setBuild( false );
+            event.setCancelled( true );
         }
     }
 
+
     @EventHandler
     public void onPrepareCraft( PrepareItemCraftEvent event ) {
+        // don't craft normal stuff with blood
         if ( event.getInventory().contains( BLOOD ) ) {
             if ( event.getRecipe().getResult().equals( Devathlon3.ritualsLeuchter ) ) {
                 return;
@@ -89,6 +92,7 @@ public class Blood implements Listener {
 
     @EventHandler
     public void onCraft( CraftItemEvent event ) {
+        // don't craft normal stuff with blood
         if ( event.getInventory().contains( BLOOD ) ) {
             if ( event.getRecipe().getResult().equals( Devathlon3.ritualsLeuchter ) ) {
                 return;
