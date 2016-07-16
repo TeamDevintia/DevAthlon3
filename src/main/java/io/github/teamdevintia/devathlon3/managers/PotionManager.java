@@ -38,6 +38,7 @@ public final class PotionManager implements Listener {
     public void registerMagicPotion(MagicPotion magicPotion) {
         magicPotionMap.put(magicPotion.getPotionID(), magicPotion);
         Bukkit.getServer().addRecipe(magicPotion.createRecipe());
+        Bukkit.getPluginManager().registerEvents(magicPotion, plugin);
     }
 
     /**
