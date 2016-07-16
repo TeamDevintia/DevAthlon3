@@ -12,7 +12,7 @@ import java.util.HashMap;
 /**
  * @author Shad0wCore
  */
-public class PotionManager implements Listener {
+public final class PotionManager implements Listener {
 
     private Devathlon3 devathlon3;
     private HashMap<String, MagicPotion> magicPotionMap = new HashMap<>();

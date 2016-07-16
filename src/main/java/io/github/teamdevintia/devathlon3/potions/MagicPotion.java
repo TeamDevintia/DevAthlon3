@@ -10,7 +10,6 @@ import org.bukkit.entity.ThrownPotion;
  */
 public abstract class MagicPotion {
 
-
     private Devathlon3 devathlon3;
     private String potionID;
 

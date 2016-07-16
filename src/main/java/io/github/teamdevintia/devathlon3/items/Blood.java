@@ -22,7 +22,7 @@ import java.util.concurrent.ThreadLocalRandom;
  *
  * @author MiniDigger
  */
-public class Blood implements Listener {
+public final class Blood implements Listener {
 
     private static final List<EntityType> aggressiveMobs = new ArrayList<>();
     private ItemStack BLOOD_STACK, RITUAL_LANTERN;

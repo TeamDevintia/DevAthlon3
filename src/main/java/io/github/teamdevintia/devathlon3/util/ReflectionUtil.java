@@ -3,9 +3,9 @@ package io.github.teamdevintia.devathlon3.util;
 import java.lang.reflect.Field;
 
 /**
- * Created by Martin on 16.07.2016.
+ * @author MiniDigger
  */
-public class ReflectionUtil {
+public final class ReflectionUtil {
 
     /**
      * returns the value of a private field
@@ -13,7 +13,7 @@ public class ReflectionUtil {
      * @param fieldName the field to access
      * @param clazz the class the field is in
      * @param object the instance of the class
-     * @return the value of the vield, null if an error occured
+     * @return the value of the field, null if an error occurred
      */
     public static Object getPrivateField(String fieldName, Class clazz, Object object) {
         try {

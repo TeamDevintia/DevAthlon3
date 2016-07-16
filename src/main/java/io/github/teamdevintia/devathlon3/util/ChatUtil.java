@@ -10,7 +10,7 @@ import org.bukkit.entity.Player;
  *
  * @author MiniDigger
  */
-public class ChatUtil {
+public final class ChatUtil {
 
     /**
      * Sends a message to all nearby player
