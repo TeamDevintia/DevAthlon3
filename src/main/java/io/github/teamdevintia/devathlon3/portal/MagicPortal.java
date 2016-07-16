@@ -16,7 +16,9 @@ import org.bukkit.scheduler.BukkitTask;
 import org.bukkit.util.Vector;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Controlls all magic portals in the world
@@ -29,6 +31,9 @@ public class MagicPortal implements Listener {
     private List<LocationTuple> validLocations = new ArrayList<>();
     private BukkitTask particleTask;
 
+    private int torchcount = 0;
+    private boolean isFinished = false;
+
     private Devathlon3 plugin;
 
     public MagicPortal( Devathlon3 plugin ) {
@@ -38,16 +43,39 @@ public class MagicPortal implements Listener {
 
     @EventHandler
     public void onPlace( BlockPlaceEvent event ) {
+        //TODO check if it is the right torch
         if ( event.getBlockPlaced().getType() == Material.REDSTONE_TORCH_ON ) {
+            // only 5 torches are placeable, so that it is easier to finish it ^^
+            if ( torchcount == 5 ) {
+                event.setCancelled( true );
+                event.setBuild( false );
+                return;
+            }
+
             placedTorches.add( event.getBlockPlaced().getLocation() );
+            torchcount++;
             checkForCompletion();
         }
     }
 
     @EventHandler
     public void onBreak( BlockBreakEvent event ) {
+        //TODO check if it is the right torch
         if ( event.getBlock().getType() == Material.REDSTONE_TORCH_ON ) {
+            // don't destroy what you just created!
+            if ( isFinished ) {
+                event.setCancelled( true );
+                return;
+            }
+
             placedTorches.remove( event.getBlock().getLocation() );
+            torchcount--;
+
+            // someone cheated!
+            if ( torchcount < 0 ) {
+                torchcount = 0;
+            }
+
             checkForCompletion();
         }
     }
@@ -98,6 +126,40 @@ public class MagicPortal implements Listener {
                 }
             }
         }.runTaskTimer( plugin, 0, 1 );
+
+        // check if portal complete
+
+        // count locations
+        Map<Location, Integer> count = new HashMap<>();
+        for ( LocationTuple tuple : validLocations ) {
+            tuple.forEach( loc -> {
+                Integer c = count.get( loc );
+                if ( c == null ) {
+                    c = 0;
+                }
+
+                count.put( loc, c + 1 );
+            } );
+        }
+
+        boolean full = false;
+        // our structure has 5 torches
+        if ( count.size() == 5 ) {
+            full = true;
+            for ( int i : count.values() ) {
+                // every torch can be reached exactly twice
+                if ( i != 2 ) {
+                    full = false;
+                    break;
+                }
+            }
+        }
+
+        // if done, spawn the throne!
+        if ( full ) {
+            isFinished = true;
+            spawnThrone();
+        }
     }
 
     /**
@@ -172,5 +234,12 @@ public class MagicPortal implements Listener {
                 }
             }
         }
+    }
+
+    /**
+     * starts the thrown spawning animation
+     */
+    private void spawnThrone() {
+        
     }
 }
