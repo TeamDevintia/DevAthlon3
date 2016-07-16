@@ -58,7 +58,7 @@ public class MagicPortal implements Listener {
             checkForCompletion();
         } else if ( event.getBlock().getType() == Material.SMOOTH_BRICK && event.getBlock().getData() == 3 && isFinished ) {
             // we already has a spawn
-            if(center != null){
+            if ( center != null ) {
                 event.setCancelled( true );
                 event.setBuild( false );
                 return;
@@ -67,7 +67,7 @@ public class MagicPortal implements Listener {
             Location center = event.getBlock().getLocation().add( 0, 1, 0 );
             // validate...
             // y value
-            System.out.println("y " + center.getY());
+            System.out.println( "y " + center.getY() );
             if ( center.getY() != placedTorches.get( 0 ).getY() ) {
                 event.setCancelled( true );
                 event.setBuild( false );
@@ -269,6 +269,83 @@ public class MagicPortal implements Listener {
      */
     private void spawnThrone() {
         System.out.println( "spawn throne" );
-        
+        spawnLayer1( center.getBlock() );
+    }
+
+    /**
+     * Spawns the first layer of blocks
+     *
+     * @param center the center pos
+     */
+    private void spawnLayer1( Block center ) {
+        center.setType( Material.SMOOTH_BRICK );
+        center.setData( (byte) 3 );
+
+        // stairs
+        Block temp = center.getRelative( BlockFace.NORTH );
+        temp.setType( Material.SMOOTH_STAIRS );
+        temp.setData( (byte) 2 );
+
+        temp = center.getRelative( BlockFace.EAST );
+        temp.setType( Material.SMOOTH_STAIRS );
+        temp.setData( (byte) 1 );
+
+        temp = center.getRelative( BlockFace.SOUTH );
+        temp.setType( Material.SMOOTH_STAIRS );
+        temp.setData( (byte) 3 );
+
+        temp = center.getRelative( BlockFace.WEST );
+        temp.setType( Material.SMOOTH_STAIRS );
+        temp.setData( (byte) 0 );
+
+        // edges
+        temp = center.getRelative( BlockFace.NORTH ).getRelative( BlockFace.WEST );
+        temp.setType( Material.SMOOTH_BRICK );
+        temp.setData( (byte) 0 );
+
+        temp = center.getRelative( BlockFace.NORTH ).getRelative( BlockFace.EAST );
+        temp.setType( Material.SMOOTH_BRICK );
+        temp.setData( (byte) 1 );
+
+        temp = center.getRelative( BlockFace.SOUTH ).getRelative( BlockFace.EAST );
+        temp.setType( Material.SMOOTH_BRICK );
+        temp.setData( (byte) 0 );
+
+        temp = center.getRelative( BlockFace.SOUTH ).getRelative( BlockFace.WEST );
+        temp.setType( Material.SMOOTH_BRICK );
+        temp.setData( (byte) 2 );
+
+        // slaps
+        temp = center.getRelative( BlockFace.NORTH, 2 ).getRelative( BlockFace.WEST );
+        temp.setType( Material.STEP );
+        temp.setData( (byte) 5 );
+        temp = center.getRelative( BlockFace.NORTH, 2 ).getRelative( BlockFace.EAST );
+        temp.setType( Material.STEP );
+        temp.setData( (byte) 5 );
+
+        temp = center.getRelative( BlockFace.EAST, 2 ).getRelative( BlockFace.NORTH );
+        temp.setType( Material.STEP );
+        temp.setData( (byte) 5 );
+        temp = center.getRelative( BlockFace.EAST, 2 ).getRelative( BlockFace.SOUTH );
+        temp.setType( Material.STEP );
+        temp.setData( (byte) 5 );
+
+        temp = center.getRelative( BlockFace.SOUTH, 2 ).getRelative( BlockFace.EAST );
+        temp.setType( Material.STEP );
+        temp.setData( (byte) 5 );
+        temp = center.getRelative( BlockFace.SOUTH, 2 ).getRelative( BlockFace.WEST );
+        temp.setType( Material.STEP );
+        temp.setData( (byte) 5 );
+
+        temp = center.getRelative( BlockFace.WEST, 2 ).getRelative( BlockFace.NORTH );
+        temp.setType( Material.STEP );
+        temp.setData( (byte) 5 );
+        temp = center.getRelative( BlockFace.WEST, 2 ).getRelative( BlockFace.SOUTH );
+        temp.setType( Material.STEP );
+        temp.setData( (byte) 5 );
+    }
+
+    private void spawnLayer2( Block center ) {
+
     }
 }
