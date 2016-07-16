@@ -6,19 +6,23 @@ import io.github.teamdevintia.devathlon3.util.ChatUtil;
 import io.github.teamdevintia.devathlon3.util.DirectionUtil;
 import io.github.teamdevintia.devathlon3.visuals.BloodTrailVFXPacket;
 import net.minecraft.server.v1_10_R1.PacketPlayOutGameStateChange;
+import net.minecraft.server.v1_10_R1.WorldServer;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
+import org.bukkit.craftbukkit.v1_10_R1.CraftServer;
+import org.bukkit.craftbukkit.v1_10_R1.CraftWorld;
 import org.bukkit.craftbukkit.v1_10_R1.entity.CraftPlayer;
-import org.bukkit.entity.EntityType;
+import org.bukkit.craftbukkit.v1_10_R1.entity.CraftVillager;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Villager;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
+import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
@@ -300,17 +304,24 @@ public class MagicPortal implements Listener {
                 PacketPlayOutGameStateChange packet = new PacketPlayOutGameStateChange(10, 0);
                 Bukkit.getOnlinePlayers().forEach(player -> ((CraftPlayer) player).getHandle().playerConnection.sendPacket(packet));
 
-                //TODO spawn wizard (talk to entites in range)
                 wizardActive = true;
 
-                Villager wizard = (Villager) center.getWorld().spawnEntity(center.clone().add(0.5, 2, 0.5), EntityType.VILLAGER);
+                // spawn custom entity
+                WorldServer nmsWorld = ((CraftWorld) center.getWorld()).getHandle();
+                WizardEntity e = new WizardEntity(nmsWorld);
+                e.setLocation(center.getX() + 0.5, center.getY() + 2, center.getZ() + 0.5, 0, 0);
+                nmsWorld.addEntity(e, CreatureSpawnEvent.SpawnReason.CUSTOM);
+
+                // add stuff
+                Villager wizard = new CraftVillager((CraftServer) Bukkit.getServer(), e);
                 wizard.setCustomName(plugin.getNameConstant().get("wizard.displayname"));
                 wizard.setCustomNameVisible(true);
-                wizard.setAI(false);
                 wizard.setCollidable(false);
+                wizard.teleport(center.clone().add(0.5, 2, 0.5));
+                System.out.println(wizard.getLocation());
                 Bukkit.getOnlinePlayers().forEach(player -> player.setCollidable(false));
-                // TODO make him look at player
 
+                // send messages
                 Bukkit.getScheduler().runTaskLater(plugin, () -> ChatUtil.sendToPlayersInRange(plugin.getMessageConstant().get("wizard.spawn.1"), 30, center),
                         plugin.getTimingConstant().get("spawn.throne.step4.message1.delay"));
                 Bukkit.getScheduler().runTaskLater(plugin, () -> ChatUtil.sendToPlayersInRange(plugin.getMessageConstant().get("wizard.spawn.2"), 30, center),

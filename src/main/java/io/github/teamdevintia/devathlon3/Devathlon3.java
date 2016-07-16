@@ -4,6 +4,9 @@ import io.github.teamdevintia.devathlon3.constants.*;
 import io.github.teamdevintia.devathlon3.items.Blood;
 import io.github.teamdevintia.devathlon3.items.Essence;
 import io.github.teamdevintia.devathlon3.portal.MagicPortal;
+import io.github.teamdevintia.devathlon3.portal.WizardEntity;
+import io.github.teamdevintia.devathlon3.util.NMSUtil;
+import net.minecraft.server.v1_10_R1.EntityVillager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 /**
@@ -36,6 +39,9 @@ public final class Devathlon3 extends JavaPlugin {
         recipeConstant.initializeContent();
         messageConstant.initializeContent();
         timingConstant.initializeContent();
+
+        // register wizard
+        NMSUtil.registerEntity("Villager", 120, EntityVillager.class, WizardEntity.class);
 
         // init portals
         new MagicPortal(this);
