@@ -122,6 +122,7 @@ public final class ItemFactory {
      * @param unsafeEnchantment Allows to set the level higher than 10
      */
     public synchronized ItemFactory enchantment(Enchantment itemEnchantment, int enchantmentLevel, boolean unsafeEnchantment) {
+        //TODO Fix this method @MiniDigger
         if (unsafeEnchantment) {
             this.factoryItemStack.addUnsafeEnchantment(itemEnchantment, enchantmentLevel);
             return this;
@@ -138,6 +139,7 @@ public final class ItemFactory {
      */
     @Deprecated
     public synchronized ItemFactory enchantment(Map<Enchantment, Integer> itemEnchantmentMap, boolean unsafeEnchantment) {
+        //TODO Fix this method @MiniDigger
         if (unsafeEnchantment) {
             this.factoryItemStack.addUnsafeEnchantments(itemEnchantmentMap);
             return this;
