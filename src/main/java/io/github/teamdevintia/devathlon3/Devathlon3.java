@@ -7,6 +7,8 @@ import io.github.teamdevintia.devathlon3.portal.MagicPortal;
 import io.github.teamdevintia.devathlon3.portal.WizardEntity;
 import io.github.teamdevintia.devathlon3.util.NMSUtil;
 import net.minecraft.server.v1_10_R1.EntityVillager;
+import org.bukkit.Bukkit;
+import org.bukkit.World;
 import org.bukkit.plugin.java.JavaPlugin;
 
 /**
@@ -49,6 +51,16 @@ public final class Devathlon3 extends JavaPlugin {
         new Blood(this);
         // essence drop
         new Essence(this);
+
+        // always day, always sunny!
+        for (World world : Bukkit.getWorlds()) {
+            world.setGameRuleValue("doDaylightCycle", "false");
+            world.setTime(6000);
+            world.setThundering(false);
+            world.setThunderDuration(0);
+            world.setStorm(false);
+            world.setWeatherDuration(1000000000);
+        }
     }
 
     @Override
