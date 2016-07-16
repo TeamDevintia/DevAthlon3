@@ -275,11 +275,18 @@ public class MagicPortal implements Listener {
         // make room
         EntityUtil.pushAway(center, 10, 1.2);
 
-        // step 1: layer 1 at y-1
+        // step 1: layer 1 at y-1, change fade value
         new BukkitRunnable() {
             @Override
             public void run() {
                 spawnLayer1(center.getBlock().getRelative(BlockFace.DOWN));
+
+                // 7 = fade value, 1 = dark
+                PacketPlayOutGameStateChange packet = new PacketPlayOutGameStateChange(7, 1);
+                Bukkit.getOnlinePlayers().forEach(player -> ((CraftPlayer) player).getHandle().playerConnection.sendPacket(packet));
+                // 8 = fade time, 20 = ticks
+                PacketPlayOutGameStateChange packet2 = new PacketPlayOutGameStateChange(8, 20);
+                Bukkit.getOnlinePlayers().forEach(player -> ((CraftPlayer) player).getHandle().playerConnection.sendPacket(packet2));
             }
         }.runTaskLater(plugin, plugin.getTimingConstant().get("spawn.throne.step1.delay"));
         // step 2: layer 1 at y0, layer 2 at y-1
@@ -346,7 +353,7 @@ public class MagicPortal implements Listener {
                         plugin.getTimingConstant().get("spawn.throne.step4.message6.delay"));
             }
         }.runTaskLater(plugin, plugin.getTimingConstant().get("spawn.throne.step4.delay"));
-        //step 5: explosion!
+        //step 5: explosion!, change fade value back
         new BukkitRunnable() {
             @Override
             public void run() {
@@ -363,6 +370,14 @@ public class MagicPortal implements Listener {
 
                 // restore
                 snapshot.restore(Material.REDSTONE_TORCH_ON);
+
+                // change fade value back
+                // 7 = fade value, 0 = bright
+                PacketPlayOutGameStateChange packet = new PacketPlayOutGameStateChange(7, 0);
+                Bukkit.getOnlinePlayers().forEach(player -> ((CraftPlayer) player).getHandle().playerConnection.sendPacket(packet));
+                // 8 = fade time, 20 = ticks
+                PacketPlayOutGameStateChange packet2 = new PacketPlayOutGameStateChange(8, 20);
+                Bukkit.getOnlinePlayers().forEach(player -> ((CraftPlayer) player).getHandle().playerConnection.sendPacket(packet2));
             }
         }.runTaskLater(plugin, plugin.getTimingConstant().get("spawn.throne.step5.delay"));
     }
