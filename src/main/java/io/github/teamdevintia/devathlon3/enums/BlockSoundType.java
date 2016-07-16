@@ -25,10 +25,6 @@ enum BlockSoundType {
         this.sound = sound;
     }
 
-    public Sound getSound() {
-        return this.sound;
-    }
-
     public static Sound fetch(int id) {
         return fetch(Material.getMaterial(id));
     }
@@ -254,6 +250,10 @@ enum BlockSoundType {
                 return WOODSOUND.getSound();
         }
 
+    }
+
+    public Sound getSound() {
+        return this.sound;
     }
 
 }

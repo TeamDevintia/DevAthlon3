@@ -29,9 +29,8 @@ import java.util.concurrent.ThreadLocalRandom;
  */
 public class Blood implements Listener {
 
-    private static final List<EntityType> agressiveMobs = new ArrayList<>();
-
     public static final ItemStack BLOOD;
+    private static final List<EntityType> agressiveMobs = new ArrayList<>();
 
     static {
         // add blood dropping entities

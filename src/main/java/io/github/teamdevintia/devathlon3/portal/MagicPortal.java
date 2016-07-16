@@ -37,7 +37,7 @@ public class MagicPortal implements Listener {
     private List<LocationTuple> connections = new ArrayList<>();
     private BukkitTask particleTask;
 
-    private int torchcount = 0;
+    private int torchCount = 0;
     private boolean isFinished = false;
     private Location center;
 
@@ -49,22 +49,22 @@ public class MagicPortal implements Listener {
     }
 
     @EventHandler
-    public void onPlace(BlockPlaceEvent event) {
-        if (event.getItemInHand().equals(Devathlon3.ritualsLeuchter)) {
-            // only 5 torches are placeable, so that it is easier to finish it ^^
-            if (torchcount == 5) {
+    public void onBlockPlace(BlockPlaceEvent event) {
+        if (event.getItemInHand().equals(this.plugin.getItemConstant().get("item.ritualLantern"))) {
+            // Only 5 torches are place able, so that it is easier to finish it ^^
+            if (torchCount == 5) {
                 event.setCancelled(true);
                 event.setBuild(false);
                 return;
             }
 
-            event.getBlockPlaced().setMetadata("ritualsleuchter", new FixedMetadataValue(plugin, "yes"));
+            event.getBlockPlaced().setMetadata("process.ritualLantern", new FixedMetadataValue(plugin, "yes"));
 
             placedTorches.add(event.getBlockPlaced().getLocation());
-            torchcount++;
+            torchCount++;
             checkForCompletion();
         } else if (event.getBlock().getType() == Material.SMOOTH_BRICK && event.getBlock().getData() == 3 && isFinished) {
-            // we already has a spawn
+            // We already has a spawn
             if (center != null) {
                 event.setCancelled(true);
                 event.setBuild(false);
@@ -94,9 +94,9 @@ public class MagicPortal implements Listener {
     }
 
     @EventHandler
-    public void onBreak(BlockBreakEvent event) {
+    public void onBlockBreak(BlockBreakEvent event) {
         if (event.getBlock().getType() == Material.REDSTONE_TORCH_ON) {
-            if (!event.getBlock().hasMetadata("ritualsleuchter")) {
+            if (!event.getBlock().hasMetadata("process.ritualLantern")) {
                 return;
             }
 
@@ -107,11 +107,11 @@ public class MagicPortal implements Listener {
             }
 
             placedTorches.remove(event.getBlock().getLocation());
-            torchcount--;
+            torchCount--;
 
             // someone cheated!
-            if (torchcount < 0) {
-                torchcount = 0;
+            if (torchCount < 0) {
+                torchCount = 0;
             }
 
             checkForCompletion();
