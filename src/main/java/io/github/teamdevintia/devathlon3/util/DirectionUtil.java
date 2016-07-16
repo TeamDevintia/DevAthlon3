@@ -12,13 +12,13 @@ import java.util.List;
  */
 public class DirectionUtil {
 
-    private static final List<BlockFace> faces = new ArrayList<>( 4 );
+    private static final List<BlockFace> faces = new ArrayList<>(4);
 
     static {
-        faces.add( BlockFace.NORTH );
-        faces.add( BlockFace.EAST );
-        faces.add( BlockFace.SOUTH );
-        faces.add( BlockFace.WEST );
+        faces.add(BlockFace.NORTH);
+        faces.add(BlockFace.EAST);
+        faces.add(BlockFace.SOUTH);
+        faces.add(BlockFace.WEST);
     }
 
     /**
@@ -27,14 +27,14 @@ public class DirectionUtil {
      * @param face the input
      * @return the next {@link org.bukkit.block.BlockFace} in clockwise direction
      */
-    public static BlockFace clockwise( BlockFace face ) {
-        int index = faces.indexOf( face );
+    public static BlockFace clockwise(BlockFace face) {
+        int index = faces.indexOf(face);
 
-        if ( index == -1 ) {
-            throw new IllegalArgumentException( "Invalid face " + face.name() );
+        if (index == -1) {
+            throw new IllegalArgumentException("Invalid face " + face.name());
         }
 
-        return faces.get( Math.floorMod( index + 1, 4 ) );
+        return faces.get(Math.floorMod(index + 1, 4));
     }
 
     /**
@@ -43,13 +43,13 @@ public class DirectionUtil {
      * @param face the input
      * @return the next {@link org.bukkit.block.BlockFace} in counter-clockwise direction
      */
-    public static BlockFace counterClockwise( BlockFace face ) {
-        int index = faces.indexOf( face );
+    public static BlockFace counterClockwise(BlockFace face) {
+        int index = faces.indexOf(face);
 
-        if ( index == -1 ) {
-            throw new IllegalArgumentException( "Invalid face " + face.name() );
+        if (index == -1) {
+            throw new IllegalArgumentException("Invalid face " + face.name());
         }
 
-        return faces.get( Math.floorMod( index - 1, 4 ) );
+        return faces.get(Math.floorMod(index - 1, 4));
     }
 }

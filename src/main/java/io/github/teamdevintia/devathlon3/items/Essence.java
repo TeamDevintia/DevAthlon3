@@ -35,26 +35,26 @@ public class Essence implements Listener {
     }
 */
 
-    public Essence( Devathlon3 plugin ) {
-        Bukkit.getPluginManager().registerEvents( this, plugin );
+    public Essence(Devathlon3 plugin) {
+        Bukkit.getPluginManager().registerEvents(this, plugin);
     }
 
     @EventHandler
-    public void onDeath( EntityDeathEvent event ) {
+    public void onDeath(EntityDeathEvent event) {
         // spawn essences on death of some entities
         // after before wizard spawns
-        if ( MagicPortal.wizardActive ) {
+        if (MagicPortal.wizardActive) {
             Location loc = event.getEntity().getLocation();
 
             // 3 for witch
-            if ( event.getEntityType() == EntityType.WITCH ) {
-                for ( int i = 0; i < 2; i++ ) {
-                    loc.getWorld().dropItemNaturally( loc, ESSENCE );
+            if (event.getEntityType() == EntityType.WITCH) {
+                for (int i = 0; i < 2; i++) {
+                    loc.getWorld().dropItemNaturally(loc, ESSENCE);
                 }
             } else
                 // 1 for the rest
-                if ( event.getEntityType() == EntityType.ZOMBIE || event.getEntityType() == EntityType.SKELETON || event.getEntityType() == EntityType.SPIDER ) {
-                    loc.getWorld().dropItemNaturally( loc, ESSENCE );
+                if (event.getEntityType() == EntityType.ZOMBIE || event.getEntityType() == EntityType.SKELETON || event.getEntityType() == EntityType.SPIDER) {
+                    loc.getWorld().dropItemNaturally(loc, ESSENCE);
                 }
         }
     }

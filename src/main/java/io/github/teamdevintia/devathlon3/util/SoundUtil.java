@@ -18,7 +18,7 @@ import org.bukkit.entity.Player;
 /**
  * @author Shad0wCore
  */
-public final class SoundUtil  {
+public final class SoundUtil {
 
     public static void playCustomSound(Player player, String soundPath, SoundSource source, float volume, float pitch) {
         sendPacket(player, new PacketPlayOutCustomSoundEffect(soundPath, SoundCategory.a(source.source()),

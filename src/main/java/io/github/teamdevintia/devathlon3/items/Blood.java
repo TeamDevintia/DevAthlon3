@@ -35,67 +35,67 @@ public class Blood implements Listener {
 
     static {
         // add blood dropping entities
-        agressiveMobs.add( EntityType.ZOMBIE );
-        agressiveMobs.add( EntityType.SKELETON );
-        agressiveMobs.add( EntityType.SPIDER );
-        agressiveMobs.add( EntityType.WITCH );
+        agressiveMobs.add(EntityType.ZOMBIE);
+        agressiveMobs.add(EntityType.SKELETON);
+        agressiveMobs.add(EntityType.SPIDER);
+        agressiveMobs.add(EntityType.WITCH);
 
         // blood item
         BLOOD = new ItemFactory(Material.REDSTONE).amount(1).displayName(ChatColor.RED + "Blut")
                 .itemFlags(ItemFlag.HIDE_ENCHANTS).enchantment(Enchantment.DIG_SPEED, 1, true).release();
     }
 
-    public Blood( Devathlon3 plugin ) {
-        Bukkit.getPluginManager().registerEvents( this, plugin );
+    public Blood(Devathlon3 plugin) {
+        Bukkit.getPluginManager().registerEvents(this, plugin);
     }
 
     @EventHandler
-    public void onDeath( EntityDeathEvent event ) {
+    public void onDeath(EntityDeathEvent event) {
         // spawn blood on death of some entities
         // only before wizard spawns
-        if ( !MagicPortal.wizardActive ) {
-            if ( agressiveMobs.contains( event.getEntity().getType() ) ) {
-                int r = ThreadLocalRandom.current().nextInt( 100 );
+        if (!MagicPortal.wizardActive) {
+            if (agressiveMobs.contains(event.getEntity().getType())) {
+                int r = ThreadLocalRandom.current().nextInt(100);
                 // 33% chance
-                if ( r <= 33 ) {
+                if (r <= 33) {
                     Location loc = event.getEntity().getLocation();
-                    loc.getWorld().dropItemNaturally( loc, BLOOD );
+                    loc.getWorld().dropItemNaturally(loc, BLOOD);
                 }
             }
         }
     }
 
     @EventHandler
-    public void onPlace( BlockPlaceEvent event ) {
+    public void onPlace(BlockPlaceEvent event) {
         // don't place blood
-        if ( event.getItemInHand().equals( BLOOD ) ) {
-            event.setBuild( false );
-            event.setCancelled( true );
+        if (event.getItemInHand().equals(BLOOD)) {
+            event.setBuild(false);
+            event.setCancelled(true);
         }
     }
 
 
     @EventHandler
-    public void onPrepareCraft( PrepareItemCraftEvent event ) {
+    public void onPrepareCraft(PrepareItemCraftEvent event) {
         // don't craft normal stuff with blood
-        if ( event.getInventory().contains( BLOOD ) ) {
-            if ( event.getRecipe().getResult().equals( Devathlon3.ritualsLeuchter ) ) {
+        if (event.getInventory().contains(BLOOD)) {
+            if (event.getRecipe().getResult().equals(Devathlon3.ritualsLeuchter)) {
                 return;
             }
 
-            event.getInventory().setResult( null );
+            event.getInventory().setResult(null);
         }
     }
 
     @EventHandler
-    public void onCraft( CraftItemEvent event ) {
+    public void onCraft(CraftItemEvent event) {
         // don't craft normal stuff with blood
-        if ( event.getInventory().contains( BLOOD ) ) {
-            if ( event.getRecipe().getResult().equals( Devathlon3.ritualsLeuchter ) ) {
+        if (event.getInventory().contains(BLOOD)) {
+            if (event.getRecipe().getResult().equals(Devathlon3.ritualsLeuchter)) {
                 return;
             }
 
-            event.setCancelled( true );
+            event.setCancelled(true);
         }
     }
 }

@@ -43,47 +43,47 @@ public class MagicPortal implements Listener {
 
     private Devathlon3 plugin;
 
-    public MagicPortal( Devathlon3 plugin ) {
+    public MagicPortal(Devathlon3 plugin) {
         this.plugin = plugin;
-        Bukkit.getPluginManager().registerEvents( this, plugin );
+        Bukkit.getPluginManager().registerEvents(this, plugin);
     }
 
     @EventHandler
-    public void onPlace( BlockPlaceEvent event ) {
-        if ( event.getItemInHand().equals( Devathlon3.ritualsLeuchter ) ) {
+    public void onPlace(BlockPlaceEvent event) {
+        if (event.getItemInHand().equals(Devathlon3.ritualsLeuchter)) {
             // only 5 torches are placeable, so that it is easier to finish it ^^
-            if ( torchcount == 5 ) {
-                event.setCancelled( true );
-                event.setBuild( false );
+            if (torchcount == 5) {
+                event.setCancelled(true);
+                event.setBuild(false);
                 return;
             }
 
-            event.getBlockPlaced().setMetadata( "ritualsleuchter", new FixedMetadataValue( plugin, "yes" ) );
+            event.getBlockPlaced().setMetadata("ritualsleuchter", new FixedMetadataValue(plugin, "yes"));
 
-            placedTorches.add( event.getBlockPlaced().getLocation() );
+            placedTorches.add(event.getBlockPlaced().getLocation());
             torchcount++;
             checkForCompletion();
-        } else if ( event.getBlock().getType() == Material.SMOOTH_BRICK && event.getBlock().getData() == 3 && isFinished ) {
+        } else if (event.getBlock().getType() == Material.SMOOTH_BRICK && event.getBlock().getData() == 3 && isFinished) {
             // we already has a spawn
-            if ( center != null ) {
-                event.setCancelled( true );
-                event.setBuild( false );
+            if (center != null) {
+                event.setCancelled(true);
+                event.setBuild(false);
                 return;
             }
 
-            Location center = event.getBlock().getLocation().add( 0, 1, 0 );
+            Location center = event.getBlock().getLocation().add(0, 1, 0);
             // validate...
             // -y value
-            if ( center.getY() != placedTorches.get( 0 ).getY() ) {
-                event.setCancelled( true );
-                event.setBuild( false );
+            if (center.getY() != placedTorches.get(0).getY()) {
+                event.setCancelled(true);
+                event.setBuild(false);
                 return;
             }
             // -distance
-            for ( Location loc : placedTorches ) {
-                if ( loc.distanceSquared( center ) > 16 ) {
-                    event.setCancelled( true );
-                    event.setBuild( false );
+            for (Location loc : placedTorches) {
+                if (loc.distanceSquared(center) > 16) {
+                    event.setCancelled(true);
+                    event.setBuild(false);
                     return;
                 }
             }
@@ -94,23 +94,23 @@ public class MagicPortal implements Listener {
     }
 
     @EventHandler
-    public void onBreak( BlockBreakEvent event ) {
-        if ( event.getBlock().getType() == Material.REDSTONE_TORCH_ON ) {
-            if ( !event.getBlock().hasMetadata( "ritualsleuchter" ) ) {
+    public void onBreak(BlockBreakEvent event) {
+        if (event.getBlock().getType() == Material.REDSTONE_TORCH_ON) {
+            if (!event.getBlock().hasMetadata("ritualsleuchter")) {
                 return;
             }
 
             // don't destroy what you just created!
-            if ( isFinished ) {
-                event.setCancelled( true );
+            if (isFinished) {
+                event.setCancelled(true);
                 return;
             }
 
-            placedTorches.remove( event.getBlock().getLocation() );
+            placedTorches.remove(event.getBlock().getLocation());
             torchcount--;
 
             // someone cheated!
-            if ( torchcount < 0 ) {
+            if (torchcount < 0) {
                 torchcount = 0;
             }
 
@@ -122,7 +122,7 @@ public class MagicPortal implements Listener {
      * Relights all portals
      */
     private void checkForCompletion() {
-        if ( particleTask != null ) {
+        if (particleTask != null) {
             particleTask.cancel();
         }
 
@@ -130,11 +130,11 @@ public class MagicPortal implements Listener {
         connections = new ArrayList<>();
 
         // find locations
-        for ( Location loc : placedTorches ) {
+        for (Location loc : placedTorches) {
             Block block = loc.getBlock();
 
-            for ( BlockFace face : new BlockFace[]{ BlockFace.NORTH, BlockFace.EAST, BlockFace.WEST, BlockFace.SOUTH } ) {
-                check( block, face );
+            for (BlockFace face : new BlockFace[]{BlockFace.NORTH, BlockFace.EAST, BlockFace.WEST, BlockFace.SOUTH}) {
+                check(block, face);
             }
         }
 
@@ -142,50 +142,50 @@ public class MagicPortal implements Listener {
         particleTask = new BukkitRunnable() {
             @Override
             public void run() {
-                for ( LocationTuple tuple : connections ) {
+                for (LocationTuple tuple : connections) {
                     //calc direction
-                    Vector diff = tuple.loc2.toVector().subtract( tuple.loc1.toVector() );
+                    Vector diff = tuple.loc2.toVector().subtract(tuple.loc1.toVector());
                     double distance = diff.length();
 
                     // calc step size
                     double stepSize = 0.5;
-                    double dx = ( diff.getX() / distance ) * stepSize;
-                    double dy = ( diff.getY() / distance ) * stepSize;
-                    double dz = ( diff.getZ() / distance ) * stepSize;
+                    double dx = (diff.getX() / distance) * stepSize;
+                    double dy = (diff.getY() / distance) * stepSize;
+                    double dz = (diff.getZ() / distance) * stepSize;
 
                     // 0.5 offset to center the particle
-                    Location temp = tuple.loc1.clone().add( 0.5, 0.5, 0.5 );
+                    Location temp = tuple.loc1.clone().add(0.5, 0.5, 0.5);
                     // play the line
-                    for ( double d = 0; d <= distance; d += stepSize ) {
-                        temp.add( dx, dy, dz );
+                    for (double d = 0; d <= distance; d += stepSize) {
+                        temp.add(dx, dy, dz);
 
-                        temp.getWorld().playEffect( temp, Effect.TILE_BREAK, Material.REDSTONE_BLOCK.getId() );
+                        temp.getWorld().playEffect(temp, Effect.TILE_BREAK, Material.REDSTONE_BLOCK.getId());
                     }
                 }
             }
-        }.runTaskTimer( plugin, 0, 1 );
+        }.runTaskTimer(plugin, 0, 1);
 
         // check if portal complete
         // -count locations
         Map<Location, Integer> count = new HashMap<>();
-        for ( LocationTuple tuple : connections ) {
-            tuple.forEach( loc -> {
-                Integer c = count.get( loc );
-                if ( c == null ) {
+        for (LocationTuple tuple : connections) {
+            tuple.forEach(loc -> {
+                Integer c = count.get(loc);
+                if (c == null) {
                     c = 0;
                 }
 
-                count.put( loc, c + 1 );
-            } );
+                count.put(loc, c + 1);
+            });
         }
 
         boolean full = false;
         // -our structure has 5 torches
-        if ( count.size() == 5 ) {
+        if (count.size() == 5) {
             full = true;
-            for ( int i : count.values() ) {
+            for (int i : count.values()) {
                 // -every torch can be reached exactly twice
-                if ( i != 2 ) {
+                if (i != 2) {
                     full = false;
                     break;
                 }
@@ -193,7 +193,7 @@ public class MagicPortal implements Listener {
         }
 
         // if done, spawn the throne!
-        if ( full ) {
+        if (full) {
             isFinished = true;
         }
     }
@@ -205,54 +205,54 @@ public class MagicPortal implements Listener {
      * @param up    the direction the tringle is facing
      */
     // http://bender.minidigger.me/2016/07/mspaint_2016-07-16_14-25-02.png
-    private void check( Block block, BlockFace up ) {
-        if ( up != BlockFace.NORTH && up != BlockFace.EAST && up != BlockFace.SOUTH && up != BlockFace.WEST ) {
-            throw new IllegalArgumentException( "Invalid block face " + up.name() );
+    private void check(Block block, BlockFace up) {
+        if (up != BlockFace.NORTH && up != BlockFace.EAST && up != BlockFace.SOUTH && up != BlockFace.WEST) {
+            throw new IllegalArgumentException("Invalid block face " + up.name());
         }
 
         BlockFace down = up.getOppositeFace();
-        BlockFace left = DirectionUtil.counterClockwise( up );
-        BlockFace right = DirectionUtil.clockwise( up );
+        BlockFace left = DirectionUtil.counterClockwise(up);
+        BlockFace right = DirectionUtil.clockwise(up);
 
         // 1
         // 1 -> 3
-        Block pos = block.getRelative( right, 2 ).getRelative( down, 5 );
-        checkAndAddToList( block, pos );
+        Block pos = block.getRelative(right, 2).getRelative(down, 5);
+        checkAndAddToList(block, pos);
         // 1 -> 4
-        pos = block.getRelative( left, 2 ).getRelative( down, 5 );
-        checkAndAddToList( block, pos );
+        pos = block.getRelative(left, 2).getRelative(down, 5);
+        checkAndAddToList(block, pos);
 
         // 2
         // 2 -> 4
-        pos = block.getRelative( down, 3 ).getRelative( left, 5 );
-        checkAndAddToList( block, pos );
+        pos = block.getRelative(down, 3).getRelative(left, 5);
+        checkAndAddToList(block, pos);
         // 2 -> 5
-        pos = block.getRelative( left, 6 );
-        checkAndAddToList( block, pos );
+        pos = block.getRelative(left, 6);
+        checkAndAddToList(block, pos);
 
         // 3
         // 3 -> 1
-        pos = block.getRelative( up, 5 ).getRelative( left, 2 );
-        checkAndAddToList( block, pos );
+        pos = block.getRelative(up, 5).getRelative(left, 2);
+        checkAndAddToList(block, pos);
         // 3 -> 5
-        pos = block.getRelative( left, 5 ).getRelative( up, 3 );
-        checkAndAddToList( block, pos );
+        pos = block.getRelative(left, 5).getRelative(up, 3);
+        checkAndAddToList(block, pos);
 
         // 4
         // 4 -> 1
-        pos = block.getRelative( up, 5 ).getRelative( right, 2 );
-        checkAndAddToList( block, pos );
+        pos = block.getRelative(up, 5).getRelative(right, 2);
+        checkAndAddToList(block, pos);
         // 4 -> 2
-        pos = block.getRelative( right, 5 ).getRelative( up, 3 );
-        checkAndAddToList( block, pos );
+        pos = block.getRelative(right, 5).getRelative(up, 3);
+        checkAndAddToList(block, pos);
 
         //5
         //5 -> 2
-        pos = block.getRelative( right, 6 );
-        checkAndAddToList( block, pos );
+        pos = block.getRelative(right, 6);
+        checkAndAddToList(block, pos);
         // 5 ->3
-        pos = block.getRelative( down, 3 ).getRelative( left, 5 );
-        checkAndAddToList( block, pos );
+        pos = block.getRelative(down, 3).getRelative(left, 5);
+        checkAndAddToList(block, pos);
     }
 
     /**
@@ -261,12 +261,12 @@ public class MagicPortal implements Listener {
      * @param origin the block placed
      * @param pos    the block to check
      */
-    private void checkAndAddToList( Block origin, Block pos ) {
-        if ( pos.getType() == Material.REDSTONE_TORCH_ON ) {
-            if ( placedTorches.contains( pos.getLocation() ) ) {
-                LocationTuple tuple = new LocationTuple( origin, pos );
-                if ( !connections.contains( tuple ) ) {
-                    connections.add( tuple );
+    private void checkAndAddToList(Block origin, Block pos) {
+        if (pos.getType() == Material.REDSTONE_TORCH_ON) {
+            if (placedTorches.contains(pos.getLocation())) {
+                LocationTuple tuple = new LocationTuple(origin, pos);
+                if (!connections.contains(tuple)) {
+                    connections.add(tuple);
                 }
             }
         }
@@ -280,42 +280,42 @@ public class MagicPortal implements Listener {
         new BukkitRunnable() {
             @Override
             public void run() {
-                spawnLayer1( center.getBlock().getRelative( BlockFace.DOWN ) );
+                spawnLayer1(center.getBlock().getRelative(BlockFace.DOWN));
             }
-        }.runTaskLater( plugin, (long) ( 20 * 1.5 ) );
+        }.runTaskLater(plugin, (long) (20 * 1.5));
         // step 2: layer 1 at y0, layer 2 at y-1
         new BukkitRunnable() {
             @Override
             public void run() {
-                spawnLayer1( center.getBlock() );
-                spawnLayer2( center.getBlock().getRelative( BlockFace.DOWN ) );
+                spawnLayer1(center.getBlock());
+                spawnLayer2(center.getBlock().getRelative(BlockFace.DOWN));
             }
-        }.runTaskLater( plugin, (long) ( 20 * 3 ) );
+        }.runTaskLater(plugin, (long) (20 * 3));
         // step 3: layer 1 at y+1, layer 2 at y0, stop particles,
         new BukkitRunnable() {
             @Override
             public void run() {
-                spawnLayer1( center.getBlock().getRelative( BlockFace.UP ) );
-                spawnLayer2( center.getBlock() );
+                spawnLayer1(center.getBlock().getRelative(BlockFace.UP));
+                spawnLayer2(center.getBlock());
 
                 //stop particles
                 particleTask.cancel();
 
                 //remove torches
-                placedTorches.forEach( loc -> loc.getBlock().setType( Material.AIR ) );
+                placedTorches.forEach(loc -> loc.getBlock().setType(Material.AIR));
             }
-        }.runTaskLater( plugin, (long) ( 20 * 4.5 ) );
+        }.runTaskLater(plugin, (long) (20 * 4.5));
         // step 4: mob appearance effect plus spawn of wizard
         new BukkitRunnable() {
             @Override
             public void run() {
-                PacketPlayOutGameStateChange packet = new PacketPlayOutGameStateChange( 10, 0 );
-                Bukkit.getOnlinePlayers().forEach( player -> ( (CraftPlayer) player ).getHandle().playerConnection.sendPacket( packet ) );
+                PacketPlayOutGameStateChange packet = new PacketPlayOutGameStateChange(10, 0);
+                Bukkit.getOnlinePlayers().forEach(player -> ((CraftPlayer) player).getHandle().playerConnection.sendPacket(packet));
 
-                //TODO spawn wizard
+                //TODO spawn wizard (talk to entites in range)
                 wizardActive = true;
             }
-        }.runTaskLater( plugin, (long) ( 20 * 5 ) );
+        }.runTaskLater(plugin, (long) (20 * 5));
     }
 
     /**
@@ -323,73 +323,73 @@ public class MagicPortal implements Listener {
      *
      * @param center the center pos
      */
-    private void spawnLayer1( Block center ) {
+    private void spawnLayer1(Block center) {
         //center
-        center.setType( Material.SMOOTH_BRICK );
-        center.setData( (byte) 3 );
+        center.setType(Material.SMOOTH_BRICK);
+        center.setData((byte) 3);
 
         // stairs
-        Block temp = center.getRelative( BlockFace.NORTH );
-        temp.setType( Material.SMOOTH_STAIRS );
-        temp.setData( (byte) 2 );
+        Block temp = center.getRelative(BlockFace.NORTH);
+        temp.setType(Material.SMOOTH_STAIRS);
+        temp.setData((byte) 2);
 
-        temp = center.getRelative( BlockFace.EAST );
-        temp.setType( Material.SMOOTH_STAIRS );
-        temp.setData( (byte) 1 );
+        temp = center.getRelative(BlockFace.EAST);
+        temp.setType(Material.SMOOTH_STAIRS);
+        temp.setData((byte) 1);
 
-        temp = center.getRelative( BlockFace.SOUTH );
-        temp.setType( Material.SMOOTH_STAIRS );
-        temp.setData( (byte) 3 );
+        temp = center.getRelative(BlockFace.SOUTH);
+        temp.setType(Material.SMOOTH_STAIRS);
+        temp.setData((byte) 3);
 
-        temp = center.getRelative( BlockFace.WEST );
-        temp.setType( Material.SMOOTH_STAIRS );
-        temp.setData( (byte) 0 );
+        temp = center.getRelative(BlockFace.WEST);
+        temp.setType(Material.SMOOTH_STAIRS);
+        temp.setData((byte) 0);
 
         // edges
-        temp = center.getRelative( BlockFace.NORTH ).getRelative( BlockFace.WEST );
-        temp.setType( Material.SMOOTH_BRICK );
-        temp.setData( (byte) 0 );
+        temp = center.getRelative(BlockFace.NORTH).getRelative(BlockFace.WEST);
+        temp.setType(Material.SMOOTH_BRICK);
+        temp.setData((byte) 0);
 
-        temp = center.getRelative( BlockFace.NORTH ).getRelative( BlockFace.EAST );
-        temp.setType( Material.SMOOTH_BRICK );
-        temp.setData( (byte) 1 );
+        temp = center.getRelative(BlockFace.NORTH).getRelative(BlockFace.EAST);
+        temp.setType(Material.SMOOTH_BRICK);
+        temp.setData((byte) 1);
 
-        temp = center.getRelative( BlockFace.SOUTH ).getRelative( BlockFace.EAST );
-        temp.setType( Material.SMOOTH_BRICK );
-        temp.setData( (byte) 0 );
+        temp = center.getRelative(BlockFace.SOUTH).getRelative(BlockFace.EAST);
+        temp.setType(Material.SMOOTH_BRICK);
+        temp.setData((byte) 0);
 
-        temp = center.getRelative( BlockFace.SOUTH ).getRelative( BlockFace.WEST );
-        temp.setType( Material.SMOOTH_BRICK );
-        temp.setData( (byte) 2 );
+        temp = center.getRelative(BlockFace.SOUTH).getRelative(BlockFace.WEST);
+        temp.setType(Material.SMOOTH_BRICK);
+        temp.setData((byte) 2);
 
         // slaps
-        temp = center.getRelative( BlockFace.NORTH, 2 ).getRelative( BlockFace.WEST );
-        temp.setType( Material.STEP );
-        temp.setData( (byte) 5 );
-        temp = center.getRelative( BlockFace.NORTH, 2 ).getRelative( BlockFace.EAST );
-        temp.setType( Material.STEP );
-        temp.setData( (byte) 5 );
+        temp = center.getRelative(BlockFace.NORTH, 2).getRelative(BlockFace.WEST);
+        temp.setType(Material.STEP);
+        temp.setData((byte) 5);
+        temp = center.getRelative(BlockFace.NORTH, 2).getRelative(BlockFace.EAST);
+        temp.setType(Material.STEP);
+        temp.setData((byte) 5);
 
-        temp = center.getRelative( BlockFace.EAST, 2 ).getRelative( BlockFace.NORTH );
-        temp.setType( Material.STEP );
-        temp.setData( (byte) 5 );
-        temp = center.getRelative( BlockFace.EAST, 2 ).getRelative( BlockFace.SOUTH );
-        temp.setType( Material.STEP );
-        temp.setData( (byte) 5 );
+        temp = center.getRelative(BlockFace.EAST, 2).getRelative(BlockFace.NORTH);
+        temp.setType(Material.STEP);
+        temp.setData((byte) 5);
+        temp = center.getRelative(BlockFace.EAST, 2).getRelative(BlockFace.SOUTH);
+        temp.setType(Material.STEP);
+        temp.setData((byte) 5);
 
-        temp = center.getRelative( BlockFace.SOUTH, 2 ).getRelative( BlockFace.EAST );
-        temp.setType( Material.STEP );
-        temp.setData( (byte) 5 );
-        temp = center.getRelative( BlockFace.SOUTH, 2 ).getRelative( BlockFace.WEST );
-        temp.setType( Material.STEP );
-        temp.setData( (byte) 5 );
+        temp = center.getRelative(BlockFace.SOUTH, 2).getRelative(BlockFace.EAST);
+        temp.setType(Material.STEP);
+        temp.setData((byte) 5);
+        temp = center.getRelative(BlockFace.SOUTH, 2).getRelative(BlockFace.WEST);
+        temp.setType(Material.STEP);
+        temp.setData((byte) 5);
 
-        temp = center.getRelative( BlockFace.WEST, 2 ).getRelative( BlockFace.NORTH );
-        temp.setType( Material.STEP );
-        temp.setData( (byte) 5 );
-        temp = center.getRelative( BlockFace.WEST, 2 ).getRelative( BlockFace.SOUTH );
-        temp.setType( Material.STEP );
-        temp.setData( (byte) 5 );
+        temp = center.getRelative(BlockFace.WEST, 2).getRelative(BlockFace.NORTH);
+        temp.setType(Material.STEP);
+        temp.setData((byte) 5);
+        temp = center.getRelative(BlockFace.WEST, 2).getRelative(BlockFace.SOUTH);
+        temp.setType(Material.STEP);
+        temp.setData((byte) 5);
     }
 
     /**
@@ -397,60 +397,60 @@ public class MagicPortal implements Listener {
      *
      * @param center the center pos
      */
-    private void spawnLayer2( Block center ) {
+    private void spawnLayer2(Block center) {
         //center
-        center.setType( Material.SMOOTH_BRICK );
-        for ( BlockFace face : BlockFace.values() ) {
-            if ( face == BlockFace.UP || face == BlockFace.DOWN ) {
+        center.setType(Material.SMOOTH_BRICK);
+        for (BlockFace face : BlockFace.values()) {
+            if (face == BlockFace.UP || face == BlockFace.DOWN) {
                 continue;
             }
-            center.getRelative( face ).setType( Material.SMOOTH_BRICK );
+            center.getRelative(face).setType(Material.SMOOTH_BRICK);
         }
 
         // stairs
-        Block temp = center.getRelative( BlockFace.NORTH, 2 );
-        temp.setType( Material.SMOOTH_STAIRS );
-        temp.setData( (byte) 2 );
+        Block temp = center.getRelative(BlockFace.NORTH, 2);
+        temp.setType(Material.SMOOTH_STAIRS);
+        temp.setData((byte) 2);
 
-        temp = center.getRelative( BlockFace.EAST, 2 );
-        temp.setType( Material.SMOOTH_STAIRS );
-        temp.setData( (byte) 1 );
+        temp = center.getRelative(BlockFace.EAST, 2);
+        temp.setType(Material.SMOOTH_STAIRS);
+        temp.setData((byte) 1);
 
-        temp = center.getRelative( BlockFace.SOUTH, 2 );
-        temp.setType( Material.SMOOTH_STAIRS );
-        temp.setData( (byte) 3 );
+        temp = center.getRelative(BlockFace.SOUTH, 2);
+        temp.setType(Material.SMOOTH_STAIRS);
+        temp.setData((byte) 3);
 
-        temp = center.getRelative( BlockFace.WEST, 2 );
-        temp.setType( Material.SMOOTH_STAIRS );
-        temp.setData( (byte) 0 );
+        temp = center.getRelative(BlockFace.WEST, 2);
+        temp.setType(Material.SMOOTH_STAIRS);
+        temp.setData((byte) 0);
 
         // edges
-        temp = center.getRelative( BlockFace.NORTH, 2 ).getRelative( BlockFace.WEST );
-        temp.setType( Material.SMOOTH_BRICK );
-        temp.setData( (byte) 0 );
-        temp = center.getRelative( BlockFace.NORTH, 2 ).getRelative( BlockFace.EAST );
-        temp.setType( Material.SMOOTH_BRICK );
-        temp.setData( (byte) 1 );
+        temp = center.getRelative(BlockFace.NORTH, 2).getRelative(BlockFace.WEST);
+        temp.setType(Material.SMOOTH_BRICK);
+        temp.setData((byte) 0);
+        temp = center.getRelative(BlockFace.NORTH, 2).getRelative(BlockFace.EAST);
+        temp.setType(Material.SMOOTH_BRICK);
+        temp.setData((byte) 1);
 
-        temp = center.getRelative( BlockFace.EAST, 2 ).getRelative( BlockFace.NORTH );
-        temp.setType( Material.SMOOTH_BRICK );
-        temp.setData( (byte) 2 );
-        temp = center.getRelative( BlockFace.EAST, 2 ).getRelative( BlockFace.SOUTH );
-        temp.setType( Material.SMOOTH_BRICK );
-        temp.setData( (byte) 0 );
+        temp = center.getRelative(BlockFace.EAST, 2).getRelative(BlockFace.NORTH);
+        temp.setType(Material.SMOOTH_BRICK);
+        temp.setData((byte) 2);
+        temp = center.getRelative(BlockFace.EAST, 2).getRelative(BlockFace.SOUTH);
+        temp.setType(Material.SMOOTH_BRICK);
+        temp.setData((byte) 0);
 
-        temp = center.getRelative( BlockFace.SOUTH, 2 ).getRelative( BlockFace.EAST );
-        temp.setType( Material.SMOOTH_BRICK );
-        temp.setData( (byte) 1 );
-        temp = center.getRelative( BlockFace.SOUTH, 2 ).getRelative( BlockFace.WEST );
-        temp.setType( Material.SMOOTH_BRICK );
-        temp.setData( (byte) 0 );
+        temp = center.getRelative(BlockFace.SOUTH, 2).getRelative(BlockFace.EAST);
+        temp.setType(Material.SMOOTH_BRICK);
+        temp.setData((byte) 1);
+        temp = center.getRelative(BlockFace.SOUTH, 2).getRelative(BlockFace.WEST);
+        temp.setType(Material.SMOOTH_BRICK);
+        temp.setData((byte) 0);
 
-        temp = center.getRelative( BlockFace.WEST, 2 ).getRelative( BlockFace.NORTH );
-        temp.setType( Material.SMOOTH_BRICK );
-        temp.setData( (byte) 2 );
-        temp = center.getRelative( BlockFace.WEST, 2 ).getRelative( BlockFace.SOUTH );
-        temp.setType( Material.SMOOTH_BRICK );
-        temp.setData( (byte) 0 );
+        temp = center.getRelative(BlockFace.WEST, 2).getRelative(BlockFace.NORTH);
+        temp.setType(Material.SMOOTH_BRICK);
+        temp.setData((byte) 2);
+        temp = center.getRelative(BlockFace.WEST, 2).getRelative(BlockFace.SOUTH);
+        temp.setType(Material.SMOOTH_BRICK);
+        temp.setData((byte) 0);
     }
 }

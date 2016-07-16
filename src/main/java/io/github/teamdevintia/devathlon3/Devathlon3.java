@@ -18,25 +18,25 @@ import org.bukkit.plugin.java.JavaPlugin;
  */
 public final class Devathlon3 extends JavaPlugin {
 
-    public static final ItemStack ritualsLeuchter = new ItemStack( Material.REDSTONE_TORCH_ON );
+    public static final ItemStack ritualsLeuchter = new ItemStack(Material.REDSTONE_TORCH_ON);
 
     static {
         // create ritualsleuchter item
         ItemMeta ritualsLeuchterMeta = ritualsLeuchter.getItemMeta();
-        ritualsLeuchterMeta.setDisplayName( "Ritualsleuchter" );
-        ritualsLeuchterMeta.addEnchant( Enchantment.DIG_SPEED, 1, true );
-        ritualsLeuchterMeta.addItemFlags( ItemFlag.HIDE_ENCHANTS );
-        ritualsLeuchter.setItemMeta( ritualsLeuchterMeta );
+        ritualsLeuchterMeta.setDisplayName("Ritualsleuchter");
+        ritualsLeuchterMeta.addEnchant(Enchantment.DIG_SPEED, 1, true);
+        ritualsLeuchterMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+        ritualsLeuchter.setItemMeta(ritualsLeuchterMeta);
     }
 
     @Override
     public void onEnable() {
         // init portals
-        new MagicPortal( this );
+        new MagicPortal(this);
         // blood drop
-        new Blood( this );
+        new Blood(this);
         // essence drop
-        new Essence( this );
+        new Essence(this);
 
         addCraftingRecipes();
     }
@@ -51,23 +51,23 @@ public final class Devathlon3 extends JavaPlugin {
      */
     private void addCraftingRecipes() {
         // ritualsleuchter
-        ShapedRecipe ritualsLeuchterRecipe = new ShapedRecipe( ritualsLeuchter );
-        ritualsLeuchterRecipe.shape( "BBB", "BSB", "BBB" );
-        ritualsLeuchterRecipe.setIngredient( 'B', Material.REDSTONE );
-        ritualsLeuchterRecipe.setIngredient( 'S', Material.STICK );
-        getServer().addRecipe( ritualsLeuchterRecipe );
+        ShapedRecipe ritualsLeuchterRecipe = new ShapedRecipe(ritualsLeuchter);
+        ritualsLeuchterRecipe.shape("BBB", "BSB", "BBB");
+        ritualsLeuchterRecipe.setIngredient('B', Material.REDSTONE);
+        ritualsLeuchterRecipe.setIngredient('S', Material.STICK);
+        getServer().addRecipe(ritualsLeuchterRecipe);
         //TODO ritualsLeuchterRecipe should only accept blood as ingredient
     }
 
 
     @Override
-    public boolean onCommand( CommandSender sender, Command command, String label, String[] args ) {
-        System.out.println( "test" );
+    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+        System.out.println("test");
         return true;
     }
 
     public static Devathlon3 getInstance() {
-        return Devathlon3.getPlugin( Devathlon3.class );
+        return Devathlon3.getPlugin(Devathlon3.class);
     }
 
 }
