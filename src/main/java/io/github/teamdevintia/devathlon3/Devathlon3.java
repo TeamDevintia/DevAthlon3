@@ -23,4 +23,9 @@ public final class Devathlon3 extends JavaPlugin {
         System.out.println( "test" );
         return true;
     }
+
+    public static Devathlon3 getInstance() {
+        return Devathlon3.getPlugin(Devathlon3.class);
+    }
+
 }
