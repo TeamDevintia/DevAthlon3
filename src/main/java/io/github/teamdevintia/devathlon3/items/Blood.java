@@ -2,6 +2,7 @@ package io.github.teamdevintia.devathlon3.items;
 
 import io.github.teamdevintia.devathlon3.Devathlon3;
 import io.github.teamdevintia.devathlon3.portal.MagicPortal;
+import io.github.teamdevintia.devathlon3.util.factory.ItemFactory;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -16,7 +17,6 @@ import org.bukkit.event.inventory.CraftItemEvent;
 import org.bukkit.event.inventory.PrepareItemCraftEvent;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,12 +41,8 @@ public class Blood implements Listener {
         agressiveMobs.add( EntityType.WITCH );
 
         // blood item
-        BLOOD = new ItemStack( Material.REDSTONE );
-        ItemMeta meta = BLOOD.getItemMeta();
-        meta.addEnchant( Enchantment.DIG_SPEED, 1, true );
-        meta.addItemFlags( ItemFlag.HIDE_ENCHANTS );
-        meta.setDisplayName( ChatColor.RED + "Blut" );
-        BLOOD.setItemMeta( meta );
+        BLOOD = new ItemFactory(Material.REDSTONE).amount(1).displayName(ChatColor.RED + "Blut")
+                .itemFlags(ItemFlag.HIDE_ENCHANTS).enchantment(Enchantment.DIG_SPEED, 1, true).release();
     }
 
     public Blood( Devathlon3 plugin ) {

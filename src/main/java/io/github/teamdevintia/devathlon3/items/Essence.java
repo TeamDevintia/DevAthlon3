@@ -2,7 +2,9 @@ package io.github.teamdevintia.devathlon3.items;
 
 import io.github.teamdevintia.devathlon3.Devathlon3;
 import io.github.teamdevintia.devathlon3.portal.MagicPortal;
+import io.github.teamdevintia.devathlon3.util.factory.ItemFactory;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -12,7 +14,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 
 /**
  * Handles the mechanics attached to the essence item.
@@ -21,9 +22,10 @@ import org.bukkit.inventory.meta.ItemMeta;
  */
 public class Essence implements Listener {
 
-    public static final ItemStack ESSENCE = new ItemStack( Material.SLIME_BALL );
+    public static final ItemStack ESSENCE = new ItemFactory(Material.SLIME_BALL).amount(1).displayName(ChatColor.GREEN + "Essenz")
+            .itemFlags(ItemFlag.HIDE_ENCHANTS).enchantment(Enchantment.DIG_SPEED, 1, true).release();
 
-    static {
+   /* static {
         // essence item
         ItemMeta meta = ESSENCE.getItemMeta();
         meta.setDisplayName( "Essenz" );
@@ -31,7 +33,7 @@ public class Essence implements Listener {
         meta.addItemFlags( ItemFlag.HIDE_ENCHANTS );
         ESSENCE.setItemMeta( meta );
     }
-
+*/
     public Essence( Devathlon3 plugin ) {
         Bukkit.getPluginManager().registerEvents( this, plugin );
     }
