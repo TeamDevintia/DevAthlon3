@@ -1,9 +1,6 @@
 package io.github.teamdevintia.devathlon3;
 
-import io.github.teamdevintia.devathlon3.constants.ItemConstant;
-import io.github.teamdevintia.devathlon3.constants.MessageConstant;
-import io.github.teamdevintia.devathlon3.constants.NameConstant;
-import io.github.teamdevintia.devathlon3.constants.RecipeConstant;
+import io.github.teamdevintia.devathlon3.constants.*;
 import io.github.teamdevintia.devathlon3.items.Blood;
 import io.github.teamdevintia.devathlon3.items.Essence;
 import io.github.teamdevintia.devathlon3.portal.MagicPortal;
@@ -22,6 +19,7 @@ public final class Devathlon3 extends JavaPlugin {
     private ItemConstant itemConstant;
     private RecipeConstant recipeConstant;
     private MessageConstant messageConstant;
+    private TimingConstant timingConstant;
 
     @Override
     public void onEnable() {
@@ -31,11 +29,13 @@ public final class Devathlon3 extends JavaPlugin {
         itemConstant = new ItemConstant(instance);
         recipeConstant = new RecipeConstant(instance);
         messageConstant = new MessageConstant(instance);
+        timingConstant = new TimingConstant(instance);
 
         nameConstant.initializeContent();
         itemConstant.initializeContent();
         recipeConstant.initializeContent();
         messageConstant.initializeContent();
+        timingConstant.initializeContent();
 
         // init portals
         new MagicPortal(this);
@@ -56,6 +56,8 @@ public final class Devathlon3 extends JavaPlugin {
         recipeConstant = null;
         messageConstant.cleanup();
         messageConstant = null;
+        timingConstant.cleanup();
+        timingConstant = null;
     }
 
     public NameConstant getNameConstant() {
@@ -72,6 +74,10 @@ public final class Devathlon3 extends JavaPlugin {
 
     public MessageConstant getMessageConstant() {
         return messageConstant;
+    }
+
+    public TimingConstant getTimingConstant() {
+        return timingConstant;
     }
 
     public static Devathlon3 getInstance() {

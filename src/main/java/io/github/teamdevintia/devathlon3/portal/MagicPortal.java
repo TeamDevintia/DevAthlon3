@@ -1,8 +1,8 @@
 package io.github.teamdevintia.devathlon3.portal;
 
 import io.github.teamdevintia.devathlon3.Devathlon3;
-import io.github.teamdevintia.devathlon3.util.ChatUtil;
 import io.github.teamdevintia.devathlon3.managers.VFXManager;
+import io.github.teamdevintia.devathlon3.util.ChatUtil;
 import io.github.teamdevintia.devathlon3.util.DirectionUtil;
 import io.github.teamdevintia.devathlon3.visuals.BloodTrailVFXPacket;
 import net.minecraft.server.v1_10_R1.PacketPlayOutGameStateChange;
@@ -269,7 +269,7 @@ public class MagicPortal implements Listener {
             public void run() {
                 spawnLayer1(center.getBlock().getRelative(BlockFace.DOWN));
             }
-        }.runTaskLater(plugin, (long) (20 * 1.5));
+        }.runTaskLater(plugin, plugin.getTimingConstant().get("spawn.throne.step1.delay"));
         // step 2: layer 1 at y0, layer 2 at y-1
         new BukkitRunnable() {
             @Override
@@ -277,7 +277,7 @@ public class MagicPortal implements Listener {
                 spawnLayer1(center.getBlock());
                 spawnLayer2(center.getBlock().getRelative(BlockFace.DOWN));
             }
-        }.runTaskLater(plugin, (long) (20 * 3));
+        }.runTaskLater(plugin, plugin.getTimingConstant().get("spawn.throne.step2.delay"));
         // step 3: layer 1 at y+1, layer 2 at y0, stop particles,
         new BukkitRunnable() {
             @Override
@@ -291,7 +291,7 @@ public class MagicPortal implements Listener {
                 //remove torches
                 placedTorches.forEach(loc -> loc.getBlock().setType(Material.AIR));
             }
-        }.runTaskLater(plugin, (long) (20 * 4.5));
+        }.runTaskLater(plugin, plugin.getTimingConstant().get("spawn.throne.step3.delay"));
         // step 4: mob appearance effect plus spawn of wizard
         new BukkitRunnable() {
             @Override
@@ -311,14 +311,20 @@ public class MagicPortal implements Listener {
                 Bukkit.getOnlinePlayers().forEach(player -> player.setCollidable(false));
                 // TODO make him look at player
 
-                Bukkit.getScheduler().runTaskLater(plugin, () -> ChatUtil.sendToPlayersInRange(plugin.getMessageConstant().get("wizard.spawn.1"), 30, center), 20 * 2);
-                Bukkit.getScheduler().runTaskLater(plugin, () -> ChatUtil.sendToPlayersInRange(plugin.getMessageConstant().get("wizard.spawn.2"), 30, center), 20 * 4);
-                Bukkit.getScheduler().runTaskLater(plugin, () -> ChatUtil.sendToPlayersInRange(plugin.getMessageConstant().get("wizard.spawn.3"), 30, center), 20 * 6);
-                Bukkit.getScheduler().runTaskLater(plugin, () -> ChatUtil.sendToPlayersInRange(plugin.getMessageConstant().get("wizard.spawn.4"), 30, center), 20 * 8);
-                Bukkit.getScheduler().runTaskLater(plugin, () -> ChatUtil.sendToPlayersInRange(plugin.getMessageConstant().get("wizard.spawn.5"), 30, center), 20 * 10);
-                Bukkit.getScheduler().runTaskLater(plugin, () -> ChatUtil.sendToPlayersInRange(plugin.getMessageConstant().get("wizard.spawn.6"), 30, center), 20 * 12);
+                Bukkit.getScheduler().runTaskLater(plugin, () -> ChatUtil.sendToPlayersInRange(plugin.getMessageConstant().get("wizard.spawn.1"), 30, center),
+                        plugin.getTimingConstant().get("spawn.throne.step4.message1.delay"));
+                Bukkit.getScheduler().runTaskLater(plugin, () -> ChatUtil.sendToPlayersInRange(plugin.getMessageConstant().get("wizard.spawn.2"), 30, center),
+                        plugin.getTimingConstant().get("spawn.throne.step4.message2.delay"));
+                Bukkit.getScheduler().runTaskLater(plugin, () -> ChatUtil.sendToPlayersInRange(plugin.getMessageConstant().get("wizard.spawn.3"), 30, center),
+                        plugin.getTimingConstant().get("spawn.throne.step4.message3.delay"));
+                Bukkit.getScheduler().runTaskLater(plugin, () -> ChatUtil.sendToPlayersInRange(plugin.getMessageConstant().get("wizard.spawn.4"), 30, center),
+                        plugin.getTimingConstant().get("spawn.throne.step4.message4.delay"));
+                Bukkit.getScheduler().runTaskLater(plugin, () -> ChatUtil.sendToPlayersInRange(plugin.getMessageConstant().get("wizard.spawn.5"), 30, center),
+                        plugin.getTimingConstant().get("spawn.throne.step4.message5.delay"));
+                Bukkit.getScheduler().runTaskLater(plugin, () -> ChatUtil.sendToPlayersInRange(plugin.getMessageConstant().get("wizard.spawn.6"), 30, center),
+                        plugin.getTimingConstant().get("spawn.throne.step4.message6.delay"));
             }
-        }.runTaskLater(plugin, (long) (20 * 5));
+        }.runTaskLater(plugin, plugin.getTimingConstant().get("spawn.throne.step4.delay"));
     }
 
     /**
