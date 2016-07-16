@@ -23,13 +23,14 @@ public class ItemConstant extends Constant<ItemStack> {
         this.getContentMap().put("item.ritualLantern", new ItemFactory(Material.REDSTONE_TORCH_ON).amount(1)
                 .displayName(instance.getNameConstant().get("item.name.ritualLantern")).enchantment(Enchantment.DIG_SPEED, 1, true)
                 .itemFlags(ItemFlag.HIDE_ENCHANTS).release());
-
         this.getContentMap().put("item.blood", new ItemFactory(Material.REDSTONE).amount(1)
                 .displayName(instance.getNameConstant().get("item.name.blood")).enchantment(Enchantment.DIG_SPEED, 1, true)
                 .itemFlags(ItemFlag.HIDE_ENCHANTS).release());
-
         this.getContentMap().put("item.essence", new ItemFactory(Material.SLIME_BALL).amount(1)
                 .displayName(instance.getNameConstant().get("item.name.essence")).enchantment(Enchantment.DIG_SPEED, 1, true)
+                .itemFlags(ItemFlag.HIDE_ENCHANTS).release());
+        this.getContentMap().put("item.firepotion", new ItemFactory(Material.SPLASH_POTION).amount(1)
+                .displayName(instance.getNameConstant().get("item.name.firepotion")).enchantment(Enchantment.DIG_SPEED, 1, true)
                 .itemFlags(ItemFlag.HIDE_ENCHANTS).release());
     }
 

@@ -20,6 +20,11 @@ public class RecipeConstant extends Constant<ShapedRecipe> {
     public void initializeContent() {
         this.getContentMap().put("recipe.ritualLantern", new RecipeFactory(instance.getItemConstant().get("item.ritualLantern"))
                 .shape("BBB", "BSB", "BBB").ingredient('B', Material.REDSTONE).ingredient('S', Material.STICK).releaseAndRegister());
+
+        // potions, only release, not register!
+        this.getContentMap().put("recipe.potion.fire", new RecipeFactory(instance.getItemConstant().get("item.firepotion"))
+                .shape("ESE", "SGS", "ESE").ingredient('E', instance.getItemConstant().get("item.essence").getType()).ingredient('S', Material.BLAZE_POWDER)
+                .ingredient('G', Material.GLASS_BOTTLE).release());
     }
 
     @Override

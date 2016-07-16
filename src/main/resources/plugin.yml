@@ -5,4 +5,5 @@ authors: [TeamDevintia]
 description: 'TeamDevintia''s entry for Devathlon3'
 website: 'https://github.com/TeamDevintia/DevAthlon3'
 commands:
-    test:
+    givepotion:
+        usage: '/<command> <player> <potion>'
