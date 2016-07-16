@@ -76,16 +76,18 @@ public final class ItemFactory {
             this.factoryItemStack.addUnsafeEnchantment(itemEnchantment, enchantmentLevel);
             return this;
         }
-        this.factoryItemStack.addEnchantment(itemEnchantment, enchantmentLevel);
+        this.factoryItemMeta.addEnchant(itemEnchantment, enchantmentLevel, true);
         return this;
     }
 
+    @Deprecated
     public synchronized ItemFactory enchantment(Map<Enchantment, Integer> itemEnchantmentMap, boolean unsafeEnchantment) {
         if (unsafeEnchantment) {
             this.factoryItemStack.addUnsafeEnchantments(itemEnchantmentMap);
             return this;
         }
-        this.factoryItemStack.addUnsafeEnchantments(itemEnchantmentMap);
+
+        this.factoryItemStack.addEnchantments(itemEnchantmentMap);
         return this;
     }
 
