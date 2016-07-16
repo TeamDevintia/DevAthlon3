@@ -359,7 +359,7 @@ public class MagicPortal implements Listener {
                 center.getWorld().playSound(center, Sound.ENTITY_GENERIC_EXPLODE, 10, 1);
 
                 // restore
-                snapshot.restore(Material.REDSTONE_LAMP_ON);
+                snapshot.restore(Material.REDSTONE_TORCH_ON);
             }
         }.runTaskLater(plugin, plugin.getTimingConstant().get("spawn.throne.step5.delay"));
     }

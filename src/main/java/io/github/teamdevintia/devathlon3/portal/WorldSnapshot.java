@@ -1,12 +1,15 @@
 package io.github.teamdevintia.devathlon3.portal;
 
+import io.github.teamdevintia.devathlon3.Devathlon3;
 import org.apache.commons.lang.ArrayUtils;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.BlockState;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * Takes a snapshot if a area and restores it later
@@ -76,5 +79,40 @@ public class WorldSnapshot {
      */
     public long restore(Material... ignore) {
         return blocks.stream().filter(blockState -> !ArrayUtils.contains(ignore, blockState.getType())).peek(blockState -> blockState.update(true, true)).count();
+    }
+
+    /**
+     * Restores the blocks slowly
+     *
+     * @param time  the time (in ticks) it should take
+     * @param steps the amount steps that should be done
+     */
+    public void restoreSlowly(double time, double steps) {
+        double ticks = time / steps;
+        double perIt = blocks.size() / steps;
+
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                for (int i = 0; i < perIt; i++) {
+                    if (blocks.size() - 1 <= 0) {
+                        cancel();
+                        return;
+                    }
+                    int random = ThreadLocalRandom.current().nextInt(blocks.size() - 1);
+                    BlockState state = blocks.remove(random);
+                    if (state != null) {
+                        state.update(true, true);
+                    } else {
+                        // restore rest
+                        for (BlockState s : blocks) {
+                            s.update(true, true);
+                        }
+                        cancel();
+                        return;
+                    }
+                }
+            }
+        }.runTaskTimer(Devathlon3.getInstance(), 0, (long) ticks);
     }
 }
