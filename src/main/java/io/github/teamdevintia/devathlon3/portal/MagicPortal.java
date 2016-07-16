@@ -4,12 +4,11 @@ import io.github.teamdevintia.devathlon3.Devathlon3;
 import io.github.teamdevintia.devathlon3.managers.VFXManager;
 import io.github.teamdevintia.devathlon3.util.ChatUtil;
 import io.github.teamdevintia.devathlon3.util.DirectionUtil;
+import io.github.teamdevintia.devathlon3.util.EntityUtil;
 import io.github.teamdevintia.devathlon3.visuals.BloodTrailVFXPacket;
 import net.minecraft.server.v1_10_R1.PacketPlayOutGameStateChange;
 import net.minecraft.server.v1_10_R1.WorldServer;
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.Material;
+import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.craftbukkit.v1_10_R1.CraftServer;
@@ -45,9 +44,12 @@ public class MagicPortal implements Listener {
     private List<LocationTuple> connections = new ArrayList<>();
     private BukkitTask particleTask;
 
+    private WorldSnapshot snapshot;
+
     private int torchCount = 0;
     private boolean isFinished = false;
     private Location center;
+    private Villager wizard;
 
     private Devathlon3 plugin;
 
@@ -267,6 +269,9 @@ public class MagicPortal implements Listener {
      * @param player the player who spawned it
      */
     private void spawnThrone(Player player) {
+        // take snapshot
+        snapshot = new WorldSnapshot(center.clone().subtract(0, 2, 0), 8, 6, Material.REDSTONE_TORCH_ON);
+
         // step 1: layer 1 at y-1
         new BukkitRunnable() {
             @Override
@@ -313,12 +318,14 @@ public class MagicPortal implements Listener {
                 nmsWorld.addEntity(e, CreatureSpawnEvent.SpawnReason.CUSTOM);
 
                 // add stuff
-                Villager wizard = new CraftVillager((CraftServer) Bukkit.getServer(), e);
+                wizard = new CraftVillager((CraftServer) Bukkit.getServer(), e);
                 wizard.setCustomName(plugin.getNameConstant().get("wizard.displayname"));
                 wizard.setCustomNameVisible(true);
                 wizard.setCollidable(false);
                 wizard.teleport(center.clone().add(0.5, 2, 0.5));
-                System.out.println(wizard.getLocation());
+                wizard.setInvulnerable(true);
+                wizard.setRecipes(new ArrayList<>());
+                wizard.setGliding(true);
                 Bukkit.getOnlinePlayers().forEach(player -> player.setCollidable(false));
 
                 // send messages
@@ -336,6 +343,25 @@ public class MagicPortal implements Listener {
                         plugin.getTimingConstant().get("spawn.throne.step4.message6.delay"));
             }
         }.runTaskLater(plugin, plugin.getTimingConstant().get("spawn.throne.step4.delay"));
+        //step 5: explosion!
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                // remove wizard
+                if (wizard != null) {
+                    wizard.remove();
+                }
+
+                // push ppl away
+                EntityUtil.pushAway(center, 20, 2);
+                // boom
+                center.getWorld().playEffect(center.clone().add(0, 2, 0), Effect.EXPLOSION_HUGE, 1);
+                center.getWorld().playSound(center, Sound.ENTITY_GENERIC_EXPLODE, 10, 1);
+
+                // restore
+                snapshot.restore(Material.REDSTONE_LAMP_ON);
+            }
+        }.runTaskLater(plugin, plugin.getTimingConstant().get("spawn.throne.step5.delay"));
     }
 
     /**
