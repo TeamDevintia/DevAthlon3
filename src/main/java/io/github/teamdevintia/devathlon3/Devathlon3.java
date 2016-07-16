@@ -3,12 +3,17 @@ package io.github.teamdevintia.devathlon3;
 import io.github.teamdevintia.devathlon3.constants.*;
 import io.github.teamdevintia.devathlon3.items.Blood;
 import io.github.teamdevintia.devathlon3.items.Essence;
+import io.github.teamdevintia.devathlon3.managers.PotionManager;
 import io.github.teamdevintia.devathlon3.portal.MagicPortal;
 import io.github.teamdevintia.devathlon3.portal.WizardEntity;
+import io.github.teamdevintia.devathlon3.potions.MagicPotion;
 import io.github.teamdevintia.devathlon3.util.NMSUtil;
 import net.minecraft.server.v1_10_R1.EntityVillager;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
 /**
@@ -20,11 +25,14 @@ import org.bukkit.plugin.java.JavaPlugin;
 public final class Devathlon3 extends JavaPlugin {
 
     private static Devathlon3 instance;
+
     private NameConstant nameConstant;
     private ItemConstant itemConstant;
     private RecipeConstant recipeConstant;
     private MessageConstant messageConstant;
     private TimingConstant timingConstant;
+
+    private PotionManager potionManager;
 
     @Override
     public void onEnable() {
@@ -41,6 +49,9 @@ public final class Devathlon3 extends JavaPlugin {
         recipeConstant.initializeContent();
         messageConstant.initializeContent();
         timingConstant.initializeContent();
+
+        potionManager = new PotionManager(this);
+        potionManager.registerPotions();
 
         // register wizard
         NMSUtil.registerEntity("Villager", 120, EntityVillager.class, WizardEntity.class);
@@ -98,8 +109,39 @@ public final class Devathlon3 extends JavaPlugin {
         return timingConstant;
     }
 
+    public PotionManager getPotionManager() {
+        return potionManager;
+    }
+
     public static Devathlon3 getInstance() {
         return instance;
     }
 
+    @Override
+    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+        //TODO tab completer for givepotion command
+        if (command.getName().equalsIgnoreCase("givepotion")) {
+            if (args.length != 2) {
+                return false;
+            }
+
+            Player player = Bukkit.getPlayer(args[0]);
+            if (player == null) {
+                sender.sendMessage(messageConstant.get("command.unknownplayer"));
+                return true;
+            }
+
+            MagicPotion potion = potionManager.getFromId(args[1]);
+            if (potion == null) {
+                sender.sendMessage(messageConstant.get("command.unknownpotion"));
+                return true;
+            }
+
+            potion.onPotionBuild(player);
+            player.getInventory().addItem(potion.getItem());
+            return true;
+        }
+
+        return super.onCommand(sender, command, label, args);
+    }
 }
