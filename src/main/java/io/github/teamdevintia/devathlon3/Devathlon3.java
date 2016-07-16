@@ -33,6 +33,8 @@ public final class Devathlon3 extends JavaPlugin {
         new MagicPortal( this );
         // blood drop
         new Blood( this );
+        // essence drop
+        new Essence( this );
 
         addCraftingRecipes();
     }
@@ -63,7 +65,7 @@ public final class Devathlon3 extends JavaPlugin {
     }
 
     public static Devathlon3 getInstance() {
-        return Devathlon3.getPlugin(Devathlon3.class);
+        return Devathlon3.getPlugin( Devathlon3.class );
     }
 
 }
