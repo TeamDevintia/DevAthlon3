@@ -272,6 +272,9 @@ public class MagicPortal implements Listener {
         // take snapshot
         snapshot = new WorldSnapshot(center.clone().subtract(0, 2, 0), 8, 6, Material.REDSTONE_TORCH_ON);
 
+        // make room
+        EntityUtil.pushAway(center, 10, 1.2);
+
         // step 1: layer 1 at y-1
         new BukkitRunnable() {
             @Override
