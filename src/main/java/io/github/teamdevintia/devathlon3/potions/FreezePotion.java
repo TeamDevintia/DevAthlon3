@@ -25,6 +25,8 @@ public final class FreezePotion extends MagicPotion {
     @Override
     public void onPotionBuild(Entity entity) {
 
+
+
     }
 
     @Override

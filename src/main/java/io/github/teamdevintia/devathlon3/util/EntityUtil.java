@@ -13,7 +13,7 @@ public class EntityUtil {
      * Pushes all entities in a certain radius away from one point
      *
      * @param center the center point
-     * @param range  the range in which entites should be affected
+     * @param range  the range in which entities should be affected
      * @param force  the force that should be applied
      */
     public static void pushAway(Location center, double range, double force) {

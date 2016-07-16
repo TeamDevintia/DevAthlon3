@@ -7,6 +7,10 @@ import org.bukkit.util.Vector;
  */
 public final class VectorUtil {
 
+    /**
+     * Generates a random vector
+     * Subtracts from X and Z -0.5 otherwise the Vector wont work
+     */
     public static Vector randomVector() {
         Vector vector = Vector.getRandom();
         vector.setX(vector.getX() - 0.5);
