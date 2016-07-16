@@ -13,6 +13,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
+import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 import org.bukkit.util.Vector;
@@ -48,14 +49,15 @@ public class MagicPortal implements Listener {
 
     @EventHandler
     public void onPlace( BlockPlaceEvent event ) {
-        //TODO check if it is the right torch
-        if ( event.getBlockPlaced().getType() == Material.REDSTONE_TORCH_ON ) {
+        if ( event.getItemInHand().equals( Devathlon3.ritualsLeuchter ) ) {
             // only 5 torches are placeable, so that it is easier to finish it ^^
             if ( torchcount == 5 ) {
                 event.setCancelled( true );
                 event.setBuild( false );
                 return;
             }
+
+            event.getBlockPlaced().setMetadata( "ritualsleuchter", new FixedMetadataValue( plugin, "yes" ) );
 
             placedTorches.add( event.getBlockPlaced().getLocation() );
             torchcount++;
@@ -92,8 +94,11 @@ public class MagicPortal implements Listener {
 
     @EventHandler
     public void onBreak( BlockBreakEvent event ) {
-        //TODO check if it is the right torch
         if ( event.getBlock().getType() == Material.REDSTONE_TORCH_ON ) {
+            if ( !event.getBlock().hasMetadata( "ritualsleuchter" ) ) {
+                return;
+            }
+
             // don't destroy what you just created!
             if ( isFinished ) {
                 event.setCancelled( true );

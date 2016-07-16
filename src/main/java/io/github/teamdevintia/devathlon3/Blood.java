@@ -79,7 +79,10 @@ public class Blood implements Listener {
     @EventHandler
     public void onPrepareCraft( PrepareItemCraftEvent event ) {
         if ( event.getInventory().contains( BLOOD ) ) {
-            //TODO whitelist our own recipes here
+            if ( event.getRecipe().getResult().equals( Devathlon3.ritualsLeuchter ) ) {
+                return;
+            }
+
             event.getInventory().setResult( null );
         }
     }
@@ -87,7 +90,10 @@ public class Blood implements Listener {
     @EventHandler
     public void onCraft( CraftItemEvent event ) {
         if ( event.getInventory().contains( BLOOD ) ) {
-            //TODO whitelist our own recipes here
+            if ( event.getRecipe().getResult().equals( Devathlon3.ritualsLeuchter ) ) {
+                return;
+            }
+
             event.setCancelled( true );
         }
     }
