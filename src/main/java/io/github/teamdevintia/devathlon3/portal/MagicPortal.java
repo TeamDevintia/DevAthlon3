@@ -29,6 +29,8 @@ import java.util.Map;
  */
 public class MagicPortal implements Listener {
 
+    public static boolean wizardActive;
+
     private List<Location> placedTorches = new ArrayList<>();
     private List<LocationTuple> connections = new ArrayList<>();
     private BukkitTask particleTask;
@@ -305,6 +307,7 @@ public class MagicPortal implements Listener {
                 Bukkit.getOnlinePlayers().forEach( player -> ( (CraftPlayer) player ).getHandle().playerConnection.sendPacket( packet ) );
 
                 //TODO spawn wizard
+                wizardActive = true;
             }
         }.runTaskLater( plugin, (long) ( 20 * 5 ) );
     }

@@ -11,6 +11,8 @@ public final class Devathlon3 extends JavaPlugin {
     public void onEnable() {
         // init portals
         new MagicPortal( this );
+        // blood drop
+        new Blood( this );
     }
 
     @Override
