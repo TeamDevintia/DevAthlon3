@@ -1,5 +1,7 @@
 package io.github.teamdevintia.devathlon3;
 
+import io.github.teamdevintia.devathlon3.items.Blood;
+import io.github.teamdevintia.devathlon3.items.Essence;
 import io.github.teamdevintia.devathlon3.portal.MagicPortal;
 import org.bukkit.Material;
 import org.bukkit.command.Command;

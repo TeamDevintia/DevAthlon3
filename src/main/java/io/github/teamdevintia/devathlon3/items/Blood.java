@@ -1,5 +1,6 @@
-package io.github.teamdevintia.devathlon3;
+package io.github.teamdevintia.devathlon3.items;
 
+import io.github.teamdevintia.devathlon3.Devathlon3;
 import io.github.teamdevintia.devathlon3.portal.MagicPortal;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
