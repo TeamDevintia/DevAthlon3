@@ -1,6 +1,7 @@
 package io.github.teamdevintia.devathlon3.portal;
 
 import io.github.teamdevintia.devathlon3.Devathlon3;
+import io.github.teamdevintia.devathlon3.util.ChatUtil;
 import io.github.teamdevintia.devathlon3.util.DirectionUtil;
 import net.minecraft.server.v1_10_R1.PacketPlayOutGameStateChange;
 import org.bukkit.Bukkit;
@@ -10,6 +11,9 @@ import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.craftbukkit.v1_10_R1.entity.CraftPlayer;
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Player;
+import org.bukkit.entity.Villager;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
@@ -89,7 +93,7 @@ public class MagicPortal implements Listener {
             }
 
             this.center = center;
-            spawnThrone();
+            spawnThrone(event.getPlayer());
         }
     }
 
@@ -275,8 +279,10 @@ public class MagicPortal implements Listener {
 
     /**
      * starts the thrown spawning animation
+     *
+     * @param player the player who spawned it
      */
-    private void spawnThrone() {
+    private void spawnThrone(Player player) {
         // step 1: layer 1 at y-1
         new BukkitRunnable() {
             @Override
@@ -310,11 +316,27 @@ public class MagicPortal implements Listener {
         new BukkitRunnable() {
             @Override
             public void run() {
+                // 10 = mob apearance effect
                 PacketPlayOutGameStateChange packet = new PacketPlayOutGameStateChange(10, 0);
                 Bukkit.getOnlinePlayers().forEach(player -> ((CraftPlayer) player).getHandle().playerConnection.sendPacket(packet));
 
                 //TODO spawn wizard (talk to entites in range)
                 wizardActive = true;
+
+                Villager wizard = (Villager) center.getWorld().spawnEntity(center.clone().add(0.5, 2, 0.5), EntityType.VILLAGER);
+                wizard.setCustomName(plugin.getNameConstant().get("wizard.displayname"));
+                wizard.setCustomNameVisible(true);
+                wizard.setAI(false);
+                wizard.setCollidable(false);
+                Bukkit.getOnlinePlayers().forEach(player -> player.setCollidable(false));
+                // TODO make him look at player
+
+                Bukkit.getScheduler().runTaskLater(plugin, () -> ChatUtil.sendToPlayersInRange(plugin.getMessageConstant().get("wizard.spawn.1"), 30, center), 20 * 2);
+                Bukkit.getScheduler().runTaskLater(plugin, () -> ChatUtil.sendToPlayersInRange(plugin.getMessageConstant().get("wizard.spawn.2"), 30, center), 20 * 4);
+                Bukkit.getScheduler().runTaskLater(plugin, () -> ChatUtil.sendToPlayersInRange(plugin.getMessageConstant().get("wizard.spawn.3"), 30, center), 20 * 6);
+                Bukkit.getScheduler().runTaskLater(plugin, () -> ChatUtil.sendToPlayersInRange(plugin.getMessageConstant().get("wizard.spawn.4"), 30, center), 20 * 8);
+                Bukkit.getScheduler().runTaskLater(plugin, () -> ChatUtil.sendToPlayersInRange(plugin.getMessageConstant().get("wizard.spawn.5"), 30, center), 20 * 10);
+                Bukkit.getScheduler().runTaskLater(plugin, () -> ChatUtil.sendToPlayersInRange(plugin.getMessageConstant().get("wizard.spawn.6"), 30, center), 20 * 12);
             }
         }.runTaskLater(plugin, (long) (20 * 5));
     }
