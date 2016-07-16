@@ -12,7 +12,7 @@ import java.util.Map;
 /**
  * https://gist.github.com/Funergy/b9aafce348a5bbfa6716
  */
-public class NMSUtil {
+public final class NMSUtil {
 
     public static void registerEntity(final String name, final int id, final Class<? extends EntityInsentient> nmsClass,
                                       final Class<? extends EntityInsentient> customClass) {

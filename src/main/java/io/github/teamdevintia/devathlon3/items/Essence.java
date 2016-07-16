@@ -15,7 +15,7 @@ import org.bukkit.inventory.ItemStack;
  *
  * @author MiniDigger
  */
-public class Essence implements Listener {
+public final class Essence implements Listener {
 
     private ItemStack ESSENCE_STACK;
 

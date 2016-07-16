@@ -28,4 +28,5 @@ public final class FreezePotion extends MagicPotion {
     protected void onPotionHit(Location location, ThrownPotion thrownPotion) {
 
     }
+
 }
