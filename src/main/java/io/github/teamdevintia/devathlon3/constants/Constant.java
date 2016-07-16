@@ -10,7 +10,7 @@ import java.util.HashMap;
 public abstract class Constant<T> {
 
     private HashMap<String, T> contentHashMap = new HashMap<>();
-    private Devathlon3 instance;
+    protected Devathlon3 instance;
 
     public Constant(Devathlon3 instance) {
         this.instance = instance;
@@ -24,6 +24,12 @@ public abstract class Constant<T> {
 
     public HashMap<String, T> getContentMap() {
         return contentHashMap;
+    }
+
+    public void cleanup() {
+        contentHashMap.clear();
+        contentHashMap = null;
+        instance = null;
     }
 
 }

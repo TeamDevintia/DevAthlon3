@@ -14,25 +14,22 @@ import java.util.HashMap;
  */
 public class ItemConstant extends Constant<ItemStack> {
 
-    private NameConstant nameConst;
-
-    public ItemConstant(Devathlon3 instance, NameConstant nameConst) {
+    public ItemConstant(Devathlon3 instance) {
         super(instance);
-        this.nameConst = nameConst;
     }
 
     @Override
     public void initializeContent() {
         this.getContentMap().put("item.ritualLantern", new ItemFactory(Material.REDSTONE_TORCH_ON).amount(1)
-                .displayName(this.nameConst.get("item.name.ritualLantern")).enchantment(Enchantment.DIG_SPEED, 1, true)
+                .displayName(instance.getNameConstant().get("item.name.ritualLantern")).enchantment(Enchantment.DIG_SPEED, 1, true)
                 .itemFlags(ItemFlag.HIDE_ENCHANTS).release());
 
         this.getContentMap().put("item.blood", new ItemFactory(Material.REDSTONE).amount(1)
-                .displayName(this.nameConst.get("item.name.blood")).enchantment(Enchantment.DIG_SPEED, 1, true)
+                .displayName(instance.getNameConstant().get("item.name.blood")).enchantment(Enchantment.DIG_SPEED, 1, true)
                 .itemFlags(ItemFlag.HIDE_ENCHANTS).release());
 
         this.getContentMap().put("item.essence", new ItemFactory(Material.SLIME_BALL).amount(1)
-                .displayName(this.nameConst.get("item.name.essence")).enchantment(Enchantment.DIG_SPEED, 1, true)
+                .displayName(instance.getNameConstant().get("item.name.essence")).enchantment(Enchantment.DIG_SPEED, 1, true)
                 .itemFlags(ItemFlag.HIDE_ENCHANTS).release());
     }
 

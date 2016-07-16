@@ -143,6 +143,7 @@ public class MagicPortal implements Listener {
             @Override
             public void run() {
                 for (LocationTuple tuple : connections) {
+                    //TODO move this into ParticleUtil @Shad0wCore
                     //calc direction
                     Vector diff = tuple.loc2.toVector().subtract(tuple.loc1.toVector());
                     double distance = diff.length();

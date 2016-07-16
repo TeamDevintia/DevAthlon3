@@ -1,6 +1,7 @@
 package io.github.teamdevintia.devathlon3;
 
 import io.github.teamdevintia.devathlon3.constants.ItemConstant;
+import io.github.teamdevintia.devathlon3.constants.MessageConstant;
 import io.github.teamdevintia.devathlon3.constants.NameConstant;
 import io.github.teamdevintia.devathlon3.constants.RecipeConstant;
 import io.github.teamdevintia.devathlon3.items.Blood;
@@ -17,17 +18,21 @@ public final class Devathlon3 extends JavaPlugin {
     private NameConstant nameConstant;
     private ItemConstant itemConstant;
     private RecipeConstant recipeConstant;
+    private MessageConstant messageConstant;
 
     @Override
     public void onEnable() {
-        this.instance = this;
+        instance = this;
+
         nameConstant = new NameConstant(instance);
-        itemConstant = new ItemConstant(instance, nameConstant);
-        recipeConstant = new RecipeConstant(instance, itemConstant);
+        itemConstant = new ItemConstant(instance);
+        recipeConstant = new RecipeConstant(instance);
+        messageConstant = new MessageConstant(instance);
 
         nameConstant.initializeContent();
         itemConstant.initializeContent();
         recipeConstant.initializeContent();
+        messageConstant.initializeContent();
 
         // init portals
         new MagicPortal(this);
@@ -39,7 +44,15 @@ public final class Devathlon3 extends JavaPlugin {
 
     @Override
     public void onDisable() {
-
+        instance = null;
+        nameConstant.cleanup();
+        nameConstant = null;
+        itemConstant.cleanup();
+        itemConstant = null;
+        recipeConstant.cleanup();
+        recipeConstant = null;
+        messageConstant.cleanup();
+        messageConstant = null;
     }
 
     public NameConstant getNameConstant() {
@@ -52,6 +65,10 @@ public final class Devathlon3 extends JavaPlugin {
 
     public RecipeConstant getRecipeConstant() {
         return recipeConstant;
+    }
+
+    public MessageConstant getMessageConstant() {
+        return messageConstant;
     }
 
     public static Devathlon3 getInstance() {
