@@ -5,7 +5,7 @@ import io.github.teamdevintia.devathlon3.Devathlon3;
 import java.util.HashMap;
 
 /**
- * Created by Martin on 16.07.2016.
+ * @author MiniDigger
  */
 public class MessageConstant extends Constant<String> {
 

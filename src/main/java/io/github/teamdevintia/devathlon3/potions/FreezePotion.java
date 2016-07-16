@@ -8,7 +8,7 @@ import org.bukkit.entity.ThrownPotion;
 /**
  * @author Shad0wCore
  */
-public class FreezePotion extends MagicPotion {
+public final class FreezePotion extends MagicPotion {
 
     public FreezePotion(Devathlon3 devathlon3, String potionIdentifier) {
         super(devathlon3, potionIdentifier);

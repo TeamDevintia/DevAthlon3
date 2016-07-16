@@ -9,7 +9,7 @@ import org.bukkit.material.MaterialData;
 /**
  * @author Shad0wCore
  */
-public class RecipeFactory {
+public  final class RecipeFactory {
 
     private ShapedRecipe shapedRecipe = null;
 
