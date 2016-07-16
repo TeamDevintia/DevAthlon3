@@ -8,7 +8,7 @@ import java.lang.reflect.Field;
 public final class ReflectionUtil {
 
     /**
-     * returns the value of a private field
+     * Returns the value of a private field
      *
      * @param fieldName the field to access
      * @param clazz the class the field is in
