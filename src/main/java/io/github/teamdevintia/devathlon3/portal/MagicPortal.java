@@ -28,11 +28,12 @@ import java.util.Map;
 public class MagicPortal implements Listener {
 
     private List<Location> placedTorches = new ArrayList<>();
-    private List<LocationTuple> validLocations = new ArrayList<>();
+    private List<LocationTuple> connections = new ArrayList<>();
     private BukkitTask particleTask;
 
     private int torchcount = 0;
     private boolean isFinished = false;
+    private Location center;
 
     private Devathlon3 plugin;
 
@@ -55,6 +56,34 @@ public class MagicPortal implements Listener {
             placedTorches.add( event.getBlockPlaced().getLocation() );
             torchcount++;
             checkForCompletion();
+        } else if ( event.getBlock().getType() == Material.SMOOTH_BRICK && event.getBlock().getData() == 3 && isFinished ) {
+            // we already has a spawn
+            if(center != null){
+                event.setCancelled( true );
+                event.setBuild( false );
+                return;
+            }
+
+            Location center = event.getBlock().getLocation().add( 0, 1, 0 );
+            // validate...
+            // y value
+            System.out.println("y " + center.getY());
+            if ( center.getY() != placedTorches.get( 0 ).getY() ) {
+                event.setCancelled( true );
+                event.setBuild( false );
+                return;
+            }
+            // distance
+            for ( Location loc : placedTorches ) {
+                if ( loc.distanceSquared( center ) > 16 ) {
+                    event.setCancelled( true );
+                    event.setBuild( false );
+                    return;
+                }
+            }
+
+            this.center = center;
+            spawnThrone();
         }
     }
 
@@ -89,7 +118,7 @@ public class MagicPortal implements Listener {
         }
 
         // clear old
-        validLocations = new ArrayList<>();
+        connections = new ArrayList<>();
 
         // find locations
         for ( Location loc : placedTorches ) {
@@ -104,7 +133,7 @@ public class MagicPortal implements Listener {
         particleTask = new BukkitRunnable() {
             @Override
             public void run() {
-                for ( LocationTuple tuple : validLocations ) {
+                for ( LocationTuple tuple : connections ) {
                     //calc direction
                     Vector diff = tuple.loc2.toVector().subtract( tuple.loc1.toVector() );
                     double distance = diff.length();
@@ -131,7 +160,7 @@ public class MagicPortal implements Listener {
 
         // count locations
         Map<Location, Integer> count = new HashMap<>();
-        for ( LocationTuple tuple : validLocations ) {
+        for ( LocationTuple tuple : connections ) {
             tuple.forEach( loc -> {
                 Integer c = count.get( loc );
                 if ( c == null ) {
@@ -158,7 +187,6 @@ public class MagicPortal implements Listener {
         // if done, spawn the throne!
         if ( full ) {
             isFinished = true;
-            spawnThrone();
         }
     }
 
@@ -229,8 +257,8 @@ public class MagicPortal implements Listener {
         if ( pos.getType() == Material.REDSTONE_TORCH_ON ) {
             if ( placedTorches.contains( pos.getLocation() ) ) {
                 LocationTuple tuple = new LocationTuple( origin, pos );
-                if ( !validLocations.contains( tuple ) ) {
-                    validLocations.add( tuple );
+                if ( !connections.contains( tuple ) ) {
+                    connections.add( tuple );
                 }
             }
         }
@@ -240,6 +268,7 @@ public class MagicPortal implements Listener {
      * starts the thrown spawning animation
      */
     private void spawnThrone() {
+        System.out.println( "spawn throne" );
         
     }
 }
