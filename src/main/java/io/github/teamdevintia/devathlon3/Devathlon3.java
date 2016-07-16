@@ -7,12 +7,17 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public final class Devathlon3 extends JavaPlugin {
 
+    @Deprecated
+    public static Devathlon3 getInstance() {
+        return Devathlon3.getPlugin(Devathlon3.class);
+    }
+
     @Override
     public void onEnable() {
         // init portals
-        new MagicPortal( this );
+        new MagicPortal(this);
         // blood drop
-        new Blood( this );
+        new Blood(this);
     }
 
     @Override
@@ -21,13 +26,9 @@ public final class Devathlon3 extends JavaPlugin {
     }
 
     @Override
-    public boolean onCommand( CommandSender sender, Command command, String label, String[] args ) {
-        System.out.println( "test" );
+    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+        System.out.println("test");
         return true;
-    }
-
-    public static Devathlon3 getInstance() {
-        return Devathlon3.getPlugin(Devathlon3.class);
     }
 
 }

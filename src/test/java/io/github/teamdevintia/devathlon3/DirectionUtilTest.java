@@ -1,6 +1,6 @@
 package io.github.teamdevintia.devathlon3;
 
-import io.github.teamdevintia.devathlon3.portal.DirectionUtil;
+import io.github.teamdevintia.devathlon3.util.DirectionUtil;
 import org.bukkit.block.BlockFace;
 import org.junit.Test;
 

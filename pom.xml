@@ -40,6 +40,12 @@
             </roles>
         </developer>
         <developer>
+            <name>Shad0wCore</name>
+            <roles>
+                <role>developer</role>
+            </roles>
+        </developer>
+        <developer>
             <name>HerrPixel</name>
             <roles>
                 <role>designer</role>

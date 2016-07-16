@@ -1,4 +1,4 @@
-package io.github.teamdevintia.devathlon3.portal;
+package io.github.teamdevintia.devathlon3.util;
 
 import org.bukkit.block.BlockFace;
 

@@ -1,6 +1,7 @@
 package io.github.teamdevintia.devathlon3.portal;
 
 import io.github.teamdevintia.devathlon3.Devathlon3;
+import io.github.teamdevintia.devathlon3.util.DirectionUtil;
 import net.minecraft.server.v1_10_R1.PacketPlayOutGameStateChange;
 import org.bukkit.Bukkit;
 import org.bukkit.Effect;
