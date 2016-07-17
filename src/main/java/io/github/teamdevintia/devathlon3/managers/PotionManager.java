@@ -4,6 +4,7 @@ import io.github.teamdevintia.devathlon3.Devathlon3;
 import io.github.teamdevintia.devathlon3.potions.FirePotion;
 import io.github.teamdevintia.devathlon3.potions.IcePotion;
 import io.github.teamdevintia.devathlon3.potions.MagicPotion;
+import io.github.teamdevintia.devathlon3.potions.TimeFreezePotion;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
@@ -49,6 +50,7 @@ public final class PotionManager implements Listener {
     public void registerPotions() {
         registerMagicPotion(new FirePotion(plugin));
         registerMagicPotion(new IcePotion(plugin));
+        registerMagicPotion(new TimeFreezePotion(plugin));
     }
 
     @EventHandler //TODO do we need this?

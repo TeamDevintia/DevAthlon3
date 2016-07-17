@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Martin on 17.07.2016.
+ * Potion that freezes everything in a range
  */
 public class IcePotion extends MagicPotion {
 
