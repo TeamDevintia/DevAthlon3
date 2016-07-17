@@ -6,7 +6,7 @@ import io.github.teamdevintia.devathlon3.managers.VFXManager;
 import io.github.teamdevintia.devathlon3.util.ChatUtil;
 import io.github.teamdevintia.devathlon3.util.DirectionUtil;
 import io.github.teamdevintia.devathlon3.util.EntityUtil;
-import io.github.teamdevintia.devathlon3.visuals.BloodTrailVFXPacket;
+import io.github.teamdevintia.devathlon3.visuals.altar.BloodTrailVPacket;
 import net.minecraft.server.v1_10_R1.PacketPlayOutGameStateChange;
 import net.minecraft.server.v1_10_R1.WorldServer;
 import org.bukkit.*;
@@ -153,7 +153,7 @@ public class MagicPortal implements Listener {
         particleTask = new BukkitRunnable() {
             @Override
             public void run() {
-                VFXManager.triggerVFXPacket(new BloodTrailVFXPacket(), null, null, connections);
+                VFXManager.triggerVFXPacket(new BloodTrailVPacket(), null, null, connections);
             }
         }.runTaskTimer(plugin, 0, 1);
 
