@@ -30,7 +30,7 @@ public class FirePotion extends MagicPotion {
     private static final int fireTicks = 5 * 20;
 
     public FirePotion(Devathlon3 devathlon3) {
-        super(devathlon3, "FirePotion", devathlon3.getItemConstant().get("item.firepotion"));
+        super(devathlon3, "FirePotion", devathlon3.getItemConstant().get("item.firePotion"));
     }
 
     @Override

@@ -22,17 +22,24 @@ public class RecipeConstant extends Constant<ShapedRecipe> {
                 .shape("BBB", "BSB", "BBB").ingredient('B', Material.REDSTONE).ingredient('S', Material.STICK).releaseAndRegister());
 
         // potions, only release, not register!
-        this.getContentMap().put("recipe.potion.fire", new RecipeFactory(instance.getItemConstant().get("item.firepotion"))
+        this.getContentMap().put("recipe.potion.fire", new RecipeFactory(instance.getItemConstant().get("item.firePotion"))
                 .shape("ESE", "SGS", "ESE").ingredient('E', instance.getItemConstant().get("item.essence").getType()).ingredient('S', Material.BLAZE_POWDER)
                 .ingredient('G', Material.GLASS_BOTTLE).release());
-        this.getContentMap().put("recipe.potion.ice", new RecipeFactory(instance.getItemConstant().get("item.icepotion"))
+
+        this.getContentMap().put("recipe.potion.ice", new RecipeFactory(instance.getItemConstant().get("item.icePotion"))
                 .shape("ESE", "SGS", "ESE").ingredient('E', instance.getItemConstant().get("item.essence").getType()).ingredient('S', Material.SNOW_BALL)
                 .ingredient('G', Material.GLASS_BOTTLE).release());
+
         this.getContentMap().put("recipe.potion.timeFreeze", new RecipeFactory(instance.getItemConstant().get("item.timeFreezePotion"))
                 .shape("ESE", "SGS", "ESE").ingredient('E', instance.getItemConstant().get("item.essence").getType()).ingredient('S', Material.ENDER_PEARL)
                 .ingredient('G', Material.GLASS_BOTTLE).release());
+
         this.getContentMap().put("recipe.potion.impulse", new RecipeFactory(instance.getItemConstant().get("item.impulsePotion"))
                 .shape("ESE", "SGS", "ESE").ingredient('E', instance.getItemConstant().get("item.essence").getType()).ingredient('S', Material.SULPHUR) // SULPHUR = gunpower, wtf bukkit
+                .ingredient('G', Material.GLASS_BOTTLE).release());
+
+        this.getContentMap().put("recipe.potion.sun", new RecipeFactory(instance.getItemConstant().get("item.sunPotion"))
+                .shape("EFE", "FGF", "EFE").ingredient('E', instance.getItemConstant().get("item.essence").getType()).ingredient('F', Material.FIREBALL)
                 .ingredient('G', Material.GLASS_BOTTLE).release());
     }
 

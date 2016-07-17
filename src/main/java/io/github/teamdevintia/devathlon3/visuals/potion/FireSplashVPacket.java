@@ -26,7 +26,7 @@ public class FireSplashVPacket implements VPacket {
 
     @Override
     public void play(Devathlon3 devathlon3, Location location, Player toPlayer, Object... optionalArgs) {
-        int range = (int) optionalArgs[0] + 2;
+        int range = (int) optionalArgs[0] + 1;
         int fireTicks = (int) optionalArgs[1];
 
         location.getWorld().getNearbyEntities(location, range, range, range).forEach(entity -> {
