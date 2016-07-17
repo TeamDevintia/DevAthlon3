@@ -1,7 +1,6 @@
 package io.github.teamdevintia.devathlon3.intern;
 
 import io.github.teamdevintia.devathlon3.Devathlon3;
-import io.github.teamdevintia.devathlon3.commands.CommandHandler;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.craftbukkit.v1_10_R1.CraftServer;

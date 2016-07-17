@@ -1,6 +1,7 @@
-package io.github.teamdevintia.devathlon3.commands;
+package io.github.teamdevintia.devathlon3.intern.commands;
 
 import io.github.teamdevintia.devathlon3.Devathlon3;
+import io.github.teamdevintia.devathlon3.intern.CommandHandler;
 import io.github.teamdevintia.devathlon3.potions.MagicPotion;
 import io.github.teamdevintia.devathlon3.util.TabCompleteUtil;
 import org.bukkit.Bukkit;
