@@ -77,6 +77,7 @@ public class SunSplashVPacket implements VPacket {
                         for (int z = fromZ; z < toZ; z++) {
                             Block block = location.getWorld().getBlockAt(x, y, z);
 
+
                         }
                     }
                 }
