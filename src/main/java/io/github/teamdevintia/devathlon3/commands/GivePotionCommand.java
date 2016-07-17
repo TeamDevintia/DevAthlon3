@@ -3,7 +3,6 @@ package io.github.teamdevintia.devathlon3.commands;
 import io.github.teamdevintia.devathlon3.Devathlon3;
 import io.github.teamdevintia.devathlon3.constants.MessageConstant;
 import io.github.teamdevintia.devathlon3.potions.MagicPotion;
-import io.github.teamdevintia.devathlon3.util.misc.CommandHandler;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;

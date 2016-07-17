@@ -1,4 +1,4 @@
-package io.github.teamdevintia.devathlon3.util.misc;
+package io.github.teamdevintia.devathlon3.commands;
 
 import io.github.teamdevintia.devathlon3.Devathlon3;
 import org.bukkit.command.CommandSender;
