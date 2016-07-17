@@ -1,4 +1,4 @@
-package io.github.teamdevintia.devathlon3.visuals.altar;
+package io.github.teamdevintia.devathlon3.visuals.throne;
 
 import io.github.teamdevintia.devathlon3.Devathlon3;
 import io.github.teamdevintia.devathlon3.portal.LocationTuple;

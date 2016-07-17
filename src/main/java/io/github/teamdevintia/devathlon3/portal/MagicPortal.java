@@ -6,7 +6,7 @@ import io.github.teamdevintia.devathlon3.managers.VFXManager;
 import io.github.teamdevintia.devathlon3.util.ChatUtil;
 import io.github.teamdevintia.devathlon3.util.DirectionUtil;
 import io.github.teamdevintia.devathlon3.util.EntityUtil;
-import io.github.teamdevintia.devathlon3.visuals.altar.BloodTrailVPacket;
+import io.github.teamdevintia.devathlon3.visuals.throne.BloodTrailVPacket;
 import net.minecraft.server.v1_10_R1.PacketPlayOutGameStateChange;
 import net.minecraft.server.v1_10_R1.WorldServer;
 import org.bukkit.*;
