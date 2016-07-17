@@ -133,6 +133,8 @@ public final class Devathlon3 extends JavaPlugin implements Listener {
     private void registerCommands() {
         this.eventBus.registerCommand(new GivePotionCommand(this, "givepotion",
                 "Gives the specified player the specified potion", "/<command> <player> <potion>", Arrays.asList("givepotion")));
+
+        this.eventBus.registerHelp();
     }
 
     private void applyWorldSettings() {
