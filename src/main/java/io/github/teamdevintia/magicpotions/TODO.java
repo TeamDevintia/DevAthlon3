@@ -5,10 +5,5 @@ package io.github.teamdevintia.magicpotions;
  */
 public class TODO {
 
-    // TODO implus potion
-    // TODO sonnen potion
-
     // TODO buch vom zauberer
-
-    // TODO plugin.yml aufbessern
 }

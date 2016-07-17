@@ -2,5 +2,5 @@ name: MagicPotions
 version: ${project.version}
 main: io.github.teamdevintia.magicpotions.MagicPotions
 authors: [TeamDevintia]
-description: 'TeamDevintia''s entry for MagicPotions'
+description: 'TeamDevintia''s entry for MagicPotions, more explation on the link below!'
 website: 'https://github.com/TeamDevintia/DevAthlon3'
