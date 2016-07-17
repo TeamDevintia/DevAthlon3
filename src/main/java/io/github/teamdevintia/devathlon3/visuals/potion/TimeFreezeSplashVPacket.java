@@ -24,8 +24,8 @@ public class TimeFreezeSplashVPacket implements VPacket {
             return;
         }
 
-        final double[] radius = {(Integer) optionalArgs[0] - 1};
-        final double[] endRadius = {radius[0] + (Integer) optionalArgs[1] - 1};
+        final double[] radius = {0};
+        final double[] endRadius = {(double) optionalArgs[0]};
 
         new BukkitRunnable() {
             @Override
