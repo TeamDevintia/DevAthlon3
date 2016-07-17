@@ -7,8 +7,8 @@ import org.bukkit.util.Vector;
  */
 public final class Bounding implements Cloneable {
 
-    public final Vector minimalCorner = new Vector();
-    public final Vector maximalCorner = new Vector();
+    private Vector minimalCorner = new Vector();
+    private Vector maximalCorner = new Vector();
 
     public static boolean matches(Bounding firstBox, Bounding secondBox) {
         Vector minimalA = firstBox.minimalCorner, maximalA = firstBox.maximalCorner;
@@ -40,4 +40,19 @@ public final class Bounding implements Cloneable {
         return maximalCorner.clone().subtract(minimalCorner);
     }
 
+    public Vector getMinimalCorner() {
+        return minimalCorner;
+    }
+
+    public void setMinimalCorner(Vector minimalCorner) {
+        this.minimalCorner = minimalCorner;
+    }
+
+    public Vector getMaximalCorner() {
+        return maximalCorner;
+    }
+
+    public void setMaximalCorner(Vector maximalCorner) {
+        this.maximalCorner = maximalCorner;
+    }
 }
