@@ -85,8 +85,14 @@ public final class PotionManager implements Listener {
             return;
         }
 
+
         if (event.getEntity() instanceof SplashPotion) {
             SplashPotion s = (SplashPotion) event.getEntity();
+
+            // fix amount
+            ItemStack item = s.getItem();
+            item.setAmount(1);
+            s.setItem(item);
 
             MagicPotion potion = getFromItem(s.getItem());
             if (potion == null) {
