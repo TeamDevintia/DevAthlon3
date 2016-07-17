@@ -7,4 +7,5 @@ public class TODO {
     // TODO man kann blut setzten
     // TODO blut hat kein enchantment
     // TODO essence hat kein enchantment
+    // TODO plugin.yml aufbessern
 }

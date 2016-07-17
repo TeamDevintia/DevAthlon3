@@ -16,6 +16,7 @@ import org.bukkit.event.inventory.CraftItemEvent;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.HashMap;
+import java.util.Set;
 
 /**
  * @author Shad0wCore
@@ -132,5 +133,12 @@ public final class PotionManager implements Listener {
      */
     public MagicPotion getFromId(String id) {
         return magicPotionMap.get(id);
+    }
+
+    /**
+     * @return the names of all potions
+     */
+    public Set<String> getNames() {
+        return magicPotionMap.keySet();
     }
 }
