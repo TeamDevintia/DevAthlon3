@@ -121,7 +121,6 @@ public final class Devathlon3 extends JavaPlugin implements Listener {
     private void initialization() {
         // Register wizard entity
         NMSUtil.registerEntity("Villager", 120, EntityVillager.class, WizardEntity.class);
-        // events
     }
 
     private void postInitialization() {
