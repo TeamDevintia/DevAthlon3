@@ -18,9 +18,9 @@ import org.bukkit.scheduler.BukkitRunnable;
  */
 public class TimeFreezeTrailVPacket implements VPacket {
 
-    private float red = ParticleUtil.floatRGB(0);
-    private float green = ParticleUtil.floatRGB(255);
-    private float blue = ParticleUtil.floatRGB(255);
+    private float red = ParticleUtil.floatRGB(52);
+    private float green = ParticleUtil.floatRGB(73);
+    private float blue = ParticleUtil.floatRGB(94);
 
     @Override
     public void play(Devathlon3 devathlon3, Location location, Player toPlayer, Object... optionalArgs) {
@@ -30,14 +30,15 @@ public class TimeFreezeTrailVPacket implements VPacket {
             public void run() {
                 if (thrownPotion.isDead()) {
                     this.cancel();
-                    SoundUtil.playSound(Sound.ENTITY_ZOMBIE_INFECT, SoundSource.HOSTILE, 2.F, 1.F, thrownPotion.getLocation());
+                    SoundUtil.playSound(Sound.ENTITY_ZOMBIE_INFECT, SoundSource.HOSTILE, 1.F, 1.F, thrownPotion.getLocation());
                 }
 
-                // basically you also can use 0.0, 1.0, 1.0 at red, green, blue
-                ParticleUtil.playColor(thrownPotion.getLocation(), false, ColoredParticle.MOBSPELL, red, green, blue, 1.F);
-                ParticleUtil.play(thrownPotion.getLocation(), Effect.SNOW_SHOVEL, 0, 0, 0, 0, 0, 0.1F, 5, 16);
+                for (int i = 0; i < 5; i++) {
+                    ParticleUtil.playColor(thrownPotion.getLocation(), false, ColoredParticle.MOBSPELL, red, green, blue, 1.F);
+                    ParticleUtil.play(thrownPotion.getLocation(), Effect.SNOW_SHOVEL, 0, 0, 0, 0, 0, 0.1F, 1, 16);
+                }
             }
-        }.runTaskTimer(devathlon3, 0, 2);
+        }.runTaskTimer(devathlon3, 0, 1);
     }
 
 }
