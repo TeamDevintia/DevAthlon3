@@ -18,6 +18,7 @@ import org.bukkit.scheduler.BukkitTask;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * Potion that sets nearby entities on fire
@@ -90,7 +91,10 @@ public class FirePotion extends MagicPotion {
                     Block block = location.getWorld().getBlockAt(x, y, z);
                     // if on surface, spawn fire
                     if (block.getType() != Material.AIR && block.getRelative(BlockFace.UP).getType() == Material.AIR) {
-                        block.getRelative(BlockFace.UP).setType(Material.FIRE);
+                        int r = ThreadLocalRandom.current().nextInt(100);
+                        if (r < 30) {
+                            block.getRelative(BlockFace.UP).setType(Material.FIRE);
+                        }
                     }
 
                     // if in air, spawn particle
