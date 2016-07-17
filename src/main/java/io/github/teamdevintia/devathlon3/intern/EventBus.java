@@ -29,6 +29,8 @@ public class EventBus {
         this.pluginManager.registerEvents(listener, this.instance);
     }
 
+    //TODO clean up stuff that we don't need
+
     public void registerStaticEvents(Listener... listeners) {
         for (Listener listener : listeners) {
             this.registerStaticEvent(listener);
