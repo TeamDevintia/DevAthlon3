@@ -21,6 +21,8 @@ public class GivePotionCommand extends CommandHandler {
 
     @Override
     public boolean execute(CommandSender commandSender, String command, String[] args) {
+        System.out.println("call command");
+
         if (args.length != 2) {
             return false;
         }
@@ -39,6 +41,12 @@ public class GivePotionCommand extends CommandHandler {
 
         potion.onPotionBuild(player);
         player.getInventory().addItem(potion.getItem());
+        player.sendMessage(this.instance().getMessageConstant().get("command.potionGiven"));
+
+        if (!commandSender.getName().equals(player.getName())) {
+            commandSender.sendMessage(this.instance().getMessageConstant().get("command.executed"));
+        }
+
         return true;
 
     }
