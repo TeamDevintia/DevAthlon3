@@ -37,7 +37,7 @@ public class RecipeConstant extends Constant<ShapedRecipe> {
                 .shape("ESE", "SGS", "ESE").ingredient('E', instance.getItemConstant().get("item.essence").getType()).ingredient('S', Material.SULPHUR) // SULPHUR = gunpower, wtf bukkit
                 .ingredient('G', Material.GLASS_BOTTLE).release());
         this.getContentMap().put("recipe.potion.winter", new RecipeFactory(instance.getItemConstant().get("item.winterPotion"))
-                .shape("ESE", "SGS", "ESE").ingredient('E', instance.getItemConstant().get("item.essence").getType()).ingredient('S', Material.IRON_BLOCK)
+                .shape("ESE", "SGS", "ESE").ingredient('E', instance.getItemConstant().get("item.essence").getType()).ingredient('S', Material.ICE)
                 .ingredient('G', Material.GLASS_BOTTLE).release());
         this.getContentMap().put("recipe.potion.sun", new RecipeFactory(instance.getItemConstant().get("item.sunPotion"))
                 .shape("ESE", "SGS", "ESE").ingredient('E', instance.getItemConstant().get("item.essence").getType()).ingredient('S', Material.FIREBALL)
