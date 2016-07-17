@@ -3,8 +3,14 @@ package io.github.teamdevintia.devathlon3.visuals.potion;
 import io.github.teamdevintia.devathlon3.Devathlon3;
 import io.github.teamdevintia.devathlon3.util.ParticleUtil;
 import io.github.teamdevintia.devathlon3.util.ParticleUtil.ColoredParticle;
+import io.github.teamdevintia.devathlon3.util.factory.FireworkFactory;
 import io.github.teamdevintia.devathlon3.visuals.VPacket;
+import org.bukkit.Bukkit;
+import org.bukkit.Color;
+import org.bukkit.FireworkEffect;
+import org.bukkit.FireworkEffect.Type;
 import org.bukkit.Location;
+import org.bukkit.entity.Firework;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
@@ -22,6 +28,15 @@ public class FireSplashVPacket implements VPacket {
     public void play(Devathlon3 devathlon3, Location location, Player toPlayer, Object... optionalArgs) {
         int range = (int) optionalArgs[0] + 2;
         int fireTicks = (int) optionalArgs[1];
+
+        location.getWorld().getNearbyEntities(location, range, range, range).forEach(entity -> {
+            Firework firework = new FireworkFactory().location(entity.getLocation()).effect(FireworkEffect.builder().with(Type.BALL)
+                    .withColor(Color.fromRGB((int) (trailFirst[0] * 256), (int) (trailFirst[1] * 256), (int) (trailFirst[2] * 256)))
+                    .withColor(Color.fromRGB((int) (trailSecond[0] * 256), (int) (trailSecond[1] * 256), (int) (trailSecond[2] * 256)))
+                    .withColor(Color.fromRGB((int) (trailThird[0] * 256), (int) (trailThird[1] * 256), (int) (trailThird[2] * 256)))
+                    .withFade(Color.BLACK).build()).launch();
+            Bukkit.getScheduler().runTaskLater(devathlon3, firework::detonate, 1);
+        });
 
         BukkitTask bukkitTask = new BukkitRunnable() {
             @Override
