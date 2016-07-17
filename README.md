@@ -22,3 +22,20 @@ This project uses maven.
 git clone https://github.com/TeamDevintia/DevAthlon3.git
 mvn clean install
 ```
+
+Or just get it from my ci http://bender.minidigger.me:9090/job/DevAthlon3
+
+## Quick Start (german only, sorry)
+
+Unser Projekt heißt MagicPotions. Es geht darum das Tor zur Magie Welt durch ein Ritual wieder zu öffnen und dadurch Magie in der normalen Welt zu nutzen. <br>
+Für das Ritual braucht man Blut. Blut bekommt man durchs töten von Zombies oder ähnlichem. (Oder alernative via `/giveitem <player> blood`).<br>
+Mit dem Blut muss man dann einen sogenannten Ritualsleuchter craften:<br>
+![](http://bender.minidigger.me/2016/07/javaw_2016-07-17_10-55-33.png)
+(außen Blut, innen ein Stick)
+Davon braucht man 5 Stück um das magische Fünfeck aufzubauen. Dies muss wie folgt aussehen:
+![](http://bender.minidigger.me/2016/07/mspaint_2016-07-16_14-25-02.png)
+Der ganze Prozess sieht so aus:
+![](http://bender.minidigger.me/2016/07/2016-07-17_11-01-05.gif)
+(http://bender.minidigger.me/2016/07/2016-07-17_11-01-05.gif)<br>
+Wenn das Ritual abgeschlossen kannst du die Tränke kraften. Dazu brauchst du Essenzen. Diese werden nun von Mobs gedroppt. 
+
