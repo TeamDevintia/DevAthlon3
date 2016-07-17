@@ -44,9 +44,6 @@ public class ItemConstant extends Constant<ItemStack> {
         this.getContentMap().put("item.impulsePotion", new ItemFactory(Material.SPLASH_POTION).amount(1)
                 .displayName(instance.getNameConstant().get("item.name.impulsePotion")).enchantment(Enchantment.DIG_SPEED, 1, false)
                 .itemFlags(ItemFlag.HIDE_ENCHANTS).release());
-        this.getContentMap().put("item.winterPotion", new ItemFactory(Material.SPLASH_POTION).amount(1)
-                .displayName(instance.getNameConstant().get("item.name.winterPotion")).enchantment(Enchantment.DIG_SPEED, 1, false)
-                .itemFlags(ItemFlag.HIDE_ENCHANTS).release());
     }
 
     @Override

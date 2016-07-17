@@ -16,7 +16,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
 /**
- * Created by Martin on 17.07.2016.
+ * @author MiniDigger
  */
 public class ImpulsePotion extends MagicPotion {
 
