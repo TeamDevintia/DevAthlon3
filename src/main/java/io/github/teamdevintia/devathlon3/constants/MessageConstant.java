@@ -4,8 +4,11 @@ import io.github.teamdevintia.devathlon3.Devathlon3;
 import org.bukkit.ChatColor;
 
 import java.util.HashMap;
+import java.util.Map;
 
 /**
+ * This constant stores chat messages
+ *
  * @author MiniDigger
  */
 public class MessageConstant extends Constant<String> {
@@ -36,7 +39,7 @@ public class MessageConstant extends Constant<String> {
     }
 
     @Override
-    public HashMap<String, String> getContentMap() {
+    public Map<String, String> getContentMap() {
         return super.getContentMap();
     }
 }

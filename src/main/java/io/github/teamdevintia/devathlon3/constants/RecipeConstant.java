@@ -6,8 +6,11 @@ import org.bukkit.Material;
 import org.bukkit.inventory.ShapedRecipe;
 
 import java.util.HashMap;
+import java.util.Map;
 
 /**
+ * This constant stores all custom recipes
+ *
  * @author Shad0wCore
  */
 public class RecipeConstant extends Constant<ShapedRecipe> {
@@ -22,10 +25,10 @@ public class RecipeConstant extends Constant<ShapedRecipe> {
                 .shape("BBB", "BSB", "BBB").ingredient('B', Material.REDSTONE).ingredient('S', Material.STICK).releaseAndRegister());
 
         // potions, only release, not register!
-        this.getContentMap().put("recipe.potion.fire", new RecipeFactory(instance.getItemConstant().get("item.firepotion"))
+        this.getContentMap().put("recipe.potion.fire", new RecipeFactory(instance.getItemConstant().get("item.firePotion"))
                 .shape("ESE", "SGS", "ESE").ingredient('E', instance.getItemConstant().get("item.essence").getType()).ingredient('S', Material.BLAZE_POWDER)
                 .ingredient('G', Material.GLASS_BOTTLE).release());
-        this.getContentMap().put("recipe.potion.ice", new RecipeFactory(instance.getItemConstant().get("item.icepotion"))
+        this.getContentMap().put("recipe.potion.ice", new RecipeFactory(instance.getItemConstant().get("item.icePotion"))
                 .shape("ESE", "SGS", "ESE").ingredient('E', instance.getItemConstant().get("item.essence").getType()).ingredient('S', Material.SNOW_BALL)
                 .ingredient('G', Material.GLASS_BOTTLE).release());
         this.getContentMap().put("recipe.potion.timeFreeze", new RecipeFactory(instance.getItemConstant().get("item.timeFreezePotion"))
@@ -45,7 +48,7 @@ public class RecipeConstant extends Constant<ShapedRecipe> {
     }
 
     @Override
-    public HashMap<String, ShapedRecipe> getContentMap() {
+    public Map<String, ShapedRecipe> getContentMap() {
         return super.getContentMap();
     }
 }

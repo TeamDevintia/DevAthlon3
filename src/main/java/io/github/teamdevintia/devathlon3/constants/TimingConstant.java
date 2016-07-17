@@ -2,9 +2,11 @@ package io.github.teamdevintia.devathlon3.constants;
 
 import io.github.teamdevintia.devathlon3.Devathlon3;
 
-import java.util.HashMap;
+import java.util.Map;
 
 /**
+ * This constant stores all timings that are used to delay certain actions
+ *
  * @author MiniDigger
  */
 public class TimingConstant extends Constant<Long> {
@@ -34,7 +36,7 @@ public class TimingConstant extends Constant<Long> {
     }
 
     @Override
-    public HashMap<String, Long> getContentMap() {
+    public Map<String, Long> getContentMap() {
         return super.getContentMap();
     }
 }

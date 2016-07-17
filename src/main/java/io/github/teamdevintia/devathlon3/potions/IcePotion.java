@@ -26,7 +26,7 @@ public class IcePotion extends MagicPotion {
     private static final int range = 3;
 
     public IcePotion(Devathlon3 devathlon3) {
-        super(devathlon3, "IcePotion", devathlon3.getItemConstant().get("item.icepotion"));
+        super(devathlon3, "IcePotion", devathlon3.getItemConstant().get("item.icePotion"));
     }
 
     @Override

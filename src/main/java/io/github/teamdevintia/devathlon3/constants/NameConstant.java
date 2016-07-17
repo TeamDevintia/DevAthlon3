@@ -4,8 +4,11 @@ import io.github.teamdevintia.devathlon3.Devathlon3;
 import org.bukkit.ChatColor;
 
 import java.util.HashMap;
+import java.util.Map;
 
 /**
+ * This constant stores various names
+ *
  * @author Shad0wCore
  */
 public class NameConstant extends Constant<String> {
@@ -19,8 +22,8 @@ public class NameConstant extends Constant<String> {
         this.getContentMap().put("item.name.ritualLantern", ChatColor.RED + "Ritualsleuchter");
         this.getContentMap().put("item.name.blood", ChatColor.RED + "Blut");
         this.getContentMap().put("item.name.essence", ChatColor.GREEN + "Essenz");
-        this.getContentMap().put("item.name.firepotion",ChatColor.RED + "FirePotion");
-        this.getContentMap().put("item.name.icepotion",ChatColor.BLUE + "IcePotion");
+        this.getContentMap().put("item.name.firePotion",ChatColor.RED + "FirePotion");
+        this.getContentMap().put("item.name.icePotion",ChatColor.BLUE + "IcePotion");
         this.getContentMap().put("item.name.timeFreezePotion",ChatColor.BLUE + "TimeFreezePotion");
         this.getContentMap().put("item.name.impulsePotion",ChatColor.BLUE + "ImpulsPotion");
         this.getContentMap().put("item.name.winterPotion",ChatColor.BLUE + "WinterPotion");
@@ -33,7 +36,7 @@ public class NameConstant extends Constant<String> {
     }
 
     @Override
-    public HashMap<String, String> getContentMap() {
+    public Map<String, String> getContentMap() {
         return super.getContentMap();
     }
 }
