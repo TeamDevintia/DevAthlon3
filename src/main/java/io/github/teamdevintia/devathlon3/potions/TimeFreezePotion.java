@@ -29,7 +29,6 @@ public class TimeFreezePotion extends MagicPotion {
 
     @Override
     public void onPotionBuild(Entity entity) {
-
     }
 
     @Override
