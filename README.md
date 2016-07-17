@@ -47,9 +47,9 @@ Wenn das Ritual abgeschlossen kannst du die Tränke kraften. Dazu brauchst du Es
 `/givepotion <player> TimeFreezePotion`<br>
 ![](http://bender.minidigger.me/2016/07/javaw_2016-07-17_11-10-23.png)<br>
 `/givepotion <player> ImpulsPotion`<br>
-![](http://bender.minidigger.me/2016/07/javaw_2016-07-17_11-11-09.png)<br>
+![](http://bender.minidigger.me/2016/07/javaw_2016-07-17_11-22-41.png)<br>
 `/givepotion <player> WinterPotion`<br>
-![](http://bender.minidigger.me/2016/07/javaw_2016-07-17_11-11-44.png)<br>
+![](http://bender.minidigger.me/2016/07/javaw_2016-07-17_11-22-16.png)<br>
 `/givepotion <player> SunPotion`<br>
 ![](http://bender.minidigger.me/2016/07/javaw_2016-07-17_11-12-20.png)<br>
 `/givepotion <player> ExplosionPotion`<br>
