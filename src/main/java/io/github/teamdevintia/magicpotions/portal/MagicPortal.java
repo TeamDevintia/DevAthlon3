@@ -374,7 +374,10 @@ public class MagicPortal implements Listener {
                 center.getWorld().playSound(center, Sound.ENTITY_GENERIC_EXPLODE, 10, 1);
 
                 // restore
-                snapshot.restore(Material.REDSTONE_TORCH_ON);
+                if (snapshot.restore(Material.REDSTONE_TORCH_ON) == 0) {
+                    // well our restore failed, lets blow shit up
+                    center.getWorld().createExplosion(center, 5);
+                }
 
                 // change fade value back
                 // 7 = fade value, 0 = bright
