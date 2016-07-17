@@ -85,7 +85,6 @@ public final class PotionManager implements Listener {
             return;
         }
 
-
         if (event.getEntity() instanceof SplashPotion) {
             SplashPotion s = (SplashPotion) event.getEntity();
 
