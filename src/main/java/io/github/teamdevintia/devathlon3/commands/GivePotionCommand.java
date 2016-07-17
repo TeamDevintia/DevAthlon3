@@ -1,20 +1,19 @@
 package io.github.teamdevintia.devathlon3.commands;
 
 import io.github.teamdevintia.devathlon3.Devathlon3;
-import io.github.teamdevintia.devathlon3.constants.MessageConstant;
 import io.github.teamdevintia.devathlon3.potions.MagicPotion;
+import io.github.teamdevintia.devathlon3.util.TabCompleteUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author Shad0wCore
+ * @author Shad0wCore & MiniDigger
  */
 public class GivePotionCommand extends CommandHandler {
-
-    private MessageConstant messageConstant;
 
     public GivePotionCommand(Devathlon3 instance, String name, String description, String usageMessage, List<String> aliases) {
         super(instance, name, description, usageMessage, aliases);
@@ -29,13 +28,13 @@ public class GivePotionCommand extends CommandHandler {
 
             Player player = Bukkit.getPlayer(args[0]);
             if (player == null) {
-                commandSender.sendMessage(this.messageConstant.get("command.unknownPlayer"));
+                commandSender.sendMessage(this.instance().getMessageConstant().get("command.unknownPlayer"));
                 return true;
             }
 
             MagicPotion potion = this.instance().getPotionManager().getFromId(args[1]);
             if (potion == null) {
-                commandSender.sendMessage(this.messageConstant.get("command.unknownPotion"));
+                commandSender.sendMessage(this.instance().getMessageConstant().get("command.unknownPotion"));
                 return true;
             }
 
@@ -45,6 +44,22 @@ public class GivePotionCommand extends CommandHandler {
         }
 
         return false;
+    }
+
+    @Override
+    public List<String> tabComplete(CommandSender sender, String alias, String[] args) throws IllegalArgumentException {
+        if (this.getName().equalsIgnoreCase("givepotion")) {
+            if (args.length == 2) {
+                return TabCompleteUtil.complete(this.instance().getPotionManager().getNames(), args[1]);
+            }
+
+            if (args.length == 1) {
+                return TabCompleteUtil.complete(TabCompleteUtil.playerNames(), args[0]);
+            }
+
+            return new ArrayList<>();
+        }
+        return new ArrayList<>();
     }
 
 }

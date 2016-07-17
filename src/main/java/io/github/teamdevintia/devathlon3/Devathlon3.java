@@ -1,22 +1,20 @@
 package io.github.teamdevintia.devathlon3;
 
-import io.github.teamdevintia.devathlon3.constants.*;
+import io.github.teamdevintia.devathlon3.constants.ItemConstant;
+import io.github.teamdevintia.devathlon3.constants.MessageConstant;
+import io.github.teamdevintia.devathlon3.constants.NameConstant;
+import io.github.teamdevintia.devathlon3.constants.RecipeConstant;
+import io.github.teamdevintia.devathlon3.constants.TimingConstant;
 import io.github.teamdevintia.devathlon3.items.Blood;
 import io.github.teamdevintia.devathlon3.items.Essence;
 import io.github.teamdevintia.devathlon3.managers.PotionManager;
 import io.github.teamdevintia.devathlon3.portal.MagicPortal;
 import io.github.teamdevintia.devathlon3.portal.WizardEntity;
 import io.github.teamdevintia.devathlon3.util.NMSUtil;
-import io.github.teamdevintia.devathlon3.util.TabCompleteUtil;
 import net.minecraft.server.v1_10_R1.EntityVillager;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.java.JavaPlugin;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Main class
@@ -133,24 +131,5 @@ public final class Devathlon3 extends JavaPlugin {
             world.setWeatherDuration(1000000000);
         }
     }
-
-    //<editor-fold desc="Tab Complete Additions">
-    @Override
-    public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
-        if (command.getName().equalsIgnoreCase("givepotion")) {
-            if (args.length == 2) {
-                return TabCompleteUtil.complete(potionManager.getNames(), args[1]);
-            }
-
-            if (args.length == 1) {
-                return TabCompleteUtil.complete(TabCompleteUtil.playerNames(), args[0]);
-            }
-
-            return new ArrayList<>();
-        }
-
-        return new ArrayList<>();
-    }
-    //</editor-fold>
 
 }
