@@ -31,6 +31,9 @@ public class RecipeConstant extends Constant<ShapedRecipe> {
         this.getContentMap().put("recipe.potion.timeFreeze", new RecipeFactory(instance.getItemConstant().get("item.timeFreezePotion"))
                 .shape("ESE", "SGS", "ESE").ingredient('E', instance.getItemConstant().get("item.essence").getType()).ingredient('S', Material.ENDER_PEARL)
                 .ingredient('G', Material.GLASS_BOTTLE).release());
+        this.getContentMap().put("recipe.potion.impulse", new RecipeFactory(instance.getItemConstant().get("item.impulsePotion"))
+                .shape("ESE", "SGS", "ESE").ingredient('E', instance.getItemConstant().get("item.essence").getType()).ingredient('S', Material.SULPHUR) // SULPHUR = gunpower, wtf bukkit
+                .ingredient('G', Material.GLASS_BOTTLE).release());
     }
 
     @Override

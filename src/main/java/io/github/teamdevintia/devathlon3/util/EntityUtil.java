@@ -20,7 +20,10 @@ public final class EntityUtil {
         Vector centerV = center.toVector();
         for (Entity entity : center.getWorld().getNearbyEntities(center, range, range, range)) {
             Vector entityV = entity.getLocation().toVector();
-            Vector velocity = entityV.subtract(centerV).multiply(force);
+            Vector velocity = entityV.subtract(centerV);
+            velocity.setX(velocity.getX() + 0.5);
+            velocity.setZ(velocity.getZ() + 0.5);
+            velocity = velocity.multiply(force);
             velocity.setY(0.5);
             entity.setVelocity(velocity);
         }
