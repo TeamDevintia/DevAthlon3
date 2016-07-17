@@ -52,13 +52,7 @@ public final class PotionManager implements Listener {
         registerMagicPotion(new IcePotion(plugin));
         registerMagicPotion(new TimeFreezePotion(plugin));
         registerMagicPotion(new ImpulsePotion(plugin));
-    }
-
-    @EventHandler //TODO do we need this?
-    public void onApply(AreaEffectCloudApplyEvent event) {
-       /* for (MagicPotion magicPotion : magicPotionMap.values()) {
-            magicPotion.onPotionHit(event.getEntity().getLocation(), (ThrownPotion) event.getEntity());
-        }*/
+        registerMagicPotion(new WinterPotion(plugin));
     }
 
     @EventHandler
