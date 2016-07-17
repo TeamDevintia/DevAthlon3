@@ -30,7 +30,7 @@ public class MessageConstant extends Constant<String> {
         this.getContentMap().put("command.unknownItem", ChatColor.RED + "Unbekanntes Item!");
         this.getContentMap().put("command.potionGiven", ChatColor.GREEN + "Hier is dein Potion!");
         this.getContentMap().put("command.itemGiven", ChatColor.GREEN + "Hier is dein Item!");
-        this.getContentMap().put("command.excuted", ChatColor.GREEN + "Ausgeführt!");
+        this.getContentMap().put("command.executed", ChatColor.GREEN + "Ausgeführt!");
     }
 
     @Override
