@@ -1,14 +1,10 @@
 package io.github.teamdevintia.devathlon3.entities;
 
 import io.github.teamdevintia.devathlon3.Devathlon3;
-import net.minecraft.server.v1_10_R1.EntityLiving;
-import net.minecraft.server.v1_10_R1.EntityPotion;
-import net.minecraft.server.v1_10_R1.EntityWitch;
-import net.minecraft.server.v1_10_R1.ItemStack;
-import net.minecraft.server.v1_10_R1.MathHelper;
-import net.minecraft.server.v1_10_R1.SoundEffects;
-import net.minecraft.server.v1_10_R1.World;
+import net.minecraft.server.v1_10_R1.*;
 import org.bukkit.craftbukkit.v1_10_R1.inventory.CraftItemStack;
+
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * A evil version of the already pretty annoying mob, throw with magic potions
@@ -30,7 +26,13 @@ public class EvilWitch extends EntityWitch {
             double z = var1.locZ + var1.motZ - this.locZ;
             float distance = MathHelper.sqrt(x * x + z * z);
 
-            ItemStack potion = CraftItemStack.asNMSCopy(Devathlon3.getInstance().getPotionManager().getRandomPotion());
+            ItemStack potion;
+            if (ThreadLocalRandom.current().nextInt(100) < 30) {
+                // harming
+                potion = PotionUtil.a(new ItemStack(Items.SPLASH_POTION), Potions.x);
+            } else {
+                potion = CraftItemStack.asNMSCopy(Devathlon3.getInstance().getPotionManager().getRandomPotion());
+            }
 
             // spawn
             EntityPotion potionEntity = new EntityPotion(this.world, this, potion);
