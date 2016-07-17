@@ -23,7 +23,11 @@ public class GiveItemCommand extends MagicCommand {
 
     @Override
     public boolean execute(CommandSender commandSender, String command, String[] args) {
-         if (args.length != 2) {
+        if (!commandSender.hasPermission("magicpotion.giveitem")) {
+            return true;
+        }
+
+        if (args.length != 2) {
             return false;
         }
 

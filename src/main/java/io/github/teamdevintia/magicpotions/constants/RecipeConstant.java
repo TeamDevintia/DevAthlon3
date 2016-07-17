@@ -39,7 +39,6 @@ public class RecipeConstant extends Constant<ShapedRecipe> {
         this.getContentMap().put("recipe.potion.winter", new RecipeFactory(instance.getItemConstant().get("item.winterPotion"))
                 .shape("ESE", "SGS", "ESE").ingredient('E', instance.getItemConstant().get("item.essence").getType()).ingredient('S', Material.IRON_BLOCK)
                 .ingredient('G', Material.GLASS_BOTTLE).release());
-        //TODO how to craft this?
         this.getContentMap().put("recipe.potion.sun", new RecipeFactory(instance.getItemConstant().get("item.sunPotion"))
                 .shape("ESE", "SGS", "ESE").ingredient('E', instance.getItemConstant().get("item.essence").getType()).ingredient('S', Material.FIREBALL)
                 .ingredient('G', Material.GLASS_BOTTLE).release());

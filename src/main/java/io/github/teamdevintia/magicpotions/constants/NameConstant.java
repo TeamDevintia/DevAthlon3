@@ -24,7 +24,7 @@ public class NameConstant extends Constant<String> {
         this.getContentMap().put("item.name.firePotion",ChatColor.RED + "FirePotion");
         this.getContentMap().put("item.name.icePotion",ChatColor.LIGHT_PURPLE + "IcePotion");
         this.getContentMap().put("item.name.timeFreezePotion",ChatColor.BLUE + "TimeFreezePotion");
-        this.getContentMap().put("item.name.impulsePotion",ChatColor.BLACK + "ImpulsPotion");
+        this.getContentMap().put("item.name.impulsePotion",ChatColor.DARK_GRAY + "ImpulsPotion");
         this.getContentMap().put("item.name.winterPotion",ChatColor.WHITE + "WinterPotion");
         this.getContentMap().put("item.name.sunPotion",ChatColor.GOLD + "SunPotion");
         this.getContentMap().put("item.name.explosionPotion",ChatColor.GRAY + "ExplosionPotion");
