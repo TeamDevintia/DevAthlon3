@@ -6,10 +6,12 @@ import org.bukkit.Effect;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
-import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.ThrownPotion;
 import org.bukkit.inventory.Recipe;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 
@@ -17,40 +19,39 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Potion that sets nearby entities on fire
- *
- * @author MiniDigger
+ * Created by Martin on 17.07.2016.
  */
-public class FirePotion extends MagicPotion {
+public class IcePotion extends MagicPotion {
 
     private static final int range = 3;
 
-    public FirePotion(Devathlon3 devathlon3) {
-        super(devathlon3, "FirePotion", devathlon3.getItemConstant().get("item.firepotion"));
+    public IcePotion(Devathlon3 devathlon3) {
+        super(devathlon3, "IcePotion", devathlon3.getItemConstant().get("item.icepotion"));
     }
 
     @Override
     public Recipe createRecipe() {
-        System.out.println("register");
-        return instance().getRecipeConstant().get("recipe.potion.fire");
+        return instance().getRecipeConstant().get("recipe.potion.ice");
     }
 
     @Override
     public void onPotionBuild(Entity entity) {
-        System.out.println("build!");
+
     }
 
     @Override
     public void onPotionLaunch(Entity thrower, ThrownPotion thrownPotion) {
-        // TODO particle trail
-        System.out.println("launch!");
+        //TODO particle trail
     }
 
     @Override
     public void onPotionHit(Location location, ThrownPotion thrownPotion) {
-        System.out.println("hit!");
-        // set stuff on fire
-        location.getWorld().getNearbyEntities(location, range, range, range).forEach(entity -> entity.setFireTicks(20 * 5));
+        // ice ice baby
+        location.getWorld().getNearbyEntities(location, range, range, range).stream().filter(entity -> entity instanceof LivingEntity).
+                forEach(entity -> {
+                    ((LivingEntity) entity).addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 5 * 20, 2, false, false));
+                    ((LivingEntity) entity).addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, 5 * 20, 1, false, false));
+                });
 
         int fromX;
         int toX;
@@ -87,9 +88,9 @@ public class FirePotion extends MagicPotion {
             for (int y = fromY; y < toY; y++) {
                 for (int z = fromZ; z < toZ; z++) {
                     Block block = location.getWorld().getBlockAt(x, y, z);
-                    // if on surface, spawn fire
-                    if (block.getType() != Material.AIR && block.getRelative(BlockFace.UP).getType() == Material.AIR) {
-                        block.getRelative(BlockFace.UP).setType(Material.FIRE);
+                    // make ice transform into water
+                    if (block.getType() == Material.WATER) {
+                        block.setType(Material.ICE);
                     }
 
                     // if in air, spawn particle
@@ -104,7 +105,7 @@ public class FirePotion extends MagicPotion {
             @Override
             public void run() {
                 for (Location loc : particleLocs) {
-                    ParticleUtil.play(loc, Effect.BOW_FIRE, 0, 0, 0, 0, 0, 1, 1, 50);
+                    ParticleUtil.play(loc, Effect.SNOW_SHOVEL, 0, 0, 0, 0, 0, 1, 1, 50);
                 }
             }
         }.runTaskTimer(instance(), 0, 5);
