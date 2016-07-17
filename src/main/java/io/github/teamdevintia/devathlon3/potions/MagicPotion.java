@@ -10,6 +10,8 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Recipe;
 
 /**
+ * A magic potion is a splash potion with custom effects, needs to be registered using the {@link io.github.teamdevintia.devathlon3.managers.PotionManager}!
+ *
  * @author Shad0wCore
  */
 public abstract class MagicPotion implements Listener {
@@ -18,6 +20,12 @@ public abstract class MagicPotion implements Listener {
     private String potionID;
     private ItemStack item;
 
+    /**
+     *
+     * @param devathlon3 the plugin instance
+     * @param potionIdentifier a unique name
+     * @param item the itemstack for this potion
+     */
     public MagicPotion(Devathlon3 devathlon3, String potionIdentifier, ItemStack item) {
         this.devathlon3 = devathlon3;
         this.potionID = potionIdentifier;
