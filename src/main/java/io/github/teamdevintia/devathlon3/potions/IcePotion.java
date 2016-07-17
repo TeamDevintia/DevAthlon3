@@ -89,7 +89,7 @@ public class IcePotion extends MagicPotion {
                 for (int z = fromZ; z < toZ; z++) {
                     Block block = location.getWorld().getBlockAt(x, y, z);
                     // make ice transform into water
-                    if (block.getType() == Material.WATER) {
+                    if (block.getType() == Material.WATER || block.getType() == Material.STATIONARY_WATER) {
                         block.setType(Material.ICE);
                     }
 
