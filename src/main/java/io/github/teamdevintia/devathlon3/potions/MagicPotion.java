@@ -3,16 +3,13 @@ package io.github.teamdevintia.devathlon3.potions;
 import io.github.teamdevintia.devathlon3.Devathlon3;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
-import org.bukkit.entity.Player;
 import org.bukkit.entity.ThrownPotion;
 import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Recipe;
 
 /**
- * A magic potion is a splash potion with custom effects, needs to be registered using the {@link io.github.teamdevintia.devathlon3.managers.PotionManager}!
- *
- * @author Shad0wCore
+ * @author Shad0wCore & MiniDigger
  */
 public abstract class MagicPotion implements Listener {
 
@@ -20,12 +17,6 @@ public abstract class MagicPotion implements Listener {
     private String potionID;
     private ItemStack item;
 
-    /**
-     *
-     * @param devathlon3 the plugin instance
-     * @param potionIdentifier a unique name
-     * @param item the itemstack for this potion
-     */
     public MagicPotion(Devathlon3 devathlon3, String potionIdentifier, ItemStack item) {
         this.devathlon3 = devathlon3;
         this.potionID = potionIdentifier;
@@ -70,7 +61,7 @@ public abstract class MagicPotion implements Listener {
     }
 
     /**
-     * @return the itemstack for this potion
+     * @return the item stack for this potion
      */
     public ItemStack getItem() {
         return item;

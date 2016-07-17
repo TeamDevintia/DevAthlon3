@@ -9,7 +9,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Recipe;
 
 /**
- * @author Shad0wCore
+ * @author Shad0wCore & MiniDigger
  */
 public final class TimewarpPotion extends MagicPotion {
 
