@@ -1,6 +1,6 @@
-name: Devathlon3
+name: MagicPotions
 version: ${project.version}
-main: io.github.teamdevintia.devathlon3.Devathlon3
+main: io.github.teamdevintia.magicpotions.MagicPotions
 authors: [TeamDevintia]
-description: 'TeamDevintia''s entry for Devathlon3'
+description: 'TeamDevintia''s entry for MagicPotions'
 website: 'https://github.com/TeamDevintia/DevAthlon3'

@@ -1,0 +1,61 @@
+package io.github.teamdevintia.magicpotions.visuals.potion.trails;
+
+import io.github.teamdevintia.magicpotions.MagicPotions;
+import io.github.teamdevintia.magicpotions.enums.SoundSource;
+import io.github.teamdevintia.magicpotions.util.ParticleUtil;
+import io.github.teamdevintia.magicpotions.util.ParticleUtil.ColoredParticle;
+import io.github.teamdevintia.magicpotions.util.SoundUtil;
+import io.github.teamdevintia.magicpotions.visuals.VPacket;
+import org.bukkit.Location;
+import org.bukkit.Sound;
+import org.bukkit.entity.Player;
+import org.bukkit.entity.ThrownPotion;
+import org.bukkit.scheduler.BukkitRunnable;
+
+/**
+ * @author Shad0wCore
+ */
+public class FireTrailVPacket implements VPacket {
+
+    private float[] trailFirst = new float[]{ParticleUtil.floatRGB(241), ParticleUtil.floatRGB(196), ParticleUtil.floatRGB(15)};
+    private float[] trailSecond = new float[]{ParticleUtil.floatRGB(231), ParticleUtil.floatRGB(76), ParticleUtil.floatRGB(60)};
+    private float[] trailThird = new float[]{ParticleUtil.floatRGB(236), ParticleUtil.floatRGB(240), ParticleUtil.floatRGB(241)};
+
+
+    @Override
+    public void play(MagicPotions magicPotions, Location location, Player toPlayer, Object... optionalArgs) {
+        ThrownPotion thrownPotion = (ThrownPotion) optionalArgs[0];
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                if (thrownPotion.isDead()) {
+                    this.cancel();
+                    SoundUtil.playSound(Sound.ENTITY_WITHER_SHOOT, SoundSource.HOSTILE, 1.F, 1.F, thrownPotion.getLocation());
+                }
+
+                for (int i = 0; i < 3; i++) {
+                    switch (i) {
+                        case 0:
+                            for (int ii = 0; ii < 5; ii++) {
+                                ParticleUtil.playColor(thrownPotion.getLocation(), false, ColoredParticle.MOBSPELL, trailFirst[0], trailFirst[1], trailFirst[2], 1.F);
+                            }
+                            break;
+                        case 1:
+                            for (int ii = 0; ii < 5; ii++) {
+                                ParticleUtil.playColor(thrownPotion.getLocation(), false, ColoredParticle.MOBSPELL, trailSecond[0], trailSecond[1], trailSecond[2], 1.F);
+                            }
+                            break;
+                        case 2:
+                            for (int ii = 0; ii < 5; ii++) {
+                                ParticleUtil.playColor(thrownPotion.getLocation(), false, ColoredParticle.MOBSPELL, trailThird[0], trailThird[1], trailThird[2], 1.F);
+
+                            }
+                            break;
+                    }
+                }
+            }
+        }.runTaskTimer(magicPotions, 0, 1);
+
+    }
+
+}

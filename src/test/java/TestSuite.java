@@ -1,4 +1,4 @@
-import io.github.teamdevintia.devathlon3.DirectionUtilTest;
+import io.github.teamdevintia.magicpotions.DirectionUtilTest;
 import org.junit.Test;
 import org.junit.runners.Suite;
 
