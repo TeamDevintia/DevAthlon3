@@ -24,6 +24,8 @@ public class MessageConstant extends Constant<String> {
         this.getContentMap().put("wizard.spawn.6", "Jetzt aber wird sich der Schrein zerstören, viel Glück!");
         this.getContentMap().put("command.unknownPlayer", ChatColor.RED + "Dieser Spieler ist nicht online!");
         this.getContentMap().put("command.unknownPotion", ChatColor.RED + "Unbekannter Zaubertrank!");
+        this.getContentMap().put("command.potionGiven", ChatColor.GREEN + "Hier is dein Potion!");
+        this.getContentMap().put("command.excuted", ChatColor.GREEN + "Ausgeführt!");
     }
 
     @Override
