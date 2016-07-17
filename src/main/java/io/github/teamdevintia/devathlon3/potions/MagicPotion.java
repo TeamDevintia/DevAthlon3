@@ -3,14 +3,13 @@ package io.github.teamdevintia.devathlon3.potions;
 import io.github.teamdevintia.devathlon3.Devathlon3;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
-import org.bukkit.entity.Player;
 import org.bukkit.entity.ThrownPotion;
 import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Recipe;
 
 /**
- * @author Shad0wCore
+ * @author Shad0wCore & MiniDigger
  */
 public abstract class MagicPotion implements Listener {
 
@@ -62,7 +61,7 @@ public abstract class MagicPotion implements Listener {
     }
 
     /**
-     * @return the itemstack for this potion
+     * @return the item stack for this potion
      */
     public ItemStack getItem() {
         return item;
