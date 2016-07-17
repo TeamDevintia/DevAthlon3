@@ -8,7 +8,9 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 /**
- * Created by Martin on 16.07.2016.
+ * Tests for the direction util class
+ *
+ * @author MiniDigger
  */
 public class DirectionUtilTest {
 

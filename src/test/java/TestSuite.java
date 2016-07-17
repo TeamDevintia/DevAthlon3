@@ -6,13 +6,20 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 /**
- * Created by Martin on 30.06.2016.
+ * Test suite for all tests
+ *
+ * @author MiniDigger
  */
 @Suite.SuiteClasses(value = {DirectionUtilTest.class})
 public class TestSuite {
 
     @Test
     public void testTest() {
-        assertThat(true, is(true));
+        // unit testing minecraft is hard...
+        assertThat(thisTestIsUseless(), is(true));
+    }
+
+    private boolean thisTestIsUseless(){
+        return true;
     }
 }
