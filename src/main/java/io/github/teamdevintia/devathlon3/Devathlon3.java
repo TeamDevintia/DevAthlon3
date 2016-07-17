@@ -1,11 +1,7 @@
 package io.github.teamdevintia.devathlon3;
 
 import io.github.teamdevintia.devathlon3.commands.GivePotionCommand;
-import io.github.teamdevintia.devathlon3.constants.ItemConstant;
-import io.github.teamdevintia.devathlon3.constants.MessageConstant;
-import io.github.teamdevintia.devathlon3.constants.NameConstant;
-import io.github.teamdevintia.devathlon3.constants.RecipeConstant;
-import io.github.teamdevintia.devathlon3.constants.TimingConstant;
+import io.github.teamdevintia.devathlon3.constants.*;
 import io.github.teamdevintia.devathlon3.intern.EventBus;
 import io.github.teamdevintia.devathlon3.items.Blood;
 import io.github.teamdevintia.devathlon3.items.Essence;
@@ -16,6 +12,9 @@ import io.github.teamdevintia.devathlon3.util.NMSUtil;
 import net.minecraft.server.v1_10_R1.EntityVillager;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.weather.WeatherChangeEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.Arrays;
@@ -26,7 +25,7 @@ import java.util.Arrays;
  * @author Shad0wCore
  * @author MiniDigger
  */
-public final class Devathlon3 extends JavaPlugin {
+public final class Devathlon3 extends JavaPlugin implements Listener {
 
     private static Devathlon3 instance;
 
@@ -118,6 +117,8 @@ public final class Devathlon3 extends JavaPlugin {
     private void initialization() {
         // Register wizard entity
         NMSUtil.registerEntity("Villager", 120, EntityVillager.class, WizardEntity.class);
+        // events
+        Bukkit.getPluginManager().registerEvents(this, this);
     }
 
     private void postInitialization() {
@@ -130,8 +131,8 @@ public final class Devathlon3 extends JavaPlugin {
     }
 
     private void registerCommands() {
-        //TODO Complete Command Informations
-        this.eventBus.registerCommand(new GivePotionCommand(this, "givepotion", "", "", Arrays.asList("")));
+        this.eventBus.registerCommand(new GivePotionCommand(this, "givepotion",
+                "Gives the specified player the specified potion", "/<command> <player> <potion>", Arrays.asList("givepotion")));
     }
 
     private void applyWorldSettings() {
@@ -144,6 +145,11 @@ public final class Devathlon3 extends JavaPlugin {
             world.setStorm(false);
             world.setWeatherDuration(1000000000);
         }
+    }
+
+    @EventHandler
+    public void onWeatherChange(WeatherChangeEvent event) {
+        event.setCancelled(true);
     }
 
     public static Devathlon3 getInstance() {
