@@ -1,12 +1,15 @@
 package io.github.teamdevintia.devathlon3;
 
-import io.github.teamdevintia.devathlon3.constants.*;
+import io.github.teamdevintia.devathlon3.constants.ItemConstant;
+import io.github.teamdevintia.devathlon3.constants.MessageConstant;
+import io.github.teamdevintia.devathlon3.constants.NameConstant;
+import io.github.teamdevintia.devathlon3.constants.RecipeConstant;
+import io.github.teamdevintia.devathlon3.constants.TimingConstant;
 import io.github.teamdevintia.devathlon3.items.Blood;
 import io.github.teamdevintia.devathlon3.items.Essence;
 import io.github.teamdevintia.devathlon3.managers.PotionManager;
 import io.github.teamdevintia.devathlon3.portal.MagicPortal;
 import io.github.teamdevintia.devathlon3.portal.WizardEntity;
-import io.github.teamdevintia.devathlon3.potions.MagicPotion;
 import io.github.teamdevintia.devathlon3.util.NMSUtil;
 import net.minecraft.server.v1_10_R1.EntityVillager;
 import org.bukkit.Bukkit;
@@ -45,40 +48,12 @@ public final class Devathlon3 extends JavaPlugin {
     public void onEnable() {
         instance = this;
 
-        nameConstant = new NameConstant(instance);
-        itemConstant = new ItemConstant(instance);
-        recipeConstant = new RecipeConstant(instance);
-        messageConstant = new MessageConstant(instance);
-        timingConstant = new TimingConstant(instance);
+        this.preInitialization();
+        this.initialization();
+        this.postInitialization();
 
-        nameConstant.initializeContent();
-        itemConstant.initializeContent();
-        recipeConstant.initializeContent();
-        messageConstant.initializeContent();
-        timingConstant.initializeContent();
-
-        potionManager = new PotionManager(this);
-        potionManager.registerPotions();
-
-        // register wizard
-        NMSUtil.registerEntity("Villager", 120, EntityVillager.class, WizardEntity.class);
-
-        // init portals
-        new MagicPortal(this);
-        // blood drop
-        new Blood(this);
-        // essence drop
-        new Essence(this);
-
-        // always day, always sunny!
-        for (World world : Bukkit.getWorlds()) {
-            world.setGameRuleValue("doDaylightCycle", "false");
-            world.setTime(6000);
-            world.setThundering(false);
-            world.setThunderDuration(0);
-            world.setStorm(false);
-            world.setWeatherDuration(1000000000);
-        }
+        this.applyWorldSettings();
+        this.applyWorldSettings();
     }
 
     @Override
@@ -124,34 +99,50 @@ public final class Devathlon3 extends JavaPlugin {
         return instance;
     }
 
-    @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        //TODO tab completer for givepotion command
-        if (command.getName().equalsIgnoreCase("givepotion")) {
-            if (args.length != 2) {
-                return false;
-            }
+    private void preInitialization() {
+        nameConstant = new NameConstant(instance);
+        itemConstant = new ItemConstant(instance);
+        recipeConstant = new RecipeConstant(instance);
+        messageConstant = new MessageConstant(instance);
+        timingConstant = new TimingConstant(instance);
 
-            Player player = Bukkit.getPlayer(args[0]);
-            if (player == null) {
-                sender.sendMessage(messageConstant.get("command.unknownplayer"));
-                return true;
-            }
+        nameConstant.initializeContent();
+        itemConstant.initializeContent();
+        recipeConstant.initializeContent();
+        messageConstant.initializeContent();
+        timingConstant.initializeContent();
 
-            MagicPotion potion = potionManager.getFromId(args[1]);
-            if (potion == null) {
-                sender.sendMessage(messageConstant.get("command.unknownpotion"));
-                return true;
-            }
-
-            potion.onPotionBuild(player);
-            player.getInventory().addItem(potion.getItem());
-            return true;
-        }
-
-        return super.onCommand(sender, command, label, args);
+        potionManager = new PotionManager(this);
+        potionManager.registerPotions();
     }
 
+    private void initialization() {
+        // Register wizard entity
+        NMSUtil.registerEntity("Villager", 120, EntityVillager.class, WizardEntity.class);
+    }
+
+    private void postInitialization() {
+        // Initializes portals
+        new MagicPortal(this);
+        // Initializes blood drops
+        new Blood(this);
+        // Initializes essence drops
+        new Essence(this);
+    }
+
+    private void applyWorldSettings() {
+        // always day, always sunny!
+        for (World world : Bukkit.getWorlds()) {
+            world.setGameRuleValue("doDaylightCycle", "false");
+            world.setTime(6000);
+            world.setThundering(false);
+            world.setThunderDuration(0);
+            world.setStorm(false);
+            world.setWeatherDuration(1000000000);
+        }
+    }
+
+    //<editor-fold desc="Tab Complete Additions">
     @Override
     public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
         if (command.getName().equalsIgnoreCase("givepotion")) {
@@ -176,4 +167,6 @@ public final class Devathlon3 extends JavaPlugin {
     private List<String> complete(final Collection<String> list, final String prefix) {
         return list.stream().filter(s -> s.toLowerCase().startsWith(prefix.toLowerCase())).collect(Collectors.toList());
     }
+    //</editor-fold>
+
 }
