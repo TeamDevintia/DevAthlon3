@@ -119,15 +119,10 @@ public final class ItemFactory {
      *
      * @param itemEnchantment   The enchantment which will be applied to the item stack
      * @param enchantmentLevel  The level of the enchantment
-     * @param unsafeEnchantment Allows to set the level higher than 10
+     * @param unsafeEnchantment Allows to set the level higher than vanilla allows
      */
     public synchronized ItemFactory enchantment(Enchantment itemEnchantment, int enchantmentLevel, boolean unsafeEnchantment) {
-        //TODO Fix this method @MiniDigger
-        if (unsafeEnchantment) {
-            this.factoryItemStack.addUnsafeEnchantment(itemEnchantment, enchantmentLevel);
-            return this;
-        }
-        this.factoryItemMeta.addEnchant(itemEnchantment, enchantmentLevel, true);
+        this.factoryItemMeta.addEnchant(itemEnchantment, enchantmentLevel, unsafeEnchantment);
         return this;
     }
 
@@ -135,17 +130,13 @@ public final class ItemFactory {
      * Applies a multiple enchantments to a item stack
      *
      * @param itemEnchantmentMap The map containing the enchantments which will be applied to the item stack
-     * @param unsafeEnchantment  Allows to set the level higher than 10
+     * @param unsafeEnchantment  Allows to set the level higher than vanilla allows
      */
     @Deprecated
-    public synchronized ItemFactory enchantment(Map<Enchantment, Integer> itemEnchantmentMap, boolean unsafeEnchantment) {
-        //TODO Fix this method @MiniDigger
-        if (unsafeEnchantment) {
-            this.factoryItemStack.addUnsafeEnchantments(itemEnchantmentMap);
-            return this;
+    public synchronized ItemFactory enchantments(Map<Enchantment, Integer> itemEnchantmentMap, boolean unsafeEnchantment) {
+        for (Map.Entry<Enchantment, Integer> entry : itemEnchantmentMap.entrySet()) {
+            enchantment(entry.getKey(), entry.getValue(), unsafeEnchantment);
         }
-
-        this.factoryItemStack.addEnchantments(itemEnchantmentMap);
         return this;
     }
 
