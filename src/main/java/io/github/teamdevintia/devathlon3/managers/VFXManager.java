@@ -1,7 +1,7 @@
 package io.github.teamdevintia.devathlon3.managers;
 
 import io.github.teamdevintia.devathlon3.Devathlon3;
-import io.github.teamdevintia.devathlon3.visuals.VFXPacket;
+import io.github.teamdevintia.devathlon3.visuals.VPacket;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
@@ -10,8 +10,8 @@ import org.bukkit.entity.Player;
  */
 public final class VFXManager {
 
-    public static void triggerVFXPacket(VFXPacket vfxPacket, Player to, Location location, Object... optionalArgs) {
-        vfxPacket.play(Devathlon3.getInstance(), location, to, optionalArgs);
+    public static void triggerVFXPacket(VPacket vPacket, Player to, Location location, Object... optionalArgs) {
+        vPacket.play(Devathlon3.getInstance(), location, to, optionalArgs);
     }
 
 }

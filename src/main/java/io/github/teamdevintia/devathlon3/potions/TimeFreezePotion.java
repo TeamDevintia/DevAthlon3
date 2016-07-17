@@ -2,7 +2,8 @@ package io.github.teamdevintia.devathlon3.potions;
 
 import io.github.teamdevintia.devathlon3.Devathlon3;
 import io.github.teamdevintia.devathlon3.managers.VFXManager;
-import io.github.teamdevintia.devathlon3.visuals.TimeFreezeTrailVFXPacket;
+import io.github.teamdevintia.devathlon3.visuals.potion.TimeFreezeSplashVPacket;
+import io.github.teamdevintia.devathlon3.visuals.potion.TimeFreezeTrailVPacket;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
@@ -33,18 +34,16 @@ public class TimeFreezePotion extends MagicPotion {
 
     @Override
     public void onPotionLaunch(Entity thrower, ThrownPotion thrownPotion) {
-        VFXManager.triggerVFXPacket(new TimeFreezeTrailVFXPacket(), null, null, thrownPotion);
+        VFXManager.triggerVFXPacket(new TimeFreezeTrailVPacket(), null, null, thrownPotion);
     }
 
     @Override
     public void onPotionHit(Location location, ThrownPotion thrownPotion) {
-
+        VFXManager.triggerVFXPacket(new TimeFreezeSplashVPacket(), null, null, radius, radius + 3);
         location.getWorld().getNearbyEntities(location, radius, radius, radius).stream().filter(entity -> entity instanceof LivingEntity).
                 forEach(entity -> {
                     ((LivingEntity) entity).addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 5 * 20, 100, false, false));
                     ((LivingEntity) entity).addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, 5 * 20, 100, false, false));
                 });
-
-        //TODO no particles for time freeze?
     }
 }

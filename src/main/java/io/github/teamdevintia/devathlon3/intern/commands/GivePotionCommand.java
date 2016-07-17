@@ -22,7 +22,7 @@ public class GivePotionCommand extends CommandHandler {
 
     @Override
     public boolean execute(CommandSender commandSender, String command, String[] args) {
-        System.out.println("call command");
+        //System.out.println("call command");
 
         if (args.length != 2) {
             return false;

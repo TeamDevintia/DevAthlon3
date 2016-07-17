@@ -1,7 +1,8 @@
-package io.github.teamdevintia.devathlon3.visuals;
+package io.github.teamdevintia.devathlon3.visuals.altar;
 
 import io.github.teamdevintia.devathlon3.Devathlon3;
 import io.github.teamdevintia.devathlon3.portal.LocationTuple;
+import io.github.teamdevintia.devathlon3.visuals.VPacket;
 import org.bukkit.Effect;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -13,7 +14,7 @@ import java.util.List;
 /**
  * @author Shad0wCore
  */
-public class BloodTrailVFXPacket implements VFXPacket {
+public class BloodTrailVPacket implements VPacket {
 
     @Override
     public void play(Devathlon3 instance, Location location, Player toPlayer, Object... optionalArgs) {

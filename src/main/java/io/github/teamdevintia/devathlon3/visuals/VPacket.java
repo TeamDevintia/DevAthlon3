@@ -7,7 +7,7 @@ import org.bukkit.entity.Player;
 /**
  * @author Shad0wCore
  */
-public interface VFXPacket {
+public interface VPacket {
 
     void play(Devathlon3 devathlon3, Location location, Player toPlayer, Object... optionalArgs);
 
