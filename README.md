@@ -39,3 +39,11 @@ Der ganze Prozess sieht so aus:
 (http://bender.minidigger.me/2016/07/2016-07-17_11-01-05.gif)<br>
 Wenn das Ritual abgeschlossen kannst du die Tränke kraften. Dazu brauchst du Essenzen. Diese werden nun von Mobs gedroppt. 
 
+# Crafting
+![](http://bender.minidigger.me/2016/07/javaw_2016-07-17_11-09-07.png)
+![](http://bender.minidigger.me/2016/07/javaw_2016-07-17_11-09-47.png)
+![](http://bender.minidigger.me/2016/07/javaw_2016-07-17_11-10-23.png)
+![](http://bender.minidigger.me/2016/07/javaw_2016-07-17_11-11-09.png)
+![](http://bender.minidigger.me/2016/07/javaw_2016-07-17_11-11-44.png)
+![](http://bender.minidigger.me/2016/07/javaw_2016-07-17_11-12-20.png)
+![](http://bender.minidigger.me/2016/07/javaw_2016-07-17_11-13-03.png)
