@@ -18,16 +18,16 @@ public class NameConstant extends Constant<String> {
 
     @Override
     public void initializeContent() {
-        this.getContentMap().put("item.name.ritualLantern", ChatColor.RED + "Ritualsleuchter");
+        this.getContentMap().put("item.name.ritualLantern", ChatColor.RED + "RitualLaterne");
         this.getContentMap().put("item.name.blood", ChatColor.RED + "Blut");
         this.getContentMap().put("item.name.essence", ChatColor.GREEN + "Essenz");
         this.getContentMap().put("item.name.firePotion",ChatColor.RED + "FirePotion");
-        this.getContentMap().put("item.name.icePotion",ChatColor.BLUE + "IcePotion");
+        this.getContentMap().put("item.name.icePotion",ChatColor.LIGHT_PURPLE + "IcePotion");
         this.getContentMap().put("item.name.timeFreezePotion",ChatColor.BLUE + "TimeFreezePotion");
-        this.getContentMap().put("item.name.impulsePotion",ChatColor.BLUE + "ImpulsPotion");
-        this.getContentMap().put("item.name.winterPotion",ChatColor.BLUE + "WinterPotion");
-        this.getContentMap().put("item.name.sunPotion",ChatColor.BLUE + "SunPotion");
-        this.getContentMap().put("item.name.explosionPotion",ChatColor.BLUE + "ExplosionPotion");
+        this.getContentMap().put("item.name.impulsePotion",ChatColor.BLACK + "ImpulsPotion");
+        this.getContentMap().put("item.name.winterPotion",ChatColor.WHITE + "WinterPotion");
+        this.getContentMap().put("item.name.sunPotion",ChatColor.GOLD + "SunPotion");
+        this.getContentMap().put("item.name.explosionPotion",ChatColor.GRAY + "ExplosionPotion");
         this.getContentMap().put("wizard.displayname", "Urzauberer");
     }
 

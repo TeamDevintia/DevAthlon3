@@ -356,8 +356,6 @@ public class MagicPortal implements Listener {
                         plugin.getTimingConstant().get("spawn.throne.step4.message4.delay"));
                 Bukkit.getScheduler().runTaskLater(plugin, () -> ChatUtil.sendToPlayersInRange(plugin.getMessageConstant().get("wizard.spawn.5"), 30, center),
                         plugin.getTimingConstant().get("spawn.throne.step4.message5.delay"));
-                Bukkit.getScheduler().runTaskLater(plugin, () -> ChatUtil.sendToPlayersInRange(plugin.getMessageConstant().get("wizard.spawn.6"), 30, center),
-                        plugin.getTimingConstant().get("spawn.throne.step4.message6.delay"));
             }
         }.runTaskLater(plugin, plugin.getTimingConstant().get("spawn.throne.step4.delay"));
         //step 5: explosion!, change fade value back
