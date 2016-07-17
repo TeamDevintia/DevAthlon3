@@ -23,9 +23,7 @@ public class GiveItemCommand extends MagicCommand {
 
     @Override
     public boolean execute(CommandSender commandSender, String command, String[] args) {
-        //System.out.println("call command");
-
-        if (args.length != 2) {
+         if (args.length != 2) {
             return false;
         }
 

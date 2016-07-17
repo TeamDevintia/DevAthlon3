@@ -171,7 +171,7 @@ public final class PotionManager implements Listener {
         if (potion != null) {
             return potion.getItem();
         }
-        System.out.println("return null? bad idea");
-        return new ItemStack(Material.SLIME_BALL);
+        // just don't return null
+        return new ItemStack(Material.SPLASH_POTION);
     }
 }

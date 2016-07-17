@@ -31,7 +31,7 @@ public class EvilWitch extends EntityWitch {
             float distance = MathHelper.sqrt(x * x + z * z);
 
             ItemStack potion = CraftItemStack.asNMSCopy(Devathlon3.getInstance().getPotionManager().getRandomPotion());
-            System.out.println(potion.getName() + " selcted");
+
             // spawn
             EntityPotion potionEntity = new EntityPotion(this.world, this, potion);
             potionEntity.pitch -= -20.0F;

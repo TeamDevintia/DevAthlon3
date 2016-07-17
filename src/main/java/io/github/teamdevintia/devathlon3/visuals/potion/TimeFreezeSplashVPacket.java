@@ -19,11 +19,6 @@ public class TimeFreezeSplashVPacket implements VPacket {
 
     @Override
     public void play(Devathlon3 devathlon3, Location location, Player toPlayer, Object... optionalArgs) {
-        if (location == null) {
-            System.out.println("why is location null?!");
-            return;
-        }
-
         final double[] radius = {0};
         final double[] endRadius = {(double) (int) optionalArgs[0]};
         final int[] switcher = {0};

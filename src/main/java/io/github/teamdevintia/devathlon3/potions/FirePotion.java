@@ -31,24 +31,21 @@ public class FirePotion extends MagicPotion {
 
     @Override
     public Recipe createRecipe() {
-        System.out.println("register");
         return instance().getRecipeConstant().get("recipe.potion.fire");
     }
 
     @Override
     public void onPotionBuild(Entity entity) {
-        System.out.println("build!");
+
     }
 
     @Override
     public void onPotionLaunch(Entity thrower, ThrownPotion thrownPotion) {
         // TODO particle trail
-        System.out.println("launch!");
     }
 
     @Override
     public void onPotionHit(Location location, ThrownPotion thrownPotion) {
-        System.out.println("hit!");
         // set stuff on fire
         location.getWorld().getNearbyEntities(location, range, range, range).forEach(entity -> entity.setFireTicks(20 * 5));
 
