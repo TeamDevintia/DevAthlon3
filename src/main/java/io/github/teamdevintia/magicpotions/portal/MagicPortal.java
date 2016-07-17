@@ -323,6 +323,9 @@ public class MagicPortal implements Listener {
                 PacketPlayOutGameStateChange packet = new PacketPlayOutGameStateChange(10, 0);
                 Bukkit.getOnlinePlayers().forEach(player -> ((CraftPlayer) player).getHandle().playerConnection.sendPacket(packet));
 
+                center.getWorld().spigot().strikeLightningEffect(center,false);
+                center.getWorld().strikeLightningEffect(center);
+
                 wizardActive = true;
 
                 // spawn custom entity
