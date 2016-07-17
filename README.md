@@ -31,6 +31,7 @@ Unser Projekt heißt MagicPotions. Es geht darum das Tor zur Magie Welt durch ei
 Für das Ritual braucht man Blut. Blut bekommt man durchs töten von Zombies, Spinnen, Skeletten oder ähnlichem. (Oder alternativ via `/giveitem <player> blood`).<br>
 Mit dem Blut muss man dann einen sogenannten Ritualsleuchter craften:<br>
 ![](http://bender.minidigger.me/2016/07/javaw_2016-07-17_10-55-33.png)
+
 (außen Blut, innen ein Stick)
 Davon braucht man 5 Stück um das magische Fünfeck aufzubauen und als Abschluss einen gemeißelten Steinziegel im Boden in der Mitte. (Siehe Prozess unten) Dies muss wie folgt aussehen:
 ![](http://bender.minidigger.me/2016/07/mspaint_2016-07-16_14-25-02.png)
