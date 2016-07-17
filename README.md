@@ -40,10 +40,17 @@ Der ganze Prozess sieht so aus:
 Wenn das Ritual abgeschlossen kannst du die Tränke kraften. Dazu brauchst du Essenzen. Diese werden nun von Mobs gedroppt. 
 
 # Crafting
-![](http://bender.minidigger.me/2016/07/javaw_2016-07-17_11-09-07.png)
-![](http://bender.minidigger.me/2016/07/javaw_2016-07-17_11-09-47.png)
-![](http://bender.minidigger.me/2016/07/javaw_2016-07-17_11-10-23.png)
-![](http://bender.minidigger.me/2016/07/javaw_2016-07-17_11-11-09.png)
-![](http://bender.minidigger.me/2016/07/javaw_2016-07-17_11-11-44.png)
-![](http://bender.minidigger.me/2016/07/javaw_2016-07-17_11-12-20.png)
-![](http://bender.minidigger.me/2016/07/javaw_2016-07-17_11-13-03.png)
+`/givepotion <player> FirePotion`<br>
+![](http://bender.minidigger.me/2016/07/javaw_2016-07-17_11-09-07.png)<br>
+`/givepotion <player> IcePotion`<br>
+![](http://bender.minidigger.me/2016/07/javaw_2016-07-17_11-09-47.png)<br>
+`/givepotion <player> TimeFreezePotion`<br>
+![](http://bender.minidigger.me/2016/07/javaw_2016-07-17_11-10-23.png)<br>
+`/givepotion <player> ImpulsPotion`<br>
+![](http://bender.minidigger.me/2016/07/javaw_2016-07-17_11-11-09.png)<br>
+`/givepotion <player> WinterPotion`<br>
+![](http://bender.minidigger.me/2016/07/javaw_2016-07-17_11-11-44.png)<br>
+`/givepotion <player> SunPotion`<br>
+![](http://bender.minidigger.me/2016/07/javaw_2016-07-17_11-12-20.png)<br>
+`/givepotion <player> ExplosionPotion`<br>
+![](http://bender.minidigger.me/2016/07/javaw_2016-07-17_11-13-03.png)<br>
