@@ -34,7 +34,7 @@ public class TimeFreezePotion extends MagicPotion {
 
     @Override
     public void onPotionLaunch(Entity thrower, ThrownPotion thrownPotion) {
-        VFXManager.triggerVFXPacket(new TimeFreezeTrailVPacket(), null, null, thrownPotion);
+        VFXManager.triggerVFXPacket( new TimeFreezeTrailVPacket(), null, null, thrownPotion);
     }
 
     @Override

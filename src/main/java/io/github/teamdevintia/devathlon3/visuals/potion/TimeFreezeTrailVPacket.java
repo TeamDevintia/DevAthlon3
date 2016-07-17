@@ -6,7 +6,6 @@ import io.github.teamdevintia.devathlon3.util.ParticleUtil;
 import io.github.teamdevintia.devathlon3.util.ParticleUtil.ColoredParticle;
 import io.github.teamdevintia.devathlon3.util.SoundUtil;
 import io.github.teamdevintia.devathlon3.visuals.VPacket;
-import org.bukkit.Bukkit;
 import org.bukkit.Effect;
 import org.bukkit.Location;
 import org.bukkit.Sound;
@@ -26,7 +25,7 @@ public class TimeFreezeTrailVPacket implements VPacket {
     @Override
     public void play(Devathlon3 devathlon3, Location location, Player toPlayer, Object... optionalArgs) {
         ThrownPotion thrownPotion = (ThrownPotion) optionalArgs[0];
-        Bukkit.getScheduler().runTaskTimer(devathlon3, new BukkitRunnable() {
+        new BukkitRunnable() {
             @Override
             public void run() {
                 if (thrownPotion.isDead()) {
@@ -38,7 +37,7 @@ public class TimeFreezeTrailVPacket implements VPacket {
                 ParticleUtil.playColor(thrownPotion.getLocation(), false, ColoredParticle.MOBSPELL, red, green, blue, 1.F);
                 ParticleUtil.play(thrownPotion.getLocation(), Effect.SNOW_SHOVEL, 0, 0, 0, 0, 0, 0.1F, 5, 16);
             }
-        }, 0, 2);
+        }.runTaskTimer(devathlon3, 0, 2);
     }
 
 }

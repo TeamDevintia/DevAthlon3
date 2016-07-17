@@ -4,7 +4,6 @@ import io.github.teamdevintia.devathlon3.Devathlon3;
 import io.github.teamdevintia.devathlon3.util.ParticleUtil;
 import io.github.teamdevintia.devathlon3.util.ParticleUtil.ColoredParticle;
 import io.github.teamdevintia.devathlon3.visuals.VPacket;
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -20,10 +19,15 @@ public class TimeFreezeSplashVPacket implements VPacket {
 
     @Override
     public void play(Devathlon3 devathlon3, Location location, Player toPlayer, Object... optionalArgs) {
-        final double[] radius = {(double) optionalArgs[0]};
-        final double[] endRadius = {radius[0] + (double) optionalArgs[1]};
+        if(location == null){
+            System.out.println("why is location null?!");
+            return;
+        }
 
-        Bukkit.getScheduler().runTaskTimer(devathlon3, new BukkitRunnable() {
+        final double[] radius = {(Integer) optionalArgs[0]};
+        final double[] endRadius = {radius[0] + (Integer) optionalArgs[1]};
+
+        new BukkitRunnable() {
             @Override
             public void run() {
                 if (radius[0] > endRadius[0]) {
@@ -41,7 +45,7 @@ public class TimeFreezeSplashVPacket implements VPacket {
                     location.subtract(x, 0, z);
                 }
             }
-        }, 0, 3);
+        }.runTaskTimer(devathlon3, 0, 3);
     }
 
 }
