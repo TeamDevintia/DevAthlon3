@@ -3,9 +3,10 @@ package io.github.teamdevintia.devathlon3;
 import io.github.teamdevintia.devathlon3.constants.*;
 import io.github.teamdevintia.devathlon3.entities.EvilWitch;
 import io.github.teamdevintia.devathlon3.entities.WizardEntity;
-import io.github.teamdevintia.devathlon3.intern.EventBus;
+import io.github.teamdevintia.devathlon3.intern.CommandHandler;
 import io.github.teamdevintia.devathlon3.intern.commands.GiveItemCommand;
 import io.github.teamdevintia.devathlon3.intern.commands.GivePotionCommand;
+import io.github.teamdevintia.devathlon3.intern.listeners.MobSpawnListener;
 import io.github.teamdevintia.devathlon3.intern.listeners.WeatherChangeListener;
 import io.github.teamdevintia.devathlon3.items.Blood;
 import io.github.teamdevintia.devathlon3.items.Essence;
@@ -37,7 +38,7 @@ public final class Devathlon3 extends JavaPlugin implements Listener {
     private MessageConstant messageConstant;
     private TimingConstant timingConstant;
 
-    private EventBus eventBus;
+    private CommandHandler commandHandler;
     private PotionManager potionManager;
 
     @Override
@@ -94,8 +95,8 @@ public final class Devathlon3 extends JavaPlugin implements Listener {
         return this.potionManager;
     }
 
-    public EventBus getEventBus() {
-        return this.eventBus;
+    public CommandHandler getCommandHandler() {
+        return this.commandHandler;
     }
 
     private void preInitialization() {
@@ -111,7 +112,7 @@ public final class Devathlon3 extends JavaPlugin implements Listener {
         this.messageConstant.initializeContent();
         this.timingConstant.initializeContent();
 
-        this.eventBus = new EventBus(this);
+        this.commandHandler = new CommandHandler(this);
 
         this.potionManager = new PotionManager(this);
         this.potionManager.registerPotions();
@@ -133,14 +134,17 @@ public final class Devathlon3 extends JavaPlugin implements Listener {
     }
 
     private void registerCommands() {
-        this.eventBus.registerCommand(new GivePotionCommand(this, "givepotion",
+        this.commandHandler.registerCommand(new GivePotionCommand(this, "givepotion",
                 "Gives the specified player the specified potion", "/<command> <player> <potion>", Collections.singletonList("givepotion")));
-        this.eventBus.registerCommand(new GiveItemCommand(this, "giveitem",
+        this.commandHandler.registerCommand(new GiveItemCommand(this, "giveitem",
                 "Gives the specified player the specified item", "/<command> <player> <item>", Collections.singletonList("givepotion")));
+
+        this.commandHandler.registerHelp();
     }
 
     private void registerListeners() {
-        this.eventBus.registerStaticEvent(new WeatherChangeListener(this));
+        getServer().getPluginManager().registerEvents(new WeatherChangeListener(), this);
+        getServer().getPluginManager().registerEvents(new MobSpawnListener(), this);
     }
 
     private void applyWorldSettings() {

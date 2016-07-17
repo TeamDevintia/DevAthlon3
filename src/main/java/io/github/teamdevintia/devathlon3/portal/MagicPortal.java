@@ -27,6 +27,7 @@ import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -276,7 +277,7 @@ public class MagicPortal implements Listener {
         // make room
         EntityUtil.pushAway(center, 10, 1.2);
 
-        // step 1: layer 1 at y-1, change fade value
+        // step 1: layer 1 at y-1, change fade value, night
         new BukkitRunnable() {
             @Override
             public void run() {
@@ -288,6 +289,8 @@ public class MagicPortal implements Listener {
                 // 8 = fade time, 20 = ticks
                 PacketPlayOutGameStateChange packet2 = new PacketPlayOutGameStateChange(8, 20);
                 Bukkit.getOnlinePlayers().forEach(player -> ((CraftPlayer) player).getHandle().playerConnection.sendPacket(packet2));
+
+                center.getWorld().setTime(18000);
             }
         }.runTaskLater(plugin, plugin.getTimingConstant().get("spawn.throne.step1.delay"));
         // step 2: layer 1 at y0, layer 2 at y-1
@@ -379,6 +382,15 @@ public class MagicPortal implements Listener {
                 // 8 = fade time, 20 = ticks
                 PacketPlayOutGameStateChange packet2 = new PacketPlayOutGameStateChange(8, 20);
                 Bukkit.getOnlinePlayers().forEach(player -> ((CraftPlayer) player).getHandle().playerConnection.sendPacket(packet2));
+
+                // moar mobs
+                try {
+                    Field field = CraftServer.class.getDeclaredField("monsterSpawn");
+                    field.setAccessible(true);
+                    field.setInt(Bukkit.getServer(), 1000);
+                } catch (NoSuchFieldException | IllegalAccessException e) {
+                    e.printStackTrace();
+                }
             }
         }.runTaskLater(plugin, plugin.getTimingConstant().get("spawn.throne.step5.delay"));
     }

@@ -1,7 +1,7 @@
 package io.github.teamdevintia.devathlon3.intern.commands;
 
 import io.github.teamdevintia.devathlon3.Devathlon3;
-import io.github.teamdevintia.devathlon3.intern.CommandHandler;
+import io.github.teamdevintia.devathlon3.intern.MagicCommand;
 import io.github.teamdevintia.devathlon3.potions.MagicPotion;
 import io.github.teamdevintia.devathlon3.util.TabCompleteUtil;
 import org.bukkit.Bukkit;
@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * @author Shad0wCore & MiniDigger
  */
-public class GivePotionCommand extends CommandHandler {
+public class GivePotionCommand extends MagicCommand {
 
     public GivePotionCommand(Devathlon3 instance, String name, String description, String usageMessage, List<String> aliases) {
         super(instance, name, description, usageMessage, aliases);

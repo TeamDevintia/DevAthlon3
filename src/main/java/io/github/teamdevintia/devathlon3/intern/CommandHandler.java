@@ -1,39 +1,57 @@
 package io.github.teamdevintia.devathlon3.intern;
 
 import io.github.teamdevintia.devathlon3.Devathlon3;
-import org.bukkit.command.CommandSender;
-import org.bukkit.command.defaults.BukkitCommand;
-import org.bukkit.entity.Player;
+import org.bukkit.Bukkit;
+import org.bukkit.command.Command;
+import org.bukkit.craftbukkit.v1_10_R1.CraftServer;
+import org.bukkit.help.GenericCommandHelpTopic;
+import org.bukkit.help.HelpTopic;
+import org.bukkit.help.HelpTopicComparator;
+import org.bukkit.help.IndexHelpTopic;
 
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
 
 /**
- * @author Shad0wCore
+ * Handles registering of the commands
+ *
+ * @author Shad0wCore, MiniDigger
  */
-public abstract class CommandHandler extends BukkitCommand {
+public class CommandHandler {
+
     private Devathlon3 instance;
+    private Map<String, MagicCommand> commandMap;
 
-    public CommandHandler(Devathlon3 instance, String name) {
-        super(name);
+    public CommandHandler(Devathlon3 instance) {
         this.instance = instance;
+        this.commandMap = new HashMap<>();
     }
 
-    public CommandHandler(Devathlon3 instance, String name, String description, String usageMessage, List<String> aliases) {
-        super(name, description, usageMessage, aliases);
-        this.instance = instance;
+    /**
+     * Registers the command into the command map
+     *
+     * @param magicCommand the command to register
+     */
+    public void registerCommand(MagicCommand magicCommand) {
+        commandMap.put(magicCommand.getName(), magicCommand);
+        ((CraftServer) Bukkit.getServer()).getCommandMap().register(magicCommand.getName(), magicCommand);
     }
 
-    public final Devathlon3 instance() {
-        return this.instance;
+    /**
+     * registers all known commands from this plugin into the helpmap
+     */
+    public void registerHelp() {
+        Set<HelpTopic> help = new TreeSet<>(HelpTopicComparator.helpTopicComparatorInstance());
+        commandMap.keySet().stream().filter(commandLabel -> !commandLabel.contains(".")).forEach(commandLabel -> {
+            Command cmd = ((CraftServer) Bukkit.getServer()).getCommandMap().getCommand(commandLabel);
+            HelpTopic topic = new GenericCommandHelpTopic(cmd);
+            help.add(topic);
+        });
+        IndexHelpTopic topic = new IndexHelpTopic(instance.getName(), "All commands for " + instance.getName(), instance.getName() + ".help", help,
+                "Below is a list of all " + instance.getName() + " commands:");
+        Bukkit.getServer().getHelpMap().addTopic(topic);
+        help.forEach((t) -> Bukkit.getServer().getHelpMap().addTopic(t));
     }
-
-    public final Player fromCommandSender(CommandSender commandSender) {
-        return ((Player) commandSender);
-    }
-
-    public final boolean isNotCommandSender(CommandSender commandSender) {
-        return commandSender instanceof Player;
-    }
-
-
 }

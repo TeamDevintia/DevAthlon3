@@ -1,7 +1,7 @@
 package io.github.teamdevintia.devathlon3.intern.commands;
 
 import io.github.teamdevintia.devathlon3.Devathlon3;
-import io.github.teamdevintia.devathlon3.intern.CommandHandler;
+import io.github.teamdevintia.devathlon3.intern.MagicCommand;
 import io.github.teamdevintia.devathlon3.util.TabCompleteUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 /**
  * Created by Martin on 17.07.2016.
  */
-public class GiveItemCommand extends CommandHandler {
+public class GiveItemCommand extends MagicCommand {
 
     public GiveItemCommand(Devathlon3 instance, String name, String description, String usageMessage, List<String> aliases) {
         super(instance, name, description, usageMessage, aliases);
