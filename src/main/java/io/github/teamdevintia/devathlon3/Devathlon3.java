@@ -1,10 +1,12 @@
 package io.github.teamdevintia.devathlon3;
 
+import io.github.teamdevintia.devathlon3.commands.GivePotionCommand;
 import io.github.teamdevintia.devathlon3.constants.ItemConstant;
 import io.github.teamdevintia.devathlon3.constants.MessageConstant;
 import io.github.teamdevintia.devathlon3.constants.NameConstant;
 import io.github.teamdevintia.devathlon3.constants.RecipeConstant;
 import io.github.teamdevintia.devathlon3.constants.TimingConstant;
+import io.github.teamdevintia.devathlon3.intern.EventBus;
 import io.github.teamdevintia.devathlon3.items.Blood;
 import io.github.teamdevintia.devathlon3.items.Essence;
 import io.github.teamdevintia.devathlon3.managers.PotionManager;
@@ -15,6 +17,8 @@ import net.minecraft.server.v1_10_R1.EntityVillager;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.util.Arrays;
 
 /**
  * Main class
@@ -32,11 +36,12 @@ public final class Devathlon3 extends JavaPlugin {
     private MessageConstant messageConstant;
     private TimingConstant timingConstant;
 
+    private EventBus eventBus;
     private PotionManager potionManager;
 
     @Override
     public void onEnable() {
-        instance = this;
+        this.instance = this;
 
         this.preInitialization();
         this.initialization();
@@ -44,37 +49,39 @@ public final class Devathlon3 extends JavaPlugin {
 
         this.applyWorldSettings();
         this.applyWorldSettings();
+
+        this.registerCommands();
     }
 
     @Override
     public void onDisable() {
-        instance = null;
-        nameConstant.cleanup();
-        nameConstant = null;
-        itemConstant.cleanup();
-        itemConstant = null;
-        recipeConstant.cleanup();
-        recipeConstant = null;
-        messageConstant.cleanup();
-        messageConstant = null;
-        timingConstant.cleanup();
-        timingConstant = null;
+        this.instance = null;
+        this.nameConstant.cleanup();
+        this.nameConstant = null;
+        this.itemConstant.cleanup();
+        this.itemConstant = null;
+        this.recipeConstant.cleanup();
+        this.recipeConstant = null;
+        this.messageConstant.cleanup();
+        this.messageConstant = null;
+        this.timingConstant.cleanup();
+        this.timingConstant = null;
     }
 
     public NameConstant getNameConstant() {
-        return nameConstant;
+        return this.nameConstant;
     }
 
     public ItemConstant getItemConstant() {
-        return itemConstant;
+        return this.itemConstant;
     }
 
     public RecipeConstant getRecipeConstant() {
-        return recipeConstant;
+        return this.recipeConstant;
     }
 
     public MessageConstant getMessageConstant() {
-        return messageConstant;
+        return this.messageConstant;
     }
 
     public TimingConstant getTimingConstant() {
@@ -82,28 +89,30 @@ public final class Devathlon3 extends JavaPlugin {
     }
 
     public PotionManager getPotionManager() {
-        return potionManager;
+        return this.potionManager;
     }
 
-    public static Devathlon3 getInstance() {
-        return instance;
+    public EventBus getEventBus() {
+        return this.eventBus;
     }
 
     private void preInitialization() {
-        nameConstant = new NameConstant(instance);
-        itemConstant = new ItemConstant(instance);
-        recipeConstant = new RecipeConstant(instance);
-        messageConstant = new MessageConstant(instance);
-        timingConstant = new TimingConstant(instance);
+        this.nameConstant = new NameConstant(instance);
+        this.itemConstant = new ItemConstant(instance);
+        this.recipeConstant = new RecipeConstant(instance);
+        this.messageConstant = new MessageConstant(instance);
+        this.timingConstant = new TimingConstant(instance);
 
-        nameConstant.initializeContent();
-        itemConstant.initializeContent();
-        recipeConstant.initializeContent();
-        messageConstant.initializeContent();
-        timingConstant.initializeContent();
+        this.nameConstant.initializeContent();
+        this.itemConstant.initializeContent();
+        this.recipeConstant.initializeContent();
+        this.messageConstant.initializeContent();
+        this.timingConstant.initializeContent();
 
-        potionManager = new PotionManager(this);
-        potionManager.registerPotions();
+        this.eventBus = new EventBus(this);
+
+        this.potionManager = new PotionManager(this);
+        this.potionManager.registerPotions();
     }
 
     private void initialization() {
@@ -120,6 +129,11 @@ public final class Devathlon3 extends JavaPlugin {
         new Essence(this);
     }
 
+    private void registerCommands() {
+        //TODO Complete Command Informations
+        this.eventBus.registerCommand(new GivePotionCommand(this, "givepotion", "", "", Arrays.asList("")));
+    }
+
     private void applyWorldSettings() {
         // always day, always sunny!
         for (World world : Bukkit.getWorlds()) {
@@ -130,6 +144,10 @@ public final class Devathlon3 extends JavaPlugin {
             world.setStorm(false);
             world.setWeatherDuration(1000000000);
         }
+    }
+
+    public static Devathlon3 getInstance() {
+        return instance;
     }
 
 }

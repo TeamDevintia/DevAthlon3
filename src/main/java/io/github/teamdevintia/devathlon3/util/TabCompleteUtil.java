@@ -26,7 +26,7 @@ public class TabCompleteUtil {
      *
      * @param list   the list with all possible inputs
      * @param prefix the prefix that was already entered
-     * @return the computed list, ready to be thrown at bukkit
+     * @return the computed list, ready to be thrown at Bukkit
      */
     public static List<String> complete(final Collection<String> list, final String prefix) {
         return list.stream().filter(s -> s.toLowerCase().startsWith(prefix.toLowerCase())).collect(Collectors.toList());

@@ -23,13 +23,15 @@ public class EventBus {
 
     public EventBus(Devathlon3 instance) {
         this.instance = instance;
+        this.handlerListHashMap = new HashMap<>();
+        this.pluginManager = Bukkit.getPluginManager();
     }
 
     public void registerStaticEvent(Listener listener) {
         this.pluginManager.registerEvents(listener, this.instance);
     }
 
-    //TODO clean up stuff that we don't need
+    //TODO clean up stuff later that we don't need
 
     public void registerStaticEvents(Listener... listeners) {
         for (Listener listener : listeners) {
