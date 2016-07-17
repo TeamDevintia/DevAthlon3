@@ -53,6 +53,7 @@ public final class PotionManager implements Listener {
         registerMagicPotion(new ImpulsePotion(plugin));
         registerMagicPotion(new WinterPotion(plugin));
         registerMagicPotion(new SunPotion(plugin));
+        registerMagicPotion(new ExplosionPotion(plugin));
     }
 
     @EventHandler
