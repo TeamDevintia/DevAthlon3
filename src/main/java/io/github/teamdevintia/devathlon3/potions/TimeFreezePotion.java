@@ -39,7 +39,7 @@ public class TimeFreezePotion extends MagicPotion {
 
     @Override
     public void onPotionHit(Location location, ThrownPotion thrownPotion) {
-        VFXManager.triggerVFXPacket(new TimeFreezeSplashVPacket(), null, null, radius, radius + 3);
+        VFXManager.triggerVFXPacket(new TimeFreezeSplashVPacket(), null, location, radius, radius + 3);
         location.getWorld().getNearbyEntities(location, radius, radius, radius).stream().filter(entity -> entity instanceof LivingEntity).
                 forEach(entity -> {
                     ((LivingEntity) entity).addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 5 * 20, 100, false, false));

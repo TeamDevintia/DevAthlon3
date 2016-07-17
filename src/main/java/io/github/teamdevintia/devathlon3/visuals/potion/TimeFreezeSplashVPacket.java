@@ -19,13 +19,13 @@ public class TimeFreezeSplashVPacket implements VPacket {
 
     @Override
     public void play(Devathlon3 devathlon3, Location location, Player toPlayer, Object... optionalArgs) {
-        if(location == null){
+        if (location == null) {
             System.out.println("why is location null?!");
             return;
         }
 
-        final double[] radius = {(Integer) optionalArgs[0]};
-        final double[] endRadius = {radius[0] + (Integer) optionalArgs[1]};
+        final double[] radius = {(Integer) optionalArgs[0] - 1};
+        final double[] endRadius = {radius[0] + (Integer) optionalArgs[1] - 1};
 
         new BukkitRunnable() {
             @Override

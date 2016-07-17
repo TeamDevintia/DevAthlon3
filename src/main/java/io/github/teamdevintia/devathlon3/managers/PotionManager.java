@@ -58,9 +58,9 @@ public final class PotionManager implements Listener {
 
     @EventHandler //TODO do we need this?
     public void onApply(AreaEffectCloudApplyEvent event) {
-        for (MagicPotion magicPotion : magicPotionMap.values()) {
-            //    magicPotion.onPotionHit(event.getEntity());
-        }
+       /* for (MagicPotion magicPotion : magicPotionMap.values()) {
+            magicPotion.onPotionHit(event.getEntity().getLocation(), (ThrownPotion) event.getEntity());
+        }*/
     }
 
     @EventHandler
