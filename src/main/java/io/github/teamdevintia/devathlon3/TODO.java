@@ -10,9 +10,5 @@ public class TODO {
 
     // TODO buch vom zauberer
 
-    // TODO neue hexen mechanic
-
     // TODO plugin.yml aufbessern
-
-    //TODO witch doesn't drop 3 blood
 }

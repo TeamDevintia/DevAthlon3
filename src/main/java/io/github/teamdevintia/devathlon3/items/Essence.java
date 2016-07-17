@@ -33,7 +33,7 @@ public final class Essence implements Listener {
 
             // 3 for witch
             if (event.getEntityType() == EntityType.WITCH) {
-                for (int i = 0; i < 2; i++) {
+                for (int i = 0; i < 3; i++) {
                     location.getWorld().dropItemNaturally(location, this.ESSENCE_STACK);
                 }
             } else

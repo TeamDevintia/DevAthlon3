@@ -4,6 +4,7 @@ import io.github.teamdevintia.devathlon3.constants.*;
 import io.github.teamdevintia.devathlon3.entities.EvilWitch;
 import io.github.teamdevintia.devathlon3.entities.WizardEntity;
 import io.github.teamdevintia.devathlon3.intern.EventBus;
+import io.github.teamdevintia.devathlon3.intern.commands.GiveItemCommand;
 import io.github.teamdevintia.devathlon3.intern.commands.GivePotionCommand;
 import io.github.teamdevintia.devathlon3.intern.listeners.WeatherChangeListener;
 import io.github.teamdevintia.devathlon3.items.Blood;
@@ -18,7 +19,7 @@ import org.bukkit.World;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.util.Arrays;
+import java.util.Collections;
 
 /**
  * Main class
@@ -133,7 +134,9 @@ public final class Devathlon3 extends JavaPlugin implements Listener {
 
     private void registerCommands() {
         this.eventBus.registerCommand(new GivePotionCommand(this, "givepotion",
-                "Gives the specified player the specified potion", "/<command> <player> <potion>", Arrays.asList("givepotion")));
+                "Gives the specified player the specified potion", "/<command> <player> <potion>", Collections.singletonList("givepotion")));
+        this.eventBus.registerCommand(new GiveItemCommand(this, "giveitem",
+                "Gives the specified player the specified item", "/<command> <player> <item>", Collections.singletonList("givepotion")));
     }
 
     private void registerListeners() {
