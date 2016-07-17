@@ -272,7 +272,7 @@ public class MagicPortal implements Listener {
      */
     private void spawnThrone(Player player) {
         // take snapshot
-        snapshot = new WorldSnapshot(center.clone().subtract(0, 2, 0), 8, 6, Material.REDSTONE_TORCH_ON);
+        snapshot = new WorldSnapshot(center.clone().subtract(0, 3, 0), 10, 10, Material.REDSTONE_TORCH_ON);
 
         // make room
         EntityUtil.pushAway(center, 10, 1.2);
@@ -323,7 +323,7 @@ public class MagicPortal implements Listener {
                 PacketPlayOutGameStateChange packet = new PacketPlayOutGameStateChange(10, 0);
                 Bukkit.getOnlinePlayers().forEach(player -> ((CraftPlayer) player).getHandle().playerConnection.sendPacket(packet));
 
-                center.getWorld().spigot().strikeLightningEffect(center,false);
+                center.getWorld().spigot().strikeLightningEffect(center, false);
                 center.getWorld().strikeLightningEffect(center);
 
                 wizardActive = true;
