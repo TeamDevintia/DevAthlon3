@@ -11,6 +11,7 @@ import org.bukkit.FireworkEffect;
 import org.bukkit.FireworkEffect.Type;
 import org.bukkit.Location;
 import org.bukkit.entity.Firework;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
@@ -29,7 +30,7 @@ public class FireSplashVPacket implements VPacket {
         int range = (int) optionalArgs[0] + 1;
         int fireTicks = (int) optionalArgs[1];
 
-        location.getWorld().getNearbyEntities(location, range, range, range).forEach(entity -> {
+        location.getWorld().getNearbyEntities(location, range, range, range).stream().filter(entity -> entity instanceof LivingEntity).forEach(entity -> {
             Firework firework = new FireworkFactory().location(entity.getLocation()).effect(FireworkEffect.builder().with(Type.BALL)
                     .withColor(Color.fromRGB((int) (trailFirst[0] * 256), (int) (trailFirst[1] * 256), (int) (trailFirst[2] * 256)))
                     .withColor(Color.fromRGB((int) (trailSecond[0] * 256), (int) (trailSecond[1] * 256), (int) (trailSecond[2] * 256)))
@@ -41,7 +42,7 @@ public class FireSplashVPacket implements VPacket {
         BukkitTask bukkitTask = new BukkitRunnable() {
             @Override
             public void run() {
-                location.getWorld().getNearbyEntities(location, range, range, range).forEach(entity -> {
+                location.getWorld().getNearbyEntities(location, range, range, range).stream().filter(entity -> entity instanceof  LivingEntity).forEach(entity -> {
                     Location modified = entity.getLocation().clone();
                     modified.add(0.5, 0.5, 0.5);
 

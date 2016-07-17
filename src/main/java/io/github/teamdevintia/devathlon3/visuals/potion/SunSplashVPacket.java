@@ -28,7 +28,7 @@ public class SunSplashVPacket implements VPacket {
         Bukkit.getScheduler().runTaskTimer(devathlon3, new BukkitRunnable() {
             @Override
             public void run() {
-                location.getWorld().getNearbyEntities(location, range, range, range).forEach(entity -> {
+                location.getWorld().getNearbyEntities(location, range, range, range).stream().filter(entity -> entity instanceof LivingEntity).forEach(entity -> {
                     LivingEntity livingEntity = (LivingEntity) entity;
                     livingEntity.setFireTicks(20);
                     livingEntity.damage(2);
@@ -76,8 +76,7 @@ public class SunSplashVPacket implements VPacket {
                     for (int y = fromY; y < toY; y++) {
                         for (int z = fromZ; z < toZ; z++) {
                             Block block = location.getWorld().getBlockAt(x, y, z);
-
-
+                            //TODO more sun particles
                         }
                     }
                 }

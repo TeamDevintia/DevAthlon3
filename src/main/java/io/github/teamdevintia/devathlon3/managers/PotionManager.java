@@ -9,7 +9,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.entity.SplashPotion;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.entity.AreaEffectCloudApplyEvent;
 import org.bukkit.event.entity.PotionSplashEvent;
 import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.event.inventory.CraftItemEvent;
@@ -53,6 +52,7 @@ public final class PotionManager implements Listener {
         registerMagicPotion(new TimeFreezePotion(plugin));
         registerMagicPotion(new ImpulsePotion(plugin));
         registerMagicPotion(new WinterPotion(plugin));
+        registerMagicPotion(new SunPotion(plugin));
     }
 
     @EventHandler

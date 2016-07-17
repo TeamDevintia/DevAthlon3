@@ -9,7 +9,7 @@ import java.util.Map;
 /**
  * This constant stores various names
  *
- * @author Shad0wCore
+ * @author Shad0wCore & MiniDigger
  */
 public class NameConstant extends Constant<String> {
 
@@ -27,6 +27,7 @@ public class NameConstant extends Constant<String> {
         this.getContentMap().put("item.name.timeFreezePotion",ChatColor.BLUE + "TimeFreezePotion");
         this.getContentMap().put("item.name.impulsePotion",ChatColor.BLUE + "ImpulsPotion");
         this.getContentMap().put("item.name.winterPotion",ChatColor.BLUE + "WinterPotion");
+        this.getContentMap().put("item.name.sunPotion",ChatColor.BLUE + "SunPotion");
         this.getContentMap().put("wizard.displayname", "Urzauberer");
     }
 
