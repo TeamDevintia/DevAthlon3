@@ -28,7 +28,7 @@ Or just get it from my ci http://bender.minidigger.me:9090/job/DevAthlon3
 ## Quick Start (german only, sorry)
 
 Unser Projekt heißt MagicPotions. Es geht darum das Tor zur Magie Welt durch ein Ritual wieder zu öffnen und dadurch Magie in der normalen Welt zu nutzen. <br>
-Für das Ritual braucht man Blut. Blut bekommt man durchs töten von Zombies oder ähnlichem. (Oder alernative via `/giveitem <player> blood`).<br>
+Für das Ritual braucht man Blut. Blut bekommt man durchs töten von Zombies oder ähnlichem. (Oder alternativ via `/giveitem <player> blood`).<br>
 Mit dem Blut muss man dann einen sogenannten Ritualsleuchter craften:<br>
 ![](http://bender.minidigger.me/2016/07/javaw_2016-07-17_10-55-33.png)
 (außen Blut, innen ein Stick)
