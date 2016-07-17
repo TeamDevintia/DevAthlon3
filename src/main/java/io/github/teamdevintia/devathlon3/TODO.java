@@ -6,13 +6,13 @@ package io.github.teamdevintia.devathlon3;
 public class TODO {
 
     // TODO implus potion
-    // TODO zeit stop potion
     // TODO sonnen potion
-    // TODO winter potion
 
     // TODO buch vom zauberer
 
     // TODO neue hexen mechanic
 
     // TODO plugin.yml aufbessern
+
+    //TODO witch doesn't drop 3 blood
 }

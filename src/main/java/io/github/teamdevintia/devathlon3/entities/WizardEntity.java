@@ -1,4 +1,4 @@
-package io.github.teamdevintia.devathlon3.portal;
+package io.github.teamdevintia.devathlon3.entities;
 
 import io.github.teamdevintia.devathlon3.util.ReflectionUtil;
 import net.minecraft.server.v1_10_R1.*;

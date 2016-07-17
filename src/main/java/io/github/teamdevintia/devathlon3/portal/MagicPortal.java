@@ -1,6 +1,7 @@
 package io.github.teamdevintia.devathlon3.portal;
 
 import io.github.teamdevintia.devathlon3.Devathlon3;
+import io.github.teamdevintia.devathlon3.entities.WizardEntity;
 import io.github.teamdevintia.devathlon3.managers.VFXManager;
 import io.github.teamdevintia.devathlon3.util.ChatUtil;
 import io.github.teamdevintia.devathlon3.util.DirectionUtil;

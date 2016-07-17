@@ -6,6 +6,7 @@ import io.github.teamdevintia.devathlon3.potions.IcePotion;
 import io.github.teamdevintia.devathlon3.potions.MagicPotion;
 import io.github.teamdevintia.devathlon3.potions.TimeFreezePotion;
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.SplashPotion;
@@ -18,7 +19,9 @@ import org.bukkit.event.inventory.CraftItemEvent;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Set;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * @author Shad0wCore
@@ -144,5 +147,26 @@ public final class PotionManager implements Listener {
      */
     public Set<String> getNames() {
         return magicPotionMap.keySet();
+    }
+
+    /**
+     * @return a random potion item stack, null if error occoured
+     */
+    public ItemStack getRandomPotion() {
+        int r = ThreadLocalRandom.current().nextInt(magicPotionMap.size());
+        String key = "";
+        Iterator<String> it = magicPotionMap.keySet().iterator();
+        for (int i = 0; i < r; i++) {
+            if (it.hasNext()) {
+                key = it.next();
+            }
+        }
+
+        MagicPotion potion = magicPotionMap.get(key);
+        if (potion != null) {
+            return potion.getItem();
+        }
+        System.out.println("return null? bad idea");
+        return new ItemStack(Material.SLIME_BALL);
     }
 }

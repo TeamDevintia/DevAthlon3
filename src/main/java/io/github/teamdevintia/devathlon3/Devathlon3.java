@@ -1,10 +1,8 @@
 package io.github.teamdevintia.devathlon3;
 
-import io.github.teamdevintia.devathlon3.constants.ItemConstant;
-import io.github.teamdevintia.devathlon3.constants.MessageConstant;
-import io.github.teamdevintia.devathlon3.constants.NameConstant;
-import io.github.teamdevintia.devathlon3.constants.RecipeConstant;
-import io.github.teamdevintia.devathlon3.constants.TimingConstant;
+import io.github.teamdevintia.devathlon3.constants.*;
+import io.github.teamdevintia.devathlon3.entities.EvilWitch;
+import io.github.teamdevintia.devathlon3.entities.WizardEntity;
 import io.github.teamdevintia.devathlon3.intern.EventBus;
 import io.github.teamdevintia.devathlon3.intern.commands.GivePotionCommand;
 import io.github.teamdevintia.devathlon3.intern.listeners.WeatherChangeListener;
@@ -12,9 +10,9 @@ import io.github.teamdevintia.devathlon3.items.Blood;
 import io.github.teamdevintia.devathlon3.items.Essence;
 import io.github.teamdevintia.devathlon3.managers.PotionManager;
 import io.github.teamdevintia.devathlon3.portal.MagicPortal;
-import io.github.teamdevintia.devathlon3.portal.WizardEntity;
 import io.github.teamdevintia.devathlon3.util.NMSUtil;
 import net.minecraft.server.v1_10_R1.EntityVillager;
+import net.minecraft.server.v1_10_R1.EntityWitch;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.event.Listener;
@@ -121,6 +119,7 @@ public final class Devathlon3 extends JavaPlugin implements Listener {
     private void initialization() {
         // Register wizard entity
         NMSUtil.registerEntity("Villager", 120, EntityVillager.class, WizardEntity.class);
+        NMSUtil.registerEntity("Witch", 66, EntityWitch.class, EvilWitch.class);
     }
 
     private void postInitialization() {
