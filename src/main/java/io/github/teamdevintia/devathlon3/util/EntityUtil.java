@@ -7,7 +7,7 @@ import org.bukkit.util.Vector;
 /**
  * @author MiniDigger
  */
-public class EntityUtil {
+public final class EntityUtil {
 
     /**
      * Pushes all entities in a certain radius away from one point

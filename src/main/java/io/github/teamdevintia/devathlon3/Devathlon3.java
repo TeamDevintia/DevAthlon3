@@ -130,7 +130,6 @@ public final class Devathlon3 extends JavaPlugin {
     }
 
     private void registerCommands() {
-        //TODO Complete Command Informations
         this.eventBus.registerCommand(new GivePotionCommand(this, "givepotion", "", "", Arrays.asList("")));
     }
 

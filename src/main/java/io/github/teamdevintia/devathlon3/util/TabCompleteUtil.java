@@ -10,9 +10,9 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 /**
- * util that contains usefull method for tab completion
+ * util that contains useful method for tab completion
  */
-public class TabCompleteUtil {
+public final class TabCompleteUtil {
 
     /**
      * @return a list with the names of all online players

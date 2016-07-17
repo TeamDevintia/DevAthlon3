@@ -291,7 +291,7 @@ public final class ParticleUtil {
     /**
      * Particle types which are able to be displayed with colors
      */
-    enum ColoredParticle {
+    public enum ColoredParticle {
 
         REDDUST,
         MOBSPELL,
