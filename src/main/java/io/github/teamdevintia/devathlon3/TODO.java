@@ -5,7 +5,6 @@ package io.github.teamdevintia.devathlon3;
  */
 public class TODO {
 
-    // TODO eis potion
     // TODO implus potion
     // TODO zeit stop potion
     // TODO sonnen potion
