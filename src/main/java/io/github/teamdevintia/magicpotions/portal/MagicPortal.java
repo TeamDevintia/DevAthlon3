@@ -62,7 +62,7 @@ public class MagicPortal implements Listener {
 
     @EventHandler
     public void onBlockPlace(BlockPlaceEvent event) {
-        if (event.getItemInHand().equals(this.plugin.getItemConstant().get("item.ritualLantern"))) {
+        if (event.getItemInHand().isSimilar(this.plugin.getItemConstant().get("item.ritualLantern"))) {
             // Only 5 torches are place able, so that it is easier to finish it ^^
             if (torchCount == 5) {
                 event.setCancelled(true);

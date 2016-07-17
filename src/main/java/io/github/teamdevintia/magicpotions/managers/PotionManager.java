@@ -154,7 +154,7 @@ public final class PotionManager implements Listener {
      * @return a random potion item stack, null if error occoured
      */
     public ItemStack getRandomPotion() {
-        int r = ThreadLocalRandom.current().nextInt(magicPotionMap.size());
+        int r = ThreadLocalRandom.current().nextInt(magicPotionMap.size() - 1) + 1;
         String key = "";
         Iterator<String> it = magicPotionMap.keySet().iterator();
         for (int i = 0; i < r; i++) {

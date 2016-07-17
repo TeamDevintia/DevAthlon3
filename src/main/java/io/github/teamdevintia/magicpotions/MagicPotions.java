@@ -50,7 +50,6 @@ public final class MagicPotions extends JavaPlugin implements Listener {
         this.postInitialization();
 
         this.applyWorldSettings();
-        this.applyWorldSettings();
 
         this.registerCommands();
         this.registerListeners();
