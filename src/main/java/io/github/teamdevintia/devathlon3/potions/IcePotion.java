@@ -105,7 +105,7 @@ public class IcePotion extends MagicPotion {
             @Override
             public void run() {
                 for (Location loc : particleLocs) {
-                    ParticleUtil.play(loc, Effect.SNOW_SHOVEL, 0, 0, 0, 0, 0, 1, 1, 50);
+                    ParticleUtil.play(loc, Effect.SNOW_SHOVEL, 0, 0, 0, 0, 0, .1F, 1, 50);
                 }
             }
         }.runTaskTimer(instance(), 0, 5);
