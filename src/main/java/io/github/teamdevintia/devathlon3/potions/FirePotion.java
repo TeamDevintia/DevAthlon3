@@ -1,7 +1,10 @@
 package io.github.teamdevintia.devathlon3.potions;
 
 import io.github.teamdevintia.devathlon3.Devathlon3;
+import io.github.teamdevintia.devathlon3.managers.VFXManager;
 import io.github.teamdevintia.devathlon3.util.ParticleUtil;
+import io.github.teamdevintia.devathlon3.visuals.potion.FireSplashVPacket;
+import io.github.teamdevintia.devathlon3.visuals.potion.FireTrailVPacket;
 import org.bukkit.Effect;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -24,6 +27,7 @@ import java.util.List;
 public class FirePotion extends MagicPotion {
 
     private static final int range = 3;
+    private static final int fireTicks = 5 * 20;
 
     public FirePotion(Devathlon3 devathlon3) {
         super(devathlon3, "FirePotion", devathlon3.getItemConstant().get("item.firepotion"));
@@ -36,18 +40,18 @@ public class FirePotion extends MagicPotion {
 
     @Override
     public void onPotionBuild(Entity entity) {
-
     }
 
     @Override
     public void onPotionLaunch(Entity thrower, ThrownPotion thrownPotion) {
-        // TODO particle trail
+        VFXManager.triggerVFXPacket(new FireTrailVPacket(), null, null, thrownPotion);
     }
 
     @Override
     public void onPotionHit(Location location, ThrownPotion thrownPotion) {
+        VFXManager.triggerVFXPacket(new FireSplashVPacket(), null, location, range, fireTicks);
         // set stuff on fire
-        location.getWorld().getNearbyEntities(location, range, range, range).forEach(entity -> entity.setFireTicks(20 * 5));
+        location.getWorld().getNearbyEntities(location, range, range, range).forEach(entity -> entity.setFireTicks(fireTicks));
 
         int fromX;
         int toX;
@@ -101,7 +105,7 @@ public class FirePotion extends MagicPotion {
             @Override
             public void run() {
                 for (Location loc : particleLocs) {
-                    ParticleUtil.play(loc, Effect.BOW_FIRE, 0, 0, 0, 0, 0, 1, 1, 50);
+                    ParticleUtil.play(loc, Effect.CRIT, 0, 0, 0, 0, 0, 1, 1, 50);
                 }
             }
         }.runTaskTimer(instance(), 0, 5);
