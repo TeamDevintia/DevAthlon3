@@ -4,7 +4,7 @@ import io.github.teamdevintia.devathlon3.Devathlon3;
 import io.github.teamdevintia.devathlon3.managers.VFXManager;
 import io.github.teamdevintia.devathlon3.util.ParticleUtil;
 import io.github.teamdevintia.devathlon3.visuals.potion.FireSplashVPacket;
-import io.github.teamdevintia.devathlon3.visuals.potion.FireTrailVPacket;
+import io.github.teamdevintia.devathlon3.visuals.potion.trails.FireTrailVPacket;
 import org.bukkit.Effect;
 import org.bukkit.Location;
 import org.bukkit.Material;

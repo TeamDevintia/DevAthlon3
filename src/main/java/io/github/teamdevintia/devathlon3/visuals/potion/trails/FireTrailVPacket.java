@@ -1,4 +1,4 @@
-package io.github.teamdevintia.devathlon3.visuals.potion;
+package io.github.teamdevintia.devathlon3.visuals.potion.trails;
 
 import io.github.teamdevintia.devathlon3.Devathlon3;
 import io.github.teamdevintia.devathlon3.enums.SoundSource;

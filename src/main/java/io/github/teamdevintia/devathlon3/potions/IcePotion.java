@@ -1,10 +1,13 @@
 package io.github.teamdevintia.devathlon3.potions;
 
 import io.github.teamdevintia.devathlon3.Devathlon3;
+import io.github.teamdevintia.devathlon3.managers.VFXManager;
 import io.github.teamdevintia.devathlon3.util.ParticleUtil;
+import io.github.teamdevintia.devathlon3.visuals.potion.trails.TrailVPacket;
 import org.bukkit.Effect;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
@@ -41,7 +44,7 @@ public class IcePotion extends MagicPotion {
 
     @Override
     public void onPotionLaunch(Entity thrower, ThrownPotion thrownPotion) {
-        //TODO particle trail
+        VFXManager.triggerVFXPacket(new TrailVPacket(), null, null, Sound.BLOCK_SNOW_BREAK, thrownPotion, Effect.SMALL_SMOKE, 50f, 100f, 100f);
     }
 
     @Override
@@ -51,6 +54,7 @@ public class IcePotion extends MagicPotion {
                 forEach(entity -> {
                     ((LivingEntity) entity).addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 5 * 20, 2, false, false));
                     ((LivingEntity) entity).addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, 5 * 20, 1, false, false));
+                    ((LivingEntity) entity).damage(2, (Entity) thrownPotion.getShooter());
                 });
 
         int fromX;

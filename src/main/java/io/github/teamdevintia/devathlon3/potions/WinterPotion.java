@@ -1,10 +1,13 @@
 package io.github.teamdevintia.devathlon3.potions;
 
 import io.github.teamdevintia.devathlon3.Devathlon3;
+import io.github.teamdevintia.devathlon3.managers.VFXManager;
 import io.github.teamdevintia.devathlon3.util.ParticleUtil;
+import io.github.teamdevintia.devathlon3.visuals.potion.trails.TrailVPacket;
 import org.bukkit.Effect;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Entity;
@@ -42,7 +45,7 @@ public class WinterPotion extends MagicPotion {
 
     @Override
     public void onPotionLaunch(Entity thrower, ThrownPotion thrownPotion) {
-
+        VFXManager.triggerVFXPacket(new TrailVPacket(), null, null, Sound.BLOCK_SNOW_BREAK, thrownPotion, Effect.SNOWBALL_BREAK, 255f, 255f, 255f);
     }
 
     @Override

@@ -3,7 +3,7 @@ package io.github.teamdevintia.devathlon3.potions;
 import io.github.teamdevintia.devathlon3.Devathlon3;
 import io.github.teamdevintia.devathlon3.managers.VFXManager;
 import io.github.teamdevintia.devathlon3.visuals.potion.SunSplashVPacket;
-import io.github.teamdevintia.devathlon3.visuals.potion.SunTrailVPacket;
+import io.github.teamdevintia.devathlon3.visuals.potion.trails.SunTrailVPacket;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.ThrownPotion;

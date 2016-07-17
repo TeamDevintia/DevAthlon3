@@ -3,8 +3,10 @@ package io.github.teamdevintia.devathlon3.potions;
 import io.github.teamdevintia.devathlon3.Devathlon3;
 import io.github.teamdevintia.devathlon3.managers.VFXManager;
 import io.github.teamdevintia.devathlon3.visuals.potion.TimeFreezeSplashVPacket;
-import io.github.teamdevintia.devathlon3.visuals.potion.TimeFreezeTrailVPacket;
+import io.github.teamdevintia.devathlon3.visuals.potion.trails.TrailVPacket;
+import org.bukkit.Effect;
 import org.bukkit.Location;
+import org.bukkit.Sound;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.ThrownPotion;
@@ -34,7 +36,7 @@ public class TimeFreezePotion extends MagicPotion {
 
     @Override
     public void onPotionLaunch(Entity thrower, ThrownPotion thrownPotion) {
-        VFXManager.triggerVFXPacket( new TimeFreezeTrailVPacket(), null, null, thrownPotion);
+        VFXManager.triggerVFXPacket(new TrailVPacket(), null, null, Sound.ENTITY_ZOMBIE_INFECT, thrownPotion, Effect.SNOWBALL_BREAK, 52f, 73f, 94f);
     }
 
     @Override
